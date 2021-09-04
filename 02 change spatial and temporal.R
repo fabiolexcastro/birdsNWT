@@ -25,5 +25,13 @@ see_changes <- function(spc){
   yrs <- unique(yrs)
   gcm <- str_sub(basename(fls), start = 16, end = nchar(basename(fls)) - 4)
   
+  map(.x = 1:length(gcm), .f = function(k){
+    
+    cat(gcm[k], '\n')
+    fl <- grep(gcm[k], fls, value = TRUE)
+    fl
+    
+  })
+  
 }
 
