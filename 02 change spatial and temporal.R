@@ -38,6 +38,7 @@ see_changes <- function(spc){
     gm <- terra::geom(tb)
     df <- rbind(gm[,3:4], df)
     df <- as_tibble(df)
+    df <- mutate(df, gc = gcm[k])
     return(df)
     
   })
