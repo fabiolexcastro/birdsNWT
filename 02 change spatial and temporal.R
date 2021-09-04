@@ -19,5 +19,9 @@ see_changes <- function(spc){
   spc <- spcs[1] # Run and comment (after)
   
   cat('Start ', spc, '\n')
+  dir <- grep(spc, dirs, value = TRUE)
+  dir
+  
+  
 }
 
