@@ -29,7 +29,14 @@ see_changes <- function(spc){
     
     cat(gcm[k], '\n')
     fl <- grep(gcm[k], fls, value = TRUE)
-    fl
+  
+    cat('----- Terra library functions -----\n')
+    tr <- terra::rast(fl)
+    tb <- terra::as.points(tr)
+    df <- terra::as.data.frame(x = tb)
+    gm <- terra::geom(tb)
+    df <- rbind(gm[,3:4], df)
+    df <- as_tibble(df)
     
   })
   
