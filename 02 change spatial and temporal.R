@@ -21,7 +21,7 @@ see_changes <- function(spc){
   cat('Start ', spc, '\n')
   dir <- grep(spc, dirs, value = TRUE)
   fls <- fs::dir_ls(dir)
-  
+  yrs <- parse_number(basename(fls))
   
   
 }
