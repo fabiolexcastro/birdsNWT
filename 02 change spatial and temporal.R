@@ -22,7 +22,8 @@ see_changes <- function(spc){
   dir <- grep(spc, dirs, value = TRUE)
   fls <- fs::dir_ls(dir)
   yrs <- parse_number(basename(fls))
-  
+  yrs <- unique(yrs)
+  gcm <- str_sub(basename(fls), start = 16, end = nchar(basename(fls)) - 4)
   
 }
 
