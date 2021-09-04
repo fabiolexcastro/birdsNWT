@@ -20,7 +20,8 @@ see_changes <- function(spc){
   
   cat('Start ', spc, '\n')
   dir <- grep(spc, dirs, value = TRUE)
-  dir
+  fls <- fs::dir_ls(dir)
+  
   
   
 }
