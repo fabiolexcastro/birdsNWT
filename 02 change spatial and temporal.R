@@ -16,7 +16,7 @@ spcs <- basename(dirs)
 see_changes <- function(spc){
   
   # Proof
-  spc <- spcs[1] # Run and comment (after)
+  # spc <- spcs[1] # Run and comment (after)
   
   cat('Start ', spc, '\n')
   dir <- grep(spc, dirs, value = TRUE)
@@ -44,7 +44,9 @@ see_changes <- function(spc){
     
   })
   
-  dfm
+  return(dfm)
   
 }
+
+map(.x = spcs, .f = see_changes)
 
