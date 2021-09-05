@@ -36,7 +36,7 @@ see_changes <- function(spc){
     tb <- terra::as.points(tr)
     df <- terra::as.data.frame(x = tb)
     gm <- terra::geom(tb)
-    df <- rbind(gm[,3:4], df)
+    df <- cbind(gm[,3:4], df)
     names(df) <- paste0('x', 'y', paste0('y', yrs))
     df <- as_tibble(df)
     df <- mutate(df, gc = gcm[k])
