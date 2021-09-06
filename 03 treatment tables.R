@@ -9,6 +9,7 @@ rm(list = ls())
 root <- './outputs'
 dirs <- fs::dir_ls(root, type = 'directory')
 spcs <- basename(dirs)
+limt <- sf::st_read('limiteareadeestudio.shp')
 
 # Function to use ---------------------------------------------------------
 see_changes <- function(spc){
@@ -32,7 +33,10 @@ see_changes <- function(spc){
     return(rs)
   })
   
-  plot(rst.avg[[1]])
+  cat('To make a simple map\n')
+  
+  
+  
   
  }
 
