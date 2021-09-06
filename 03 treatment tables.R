@@ -21,9 +21,8 @@ see_changes <- function(spc){
   tbl <- fst::read_fst(path = fle)
   tbl <- dplyr::select(tbl, x, y, gc, everything())
   names(tbl)[1:2] <- c('lon', 'lat')
+  avg <- apply(as.data.frame(tbl)[,4:ncol(tbl)], MARGIN = 1, FUN = mean)
   
-  tbl %>% mutate_at(vars(contains('y')), funs = mean)
-  tbl %>% mutate(avg = rowMeans[,c('y2011', 'y2031', 'y2051')])
   
 }
 
