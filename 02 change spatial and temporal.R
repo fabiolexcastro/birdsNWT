@@ -41,6 +41,7 @@ raster_to_table <- function(spc){
   })
   
   rsl <- bind_rows(dfm)
+  system.time(expr = {fst::write_fst(x = rsl, path = glue('./outputs/{spc}/tbl_yrs_{scp}.fst'))})
   fst::write_fst(x = rsl, path = glue('./outputs/{spc}/tbl_yrs_{scp}.fst'))
   cat('------- Done -------\n')
   return(rsl)
