@@ -24,6 +24,10 @@ see_changes <- function(spc){
   tbl <- mutate(tbl, avg = rowMeans(tbl[,4:9]))
   tbl <- as_tibble(tbl)
   
+  cat('To see the average in a raster file\n')
+  rst.avg <- tbl %>% dplyr::select(lon, lat, avg)
+  plot(rst.avg)
+  
  }
 
 # Apply the function ------------------------------------------------------
