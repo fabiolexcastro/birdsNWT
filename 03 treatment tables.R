@@ -1,6 +1,6 @@
 # Load libraries ----------------------------------------------------------
 require(pacman)
-pacman::p_load(raster, rgdal, rgeos, reproducible, terra, stringr, glue, sf, tidyverse, RStoolbox, fs, fst, trend)
+pacman::p_load(raster, rgdal, rgeos, reproducible, RColorBrewer, ggspatial, ggpubr, gridExtra, terra, stringr, glue, sf, tidyverse, RStoolbox, fs, fst, trend)
 
 g <- gc(reset = TRUE)
 rm(list = ls())
@@ -32,8 +32,7 @@ see_changes <- function(spc){
     return(rs)
   })
   
-  rst.avg <- tbl %>% dplyr::select(lon, lat, avg) %>% rasterFromXYZ()
-  plot(rst.avg)
+  plot(rst.avg[[1]])
   
  }
 
