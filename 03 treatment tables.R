@@ -37,13 +37,14 @@ see_changes <- function(spc){
   gavg <- ggplot() + 
     geom_tile(data = tbl, aes(x = lon, y = lat, fill = avg)) + 
     facet_wrap(.~gc, nrow = 1, ncol = 3) +
-    scale_fill_gradientn(values = RColorBrewer::brewer.pal(n = 8, name = 'YlOrBr')) + 
+    scale_fill_gradientn(colors = RColorBrewer::brewer.pal(n = 8, name = 'YlOrBr')) + 
     theme_bw() + 
     theme(panel.grid.major = element_blank(),
           axis.text.y = element_text(angle = 90, hjust = 0.5, vjust = 0.5)) + 
     labs(x = 'Longitude', y = 'Latitude')
   
-  
+  ggsave(plot = gavg, filename = glue('./graphs/maps/avg_gcm_{spc}.png'), 
+         units = 'in', width = 13, height = 8, dpi = 300)
   
  }
 
