@@ -25,7 +25,7 @@ see_changes <- function(spc){
   tbl <- as_tibble(tbl)
   
   cat('To see the average in a raster file\n')
-  rst.avg <- tbl %>% dplyr::select(lon, lat, avg)
+  rst.avg <- tbl %>% dplyr::select(lon, lat, avg) %>% rasterFromXYZ()
   plot(rst.avg)
   
  }
