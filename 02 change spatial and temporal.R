@@ -13,11 +13,10 @@ dirs <- fs::dir_ls(root, type = 'directory')
 spcs <- basename(dirs)
 
 # See the changes  --------------------------------------------------------
-see_changes <- function(spc){
+raster_to_table <- function(spc){
   
   # Proof
   # spc <- spcs[1] # Run and comment (after)
-  
   cat('Start ', spc, '\n')
   dir <- grep(spc, dirs, value = TRUE)
   fls <- fs::dir_ls(dir)
@@ -45,13 +44,14 @@ see_changes <- function(spc){
     
   })
   
-  map(dfm, dim)
   rsl <- bind_rows(dfm)
-  dim(rsl)
+  saveRDS(object = rsl, file = glue('./outputs/{spc}/tbl_yrs_{spc}.rds'))
   cat('------- Done -------\n')
   return(rsl)
   
 }
 
+
+# Apply the function ------------------------------------------------------
 map(.x = spcs, .f = see_changes)
 
