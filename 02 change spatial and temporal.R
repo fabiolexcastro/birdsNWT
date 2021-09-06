@@ -41,8 +41,7 @@ raster_to_table <- function(spc){
   })
   
   rsl <- bind_rows(dfm)
-  system.time(expr = {fst::write_fst(x = rsl, path = glue('./outputs/{spc}/tbl_yrs_{scp}.fst'))})
-  fst::write_fst(x = rsl, path = glue('./outputs/{spc}/tbl_yrs_{scp}.fst'))
+  fst::write_fst(x = rsl, path = glue('./outputs/{spc}/tbl_yrs_{spc}.fst'))
   cat('------- Done -------\n')
   return(rsl)
   
@@ -54,7 +53,7 @@ dirs <- fs::dir_ls(root, type = 'directory')
 spcs <- basename(dirs)
 
 # Raster to table ---------------------------------------------------------
-dfrm <- map(.x = spcs, .f = see_changes)
+dfrm <- map(.x = spcs[2:length(spcs)], .f = see_changes)
 dim(dfrm)
 object.size(dfrm)
 
