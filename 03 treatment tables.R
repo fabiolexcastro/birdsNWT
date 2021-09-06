@@ -17,7 +17,7 @@ see_changes <- function(spc){
   
   cat('To start ', spc, '\n')
   dir <- grep(spc, dirs, value = TRUE)
-  dir
+  fls <- fs::dir_ls(dir, regexp = '.fst')
   
 }
 
