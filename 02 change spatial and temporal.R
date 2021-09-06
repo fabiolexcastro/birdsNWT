@@ -7,12 +7,7 @@ pacman::p_load(raster, rgdal, rgeos, terra, stringr, glue, sf, tidyverse, RStool
 g <- gc(reset = TRUE)
 rm(list = ls())
 
-# Load data ---------------------------------------------------------------
-root <- './outputs'
-dirs <- fs::dir_ls(root, type = 'directory')
-spcs <- basename(dirs)
-
-# See the changes  --------------------------------------------------------
+# Functions to use --------------------------------------------------------
 raster_to_table <- function(spc){
   
   # Proof
@@ -30,7 +25,7 @@ raster_to_table <- function(spc){
     
     cat(gcm[k], '\n')
     fl <- grep(gcm[k], fls, value = TRUE)
-  
+    
     cat('----- Terra library functions -----\n')
     tr <- terra::rast(fl)
     tb <- terra::as.points(tr)
@@ -51,7 +46,21 @@ raster_to_table <- function(spc){
   
 }
 
+# Load data ---------------------------------------------------------------
+root <- './outputs'
+dirs <- fs::dir_ls(root, type = 'directory')
+spcs <- basename(dirs)
 
-# Apply the function ------------------------------------------------------
-map(.x = spcs, .f = see_changes)
+# Raster to table ---------------------------------------------------------
+dfrm <- map(.x = spcs, .f = see_changes)
+dim(dfrm)
+object.size(dfrm)
+
+
+
+
+
+
+
+
 
