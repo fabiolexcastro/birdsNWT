@@ -2,7 +2,7 @@
 
 # Load libraries --------------------------------------------------------
 require(pacman)
-pacman::p_load(raster, rgdal, rgeos, terra, stringr, glue, sf, tidyverse, RStoolbox, fs, trend)
+pacman::p_load(raster, rgdal, rgeos, terra, stringr, glue, sf, tidyverse, RStoolbox, fs, fst, trend)
 
 g <- gc(reset = TRUE)
 rm(list = ls())
@@ -45,7 +45,7 @@ raster_to_table <- function(spc){
   })
   
   rsl <- bind_rows(dfm)
-  fst::write_fst(x = rsl, path = glue('./outputs/{spc}/tbl_yrs_{scp}.rds'))
+  fst::write_fst(x = rsl, path = glue('./outputs/{spc}/tbl_yrs_{scp}.fst'))
   cat('------- Done -------\n')
   return(rsl)
   
