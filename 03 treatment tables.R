@@ -17,7 +17,8 @@ see_changes <- function(spc){
   
   cat('To start ', spc, '\n')
   dir <- grep(spc, dirs, value = TRUE)
-  fls <- fs::dir_ls(dir, regexp = '.fst')
+  fle <- fs::dir_ls(dir, regexp = '.fst')
+  tbl <- fst::read_fst(path = fle)
   
 }
 
