@@ -14,11 +14,12 @@ raster_to_table <- function(spc){
   # spc <- spcs[1] # Run and comment (after)
   cat('Start ', spc, '\n')
   dir <- grep(spc, dirs, value = TRUE)
-  fls <- fs::dir_ls(dir)
+  fls <- fs::dir_ls(dir, regexp = '.tif$')
   yrs <- parse_number(basename(fls))
   yrs <- unique(yrs)
+  yrs <- na.omit(yrs)
   gcm <- str_sub(basename(fls), start = 16, end = nchar(basename(fls)) - 4)
-  gcm <- unique(gcm)
+  gcm <- unique(gcm) #
   
   cat('Raster to table\n')
   dfm <- map(.x = 1:length(gcm), .f = function(k){
