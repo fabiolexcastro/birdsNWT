@@ -1,5 +1,3 @@
-
-
 # Load libraries ----------------------------------------------------------
 require(pacman)
 pacman::p_load(raster, rgdal, rgeos, reproducible, terra, stringr, glue, sf, tidyverse, RStoolbox, fs, fst, trend)
@@ -18,7 +16,8 @@ see_changes <- function(spc){
   spc <- spcs[1]
   
   cat('To start ', spc, '\n')
-  
+  dir <- grep(spc, dirs, value = TRUE)
+  dir
   
 }
 
