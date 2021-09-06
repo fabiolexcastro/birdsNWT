@@ -19,6 +19,7 @@ see_changes <- function(spc){
   dir <- grep(spc, dirs, value = TRUE)
   fle <- fs::dir_ls(dir, regexp = '.fst')
   tbl <- fst::read_fst(path = fle)
+  tbl <- dplyr::select(tbl, x, y, gc, everything())
   
 }
 
