@@ -23,8 +23,15 @@ see_changes <- function(spc){
   names(tbl)[1:2] <- c('lon', 'lat')
   tbl <- mutate(tbl, avg = rowMeans(tbl[,4:9]))
   tbl <- as_tibble(tbl)
+  gcm <- unique(tbl$gc)
   
   cat('To see the average in a raster file\n')
+  rst.avg <- map(.x = 1:length(gcm), .f = function(k){
+    cat('Start -- ', k, '\n')
+    rs <- tbl %>% filter(gc == gcm[k]) %>% dplyr::select(lon, lat, avg) %>% rasterFromXYZ()
+    return(rs)
+  })
+  
   rst.avg <- tbl %>% dplyr::select(lon, lat, avg) %>% rasterFromXYZ()
   plot(rst.avg)
   
