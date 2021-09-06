@@ -36,8 +36,8 @@ see_changes <- function(spc){
   cat('To make a simple map\n')
   gavg <- ggplot() + 
     geom_tile(data = tbl, aes(x = lon, y = lat, fill = avg)) + 
-    facet_wrap(.~gc) +
-    scale_fill_manual(values = RColorBrewer::brewer.pal(n = 8, name = 'YlOrBr')) + 
+    facet_wrap(.~gc, nrow = 1, ncol = 3) +
+    scale_fill_gradientn(values = RColorBrewer::brewer.pal(n = 8, name = 'YlOrBr')) + 
     theme_bw() + 
     theme(panel.grid.major = element_blank(),
           axis.text.y = element_text(angle = 90, hjust = 0.5, vjust = 0.5)) + 
