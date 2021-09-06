@@ -24,6 +24,7 @@ see_changes <- function(spc){
   yrs <- parse_number(basename(fls))
   yrs <- unique(yrs)
   gcm <- str_sub(basename(fls), start = 16, end = nchar(basename(fls)) - 4)
+  gcm <- unique(gcm)
   
   cat('Raster to table\n')
   dfm <- map(.x = 1:length(gcm), .f = function(k){
@@ -43,6 +44,10 @@ see_changes <- function(spc){
     return(df)
     
   })
+  
+  map(dfm, dim)
+  rsl <- bind_rows(dfm)
+  
   
   return(dfm)
   
