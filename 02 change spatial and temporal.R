@@ -47,9 +47,9 @@ see_changes <- function(spc){
   
   map(dfm, dim)
   rsl <- bind_rows(dfm)
-  
-  
-  return(dfm)
+  dim(rsl)
+  cat('------- Done -------\n')
+  return(rsl)
   
 }
 
