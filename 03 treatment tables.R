@@ -15,6 +15,11 @@ spcs <- basename(dirs)
 limt <- sf::st_read('limiteareadeestudio.shp')
 ecrg <- sf::st_read('path.shp')
 
+# Extract by mask for the ecoregions ---------------------------------------
+plot(st_geometry(ecrg))
+ecrg_limt <- sf::st_intersection(x = ecrg, y = limt)
+plot(st_geometry(ecrg_limt))
+
 # Function to use ---------------------------------------------------------
 see_changes <- function(spc){
   
@@ -57,6 +62,8 @@ see_changes <- function(spc){
   
   cat('To estimate the change (ration), initial and final year\n')
   tbl <- mutate(tbl, ratio = (y2100 - y2011) / y2011 * 100)
+  
+  cat('Now to make the ')
   
  }
 
