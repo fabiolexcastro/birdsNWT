@@ -88,6 +88,8 @@ see_changes <- function(spc){
     theme(legend.position = 'bottom') + 
     labs(x = 'Ecoprovince', y = 'Change', fill = 'GCM')
   
+  ogb <- glue('./graphs/figs/bar_ratio_{spc}.png')
+  ggsave(plot = gbr, filename = ogb, units = 'in', width = 9, height = 6.8, dpi = 300)
   
   
  }
