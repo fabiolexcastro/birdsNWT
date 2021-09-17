@@ -78,6 +78,13 @@ see_changes <- function(spc){
   
   znl <- bind_rows(znl) %>% mutate(value = round(value, 2))
   
+  cat('To make the graph\n')
+  gbr <- ggplot(data = znll, aes(x = ecoprovince, y = value, fill = gcm, group = gcm)) + 
+    geom_col() + 
+    theme_ipsum_es()
+  
+  
+  
  }
 
 # Apply the function ------------------------------------------------------
