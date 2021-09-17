@@ -50,6 +50,9 @@ see_changes <- function(spc){
   ggsave(plot = gavg, filename = glue('./graphs/maps/avg_gcm_{spc}.png'), 
          units = 'in', width = 13, height = 8, dpi = 300)
   
+  cat('To estimate the change (ration), initial and final year\n')
+  tbl <- mutate(tbl, ratio = (y2100 - y2011) / y2011 * 100)
+  
  }
 
 # Apply the function ------------------------------------------------------
