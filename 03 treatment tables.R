@@ -68,14 +68,13 @@ see_changes <- function(spc){
   map(.x = 1:length(rst.avg), .f = function(k){
     
     cat('To start\n')
+    cat(k, '\n')
     znl <- exact_extractr(rst.avg[[k]], ecrg, 'mean')
     znl <- data.frame(value = znl)
     cat('Done\n')
     return(znl)
     
   })
-  
-  znl <- exact_extractr(rst.avg[[1]], ecrg, 'mean')  
   
   
  }
