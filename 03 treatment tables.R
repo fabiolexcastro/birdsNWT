@@ -80,8 +80,8 @@ see_changes <- function(spc){
   
   cat('To make the graph\n')
   gbr <- ggplot(data = znll, aes(x = ecoprovince, y = value, fill = gcm, group = gcm)) + 
-    geom_col() + 
-    theme_ipsum_es()
+    geom_bar(position = 'dodge', stat = 'identity') + 
+    theme_bw()
   
   
   
