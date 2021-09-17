@@ -69,7 +69,7 @@ see_changes <- function(spc){
     
     cat('To start\n')
     cat(k, '\n')
-    znl <- exact_extract(rst.avg[[k]], ecrg_limt, c('mean', 'sd'))
+    znl <- exact_extract(rst.avg[[k]], ecrg_limt, c('mean', 'stdev'))
     znl <- round(znl, digits = 2)
     znl <- mutate(znl, gcm = gcm[k], ecoprovince = ecrg_limt$ECOPROVINC)
     cat('Done\n')
@@ -80,7 +80,8 @@ see_changes <- function(spc){
   znl <- bind_rows(znl) 
   
   cat('To make the graph\n')
-  gbr <- ggplot(data = znl, aes(x = ecoprovince, y = value, fill = gcm, group = gcm)) + 
+  gbr <- ggplot(data = znl, aes(x = ecoprovince, y = mean, fill = gcm, group = gcm)) + 
+    geom_errorbar(aes(ymin = mean - stdev, ymax = mean + stdev)) +
     geom_bar(position = 'dodge', stat = 'identity') + 
     scale_fill_manual(vallues = c('#38610B', '#FF8000', '#29088A')) +
     theme_bw() +
