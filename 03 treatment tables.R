@@ -92,8 +92,9 @@ see_changes <- function(spc){
   ggsave(plot = gbr, filename = ogb, units = 'in', width = 9, height = 6.8, dpi = 300)
   
   cat('To calculate the slopes\n')s
-  prb <- tbl %>% filter(gcm == 'CCSM4')
-  
+  prb <- tbl %>% filter(gc == 'CCSM4')
+  prb <- prb %>% mutate(gid = 1:nrow(.))
+  nrow(prb)
   
   
  }
