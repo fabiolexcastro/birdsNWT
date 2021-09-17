@@ -1,6 +1,6 @@
 # Load libraries ----------------------------------------------------------
 require(pacman)
-pacman::p_load(raster, rgdal, rgeos, reproducible, RColorBrewer, ggspatial, ggpubr, gridExtra, terra, stringr, glue, sf, tidyverse, RStoolbox, fs, fst, trend)
+pacman::p_load(raster, rgdal, rgeos, reproducible, RColorBrewer, colorspaces, ggspatial, ggpubr, gridExtra, terra, stringr, glue, sf, tidyverse, RStoolbox, fs, fst, trend)
 
 g <- gc(reset = TRUE)
 rm(list = ls())
@@ -36,9 +36,10 @@ see_changes <- function(spc){
   cat('To make a simple map\n')
   gavg <- ggplot() + 
     geom_tile(data = tbl, aes(x = lon, y = lat, fill = avg)) + 
+    geom_sf(data = limt, fill = NA, col = 'grey') + 
     facet_wrap(.~gc, nrow = 1, ncol = 3) +
     # scale_fill_gradientn(colors = RColorBrewer::brewer.pal(n = 8, name = 'YlOrBr')) + 
-    scale_fill_binned_sequential(palette = 'Heat')
+    scale_fill_binned_sequential(palette = 'Heat') +
     theme_bw() + 
     theme(panel.grid.major = element_blank(),
           axis.text.y = element_text(angle = 90, hjust = 0.5, vjust = 0.5), 
