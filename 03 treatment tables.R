@@ -79,9 +79,12 @@ see_changes <- function(spc){
   znl <- bind_rows(znl) %>% mutate(value = round(value, 2))
   
   cat('To make the graph\n')
-  gbr <- ggplot(data = znll, aes(x = ecoprovince, y = value, fill = gcm, group = gcm)) + 
+  gbr <- ggplot(data = znl, aes(x = ecoprovince, y = value, fill = gcm, group = gcm)) + 
     geom_bar(position = 'dodge', stat = 'identity') + 
-    theme_bw()
+    scale_fill_manual(vallues = c('#38610B', '#FF8000', '#29088A')) +
+    theme_bw() +
+    theme(legend.position = 'bottom') + 
+    labs(x = 'Ecoprovince', y = 'Change', fill = 'GCM')
   
   
   
