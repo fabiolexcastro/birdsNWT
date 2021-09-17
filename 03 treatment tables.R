@@ -91,6 +91,10 @@ see_changes <- function(spc){
   ogb <- glue('./graphs/figs/bar_ratio_{spc}.png')
   ggsave(plot = gbr, filename = ogb, units = 'in', width = 9, height = 6.8, dpi = 300)
   
+  cat('To calculate the slopes\n')s
+  prb <- tbl %>% filter(gcm == 'CCSM4')
+  
+  
   
  }
 
