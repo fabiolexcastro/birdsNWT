@@ -70,7 +70,7 @@ see_changes <- function(spc){
     cat('To start\n')
     cat(k, '\n')
     znl <- exact_extract(rst.avg[[k]], ecrg_limt, 'mean')
-    znl <- data.frame(gcm = gcm[k], value = znl)
+    znl <- data.frame(gcm = gcm[k], value = znl, ecoprovince = ecrg_limt$ECOPROVINC)
     cat('Done\n')
     return(znl)
     
