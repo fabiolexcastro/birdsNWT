@@ -91,10 +91,8 @@ see_changes <- function(spc){
   ogb <- glue('./graphs/figs/bar_ratio_{spc}.png')
   ggsave(plot = gbr, filename = ogb, units = 'in', width = 9, height = 6.8, dpi = 300)
   
-  cat('To calculate the slopes\n')s
-  prb <- tbl %>% filter(gc == 'CCSM4')
-  prb <- prb %>% mutate(gid = 1:nrow(.))
-  nrow(prb)
+  cat('To calculate the slopes\n')
+  tbl <- map(.x = 1:3, function(k){tbl[[k]] %>% filter(gc == gcm[k]) %>% mutate(gid = 1:nrow(.))}) %>% bind_rows()
   
   
  }
