@@ -70,13 +70,14 @@ see_changes <- function(spc){
     cat('To start\n')
     cat(k, '\n')
     znl <- exact_extract(rst.avg[[k]], ecrg_limt, c('mean', 'sd'))
-    znl <- data.frame(gcm = gcm[k], value = znl, ecoprovince = ecrg_limt$ECOPROVINC)
+    znl <- round(znl, digits = 2)
+    znl <- mutate(znl, gcm = gcm[k], ecoprovince = ecrg_limt$ECOPROVINC)
     cat('Done\n')
     return(znl)
     
   })
   
-  znl <- bind_rows(znl) %>% mutate(value = round(value, 2))
+  znl <- bind_rows(znl) 
   
   cat('To make the graph\n')
   gbr <- ggplot(data = znl, aes(x = ecoprovince, y = value, fill = gcm, group = gcm)) + 
