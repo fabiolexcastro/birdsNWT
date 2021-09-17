@@ -10,6 +10,7 @@ root <- './outputs'
 dirs <- fs::dir_ls(root, type = 'directory')
 spcs <- basename(dirs)
 limt <- sf::st_read('limiteareadeestudio.shp')
+ecrg <- sf::st_read('path.shp')
 
 # Function to use ---------------------------------------------------------
 see_changes <- function(spc){
