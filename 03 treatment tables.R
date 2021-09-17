@@ -5,6 +5,9 @@ pacman::p_load(raster, rgdal, rgeos, reproducible, RColorBrewer, colorspaces, gg
 g <- gc(reset = TRUE)
 rm(list = ls())
 
+install.packages('exactextractr')
+library(exactextracr)
+
 # Load data ---------------------------------------------------------------
 root <- './outputs'
 dirs <- fs::dir_ls(root, type = 'directory')
@@ -38,6 +41,7 @@ see_changes <- function(spc){
   gavg <- ggplot() + 
     geom_tile(data = tbl, aes(x = lon, y = lat, fill = avg)) + 
     geom_sf(data = limt, fill = NA, col = 'grey') +
+    geom_sf(data = ecrg, fill = NA) +
     coord_sf() + 
     facet_wrap(.~gc, nrow = 1, ncol = 3) +
     # scale_fill_gradientn(colors = RColorBrewer::brewer.pal(n = 8, name = 'YlOrBr')) + 
