@@ -17,6 +17,7 @@ ecrg <- sf::st_read('path.shp')
 
 # Extract by mask for the ecoregions ---------------------------------------
 plot(st_geometry(ecrg))
+ecrg <- sf::st_transform(x = ecrg, crs = st_crs(limt))
 ecrg_limt <- sf::st_intersection(x = ecrg, y = limt)
 plot(st_geometry(ecrg_limt))
 
@@ -63,7 +64,19 @@ see_changes <- function(spc){
   cat('To estimate the change (ration), initial and final year\n')
   tbl <- mutate(tbl, ratio = (y2100 - y2011) / y2011 * 100)
   
-  cat('Now to make the ')
+  cat('Now to make the zonal statistical\n')
+  map(.x = 1:length(rst.avg), .f = function(k){
+    
+    cat('To start\n')
+    znl <- exact_extractr(rst.avg[[k]], ecrg, 'mean')
+    znl <- data.frame(value = znl)
+    cat('Done\n')
+    return(znl)
+    
+  })
+  
+  znl <- exact_extractr(rst.avg[[1]], ecrg, 'mean')  
+  
   
  }
 
