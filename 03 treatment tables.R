@@ -81,9 +81,9 @@ see_changes <- function(spc){
   
   cat('To make the graph\n')
   gbr <- ggplot(data = znl, aes(x = ecoprovince, y = mean, fill = gcm, group = gcm)) + 
-    geom_errorbar(aes(ymin = mean - stdev, ymax = mean + stdev)) +
+    geom_errorbar(aes(ymin = mean - stdev, ymax = mean + stdev), width = .2, position = position_dodge(.9)) +
     geom_bar(position = 'dodge', stat = 'identity') + 
-    scale_fill_manual(vallues = c('#38610B', '#FF8000', '#29088A')) +
+    scale_fill_manual(values = c('#38610B', '#FF8000', '#29088A')) +
     theme_bw() +
     theme(legend.position = 'bottom') + 
     labs(x = 'Ecoprovince', y = 'Change', fill = 'GCM')
