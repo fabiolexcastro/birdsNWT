@@ -65,12 +65,12 @@ see_changes <- function(spc){
   tbl <- mutate(tbl, ratio = (y2100 - y2011) / y2011 * 100)
   
   cat('Now to make the zonal statistical\n')
-  map(.x = 1:length(rst.avg), .f = function(k){
+  znl <- map(.x = 1:length(rst.avg), .f = function(k){
     
     cat('To start\n')
-    cat(k, '\n')
-    znl <- exact_extractr(rst.avg[[k]], ecrg, 'mean')
-    znl <- data.frame(value = znl)
+    cat(k, '\n')s
+    znl <- exact_extract(rst.avg[[k]], ecrg_limt, 'mean')
+    znl <- data.frame(gcm = gcm[k], value = znl)
     cat('Done\n')
     return(znl)
     
