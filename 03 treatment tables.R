@@ -1,6 +1,8 @@
 # Load libraries ----------------------------------------------------------
 require(pacman)
-pacman::p_load(raster, rgdal, rgeos, reproducible, RColorBrewer, colorspaces, ggspatial, ggpubr, gridExtra, terra, stringr, glue, sf, tidyverse, RStoolbox, fs, fst, trend)
+pacman::p_load(raster, rgdal, rgeos, future, furrr, reproducible, RColorBrewer, 
+               colorspaces, ggspatial, ggpubr, gridExtra, terra, stringr, glue, 
+               sf, tidyverse, RStoolbox, fs, future.apply, fst, trend)
 
 g <- gc(reset = TRUE)
 rm(list = ls())
@@ -94,9 +96,11 @@ see_changes <- function(spc){
   cat('To calculate the slopes\n')
   tbl <- map(.x = 1:3, function(k){tbl %>% filter(gc == gcm[k]) %>% mutate(gid = 1:nrow(.))}) %>% bind_rows()
   gds <- tbl %>% pull(gid) %>% unique()
-  map(.x = 1:length(gds), .f = function(j){
+  
+  cat('To sentence the function\n')
+  run_slope <- function(pix){
     
-    j <- 1 # Ejecutar y luego borrar
+    cat(j, '\n')
     tb <- tbl %>% filter(gid == gds[j])
     head(tb); nrow(tb)
     
@@ -108,14 +112,17 @@ see_changes <- function(spc){
       ts <- ts %>% gather(year, value) %>% mutate(year = parse_number(year))
       tm <- ts %>% pull(value) %>% ts()
       sl <- sens.slope(tm)
-      df <- data.frame(gcm = gc[g], gid = gds[j], slp = sl$estimates, pvl = sl$p.value)
+      df <- data.frame(gcm = gcm[g], gid = gds[j], slp = sl$estimates, pvl = sl$p.value)
       df <- as_tibble(df)
       cat('Done\n')
       return(df)
       
     }) %>% bind_rows()
-    
-  })
+  }
+  
+  cat('To estimate the slopes\n')
+  plan(multicore, workers = 30)
+  rsl <- future.apply::future_lapply(X = gds, FUN = run_slope)
   
   
  }
