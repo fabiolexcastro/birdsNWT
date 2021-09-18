@@ -92,7 +92,13 @@ see_changes <- function(spc){
   ggsave(plot = gbr, filename = ogb, units = 'in', width = 9, height = 6.8, dpi = 300)
   
   cat('To calculate the slopes\n')
-  tbl <- map(.x = 1:3, function(k){tbl[[k]] %>% filter(gc == gcm[k]) %>% mutate(gid = 1:nrow(.))}) %>% bind_rows()
+  tbl <- map(.x = 1:3, function(k){tbl %>% filter(gc == gcm[k]) %>% mutate(gid = 1:nrow(.))}) %>% bind_rows()
+  gds <- tbl %>% pull(gid) %>% unique()
+  map(.x = 1:length(gds), .f = function(j){
+    
+    
+    
+  })
   
   
  }
