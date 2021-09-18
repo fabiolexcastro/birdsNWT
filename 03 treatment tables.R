@@ -124,6 +124,7 @@ see_changes <- function(spc){
   
   cat('To estimate the slopes\n')
   plan(multicore, workers = 30)
+  options(future.globals.maxSize = 3460300800)
   rsl <- future.apply::future_lapply(X = gds, FUN = run_slope)
   # Update
   
