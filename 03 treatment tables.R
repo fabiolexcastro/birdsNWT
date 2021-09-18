@@ -102,11 +102,10 @@ see_changes <- function(spc){
     
     cat(j, '\n')
     tb <- tbl %>% filter(gid == gds[j])
-    head(tb); nrow(tb)
     
     rs <- map(.x = 1:3, .f = function(g){
       
-      cat(gcm[g], '\m')
+      cat(gcm[g], '\n')
       df <- tb %>% filter(gc == gcm[g]) 
       ts <- df %>% dplyr::select(contains('y'))
       ts <- ts %>% gather(year, value) %>% mutate(year = parse_number(year))
@@ -114,10 +113,13 @@ see_changes <- function(spc){
       sl <- sens.slope(tm)
       df <- data.frame(gcm = gcm[g], gid = gds[j], slp = sl$estimates, pvl = sl$p.value)
       df <- as_tibble(df)
-      cat('Done\n')
-      return(df)
       
-    }) %>% bind_rows()
+    })
+    
+    rs <- bind_rows(rs)
+    cat('Done\n')
+    return(rs)
+    
   }
   
   cat('To estimate the slopes\n')
