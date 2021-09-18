@@ -106,6 +106,7 @@ see_changes <- function(spc){
       ts <- df %>% dplyr::select(contains('y'))
       ts <- ts %>% gather(year, value) %>% mutate(year = parse_number(year))
       tm <- ts %>% pull(value) %>% ts()
+      sl <- sens.slope(tm)
       
     })
     
