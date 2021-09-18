@@ -100,15 +100,20 @@ see_changes <- function(spc){
     tb <- tbl %>% filter(gid == gds[j])
     head(tb); nrow(tb)
     
-    map(.x = 1:3, .f = function(g){
+    rs <- map(.x = 1:3, .f = function(g){
       
+      cat(gcm[g], '\m')
       df <- tb %>% filter(gc == gcm[g]) 
       ts <- df %>% dplyr::select(contains('y'))
       ts <- ts %>% gather(year, value) %>% mutate(year = parse_number(year))
       tm <- ts %>% pull(value) %>% ts()
       sl <- sens.slope(tm)
+      df <- data.frame(gcm = gc[g], gid = gds[j], slp = sl$estimates, pvl = sl$p.value)
+      df <- as_tibble(df)
+      cat('Done\n')
+      return(df)
       
-    })
+    }) %>% bind_rows()
     
   })
   
