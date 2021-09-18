@@ -100,6 +100,14 @@ see_changes <- function(spc){
     tb <- tbl %>% filter(gid == gds[j])
     head(tb); nrow(tb)
     
+    map(.x = 1:3, .f = function(g){
+      
+      df <- tb %>% filter(gc == gcm[g]) 
+      ts <- df %>% dplyr::select(contains('y'))
+      
+      
+    })
+    
   })
   
   
