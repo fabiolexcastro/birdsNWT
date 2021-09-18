@@ -96,7 +96,9 @@ see_changes <- function(spc){
   gds <- tbl %>% pull(gid) %>% unique()
   map(.x = 1:length(gds), .f = function(j){
     
-    
+    j <- 1 # Ejecutar y luego borrar
+    tb <- tbl %>% filter(gid == gds[j])
+    head(tb); nrow(tb)
     
   })
   
