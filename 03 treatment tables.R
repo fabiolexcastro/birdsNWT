@@ -105,6 +105,7 @@ see_changes <- function(spc){
       df <- tb %>% filter(gc == gcm[g]) 
       ts <- df %>% dplyr::select(contains('y'))
       ts <- ts %>% gather(year, value) %>% mutate(year = parse_number(year))
+      tm <- ts %>% pull(value) %>% ts()
       
     })
     
