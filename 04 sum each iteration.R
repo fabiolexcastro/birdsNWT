@@ -46,8 +46,6 @@ make_sum <- function(spc){
       sd <- calc(x = st, fun = 'sd')
       return(list(sm, sd))
       
-      
-      
     })
 
     
