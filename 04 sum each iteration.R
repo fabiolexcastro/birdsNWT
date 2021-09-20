@@ -13,7 +13,8 @@ root <- './inputs/predictions'
 dirs <- fs::dir_ls(root, type = 'directory')
 spcs <- basename(dirs)
 limt <- sf::st_read('limiteareadeestudio.shp')
-targetCRS <- paste('')
+targetCRS <-  paste("+proj=lcc +lat_1=49 +lat_2=77 +lat_0=0 +lon_0=-95",
+                    "+x_0=0 +y_0=0 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0")
 limt <- st_transform(x = limt, targetCRS)
 
 # Function to use ---------------------------------------------------------
@@ -22,8 +23,13 @@ make_sum <- function(spc){
   spc <- spcs[1] # Run and erase
   
   cat('Start ', spc, '\n')
-  dir <- grep(spcs, dirs, value = TRUE)
+  dir <- grep(spc, dirs, value = TRUE)
   fls <- fs::dir_ls(dir, directory = '.tif$')
+  
+  cat('To get the name of each gcm\n')
+  gcm <- str_split(basename(fls), '_')
+  gcm <- sapply(gcm, function(x) x[1])
+  
   
   
 }
