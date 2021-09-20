@@ -36,15 +36,16 @@ make_sum <- function(spc){
     
     prd <- str_sub(fls, start = nchar(fls) - 7, end = nchar(fls) - 4)
     prd <- unique(prd)
+    fl <- grep(gcm[k], fls, value = TRUE)
     
     rs <- map(.x = 1:length(prd), .f = function(i){
       
       cat(gcm[k], '\n')
-      fl <- grep(gcm[k], fls, value = TRUE)
       fl <- grep(prd[i], fl, value = TRUE)
       rs <- terra::rast(fl)
-      sm <- app(rs, sum, cores = 6)
-      sd <- app(rs, sd, cores = 6)
+      sm <- terra::app(rs, sum, cores = 6)
+      mysd <- function(x){sd(x)}
+      sd <- terra::app(rs, mysd, cores = 6)
       return(list(sm, sd))
       
     })
