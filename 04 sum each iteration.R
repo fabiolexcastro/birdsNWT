@@ -49,7 +49,9 @@ make_sum <- function(spc){
       sd <- apply(X = df, MARGIN = 1, FUN = sd)
       gm <- terra::geom(tb)
       df <- cbind(gm[,3:4], df)
-      
+      df <- mutate(df, avg = av, std = sd)
+      rs.av <- dplyr::select(df, x, y, av) %>% rasterFromXYZ()
+      rs.sd <- dplyr::select(df, x, y, std) %>% rasterFromXYZ()
       
       
     })
