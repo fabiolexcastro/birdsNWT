@@ -71,5 +71,39 @@ map(.x = spcs[2:length(spcs)], .f = make_sum)
 
 # To make the maps --------------------------------------------------------
 
+fldr <- './outputs'
+spcs <- fs::dir_ls(fldr, type = 'directory')
+
+make_maps <- function(spc){
+  
+  spc <- spcs[1] # Run and comment
+  
+  fld <- grep(spc, spcs, value = TRUE)
+  fls <- list.files(fld, full.names = TRUE, pattern = '.tif')
+  fls <- grep(paste0(c('sum', 'std'), collapse = '|'), fls, value = TRUE)
+  print(fls)
+  gcm <- str_split(basename(fls), '_')
+  gcm <- sapply(gcm, function(x) x[4])
+  gcm <- unique(gcm)
+  
+  map(.x = 1:length(gcm), .f = function(i){
+    
+    i <- 1 # Run and comment
+    
+    fle <- grep(gcm[i], fls, value = TRUE)
+    sum <- grep('sum', fle, value = TRUE) 
+    std <- grep('std', fle, value = TRUE)
+    sum <- raster(sum)
+    std <- raster(sum)
+    tbl.sum <- rasterToPoints(sum, spatial = FALSE) %>% as_tibble()
+    tbl.std <- rasterToPoints(sum, spatial = FALSE) %>% as_tibble()
+  
+    
+  })
+  
+  
+}
+
+
 
 
