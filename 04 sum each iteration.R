@@ -38,7 +38,7 @@ make_sum <- function(spc){
     prd <- unique(prd)
     fl <- grep(gcm[k], fls, value = TRUE)
     
-    rs <- map(.x = 1:length(prd), .f = function(i){
+    system.time(expr = {rs <- map(.x = 1:length(prd), .f = function(i){
       
       cat(gcm[k], '\n')
       fl <- grep(prd[i], fl, value = TRUE)
@@ -57,7 +57,7 @@ make_sum <- function(spc){
       writeRaster(x = rs.sd, filename = glue('{dr}/std_{spc}_{gcm[k]}_{prd[i]}.tif'))
       cat('Done\n')
       
-    })
+    })})
     
     return(rs)
 
