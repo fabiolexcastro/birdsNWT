@@ -44,7 +44,7 @@ make_sum <- function(spc){
       fl <- grep(prd[i], fl, value = TRUE)
       rs <- terra::rast(fl)
       sm <- sum(rs)
-      sd <- calc(x = st, fun = 'sd')
+      sd <- app(rs, sd, cores = 6)
       return(list(sm, sd))
       
     })
