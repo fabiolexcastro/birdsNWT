@@ -45,11 +45,8 @@ make_sum <- function(spc){
       rs <- terra::rast(fl)
       tb <- terra::as.points(rs)
       df <- terra::as.data.frame(x = tb)
-      names(df) <- paste0('y', yrs)
-      gm <- terra::geom(tb)
-      df <- cbind(gm[,3:4], df)
-      df <- as_tibble(df)
-      
+      av <- apply(X = df, MARGIN = 1, FUN = mean)
+      sd <- apply(X = df, MARGIN = 1, FUN = sd)
       return(df)
       
       
