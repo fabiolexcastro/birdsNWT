@@ -43,11 +43,7 @@ make_sum <- function(spc){
       fl <- grep(gcm[k], fls, value = TRUE)
       fl <- grep(prd[i], fl, value = TRUE)
       rs <- terra::rast(fl)
-      sm <- sum(rs)
-      
-      system.time(expr = sum(rs))
-      system.time(expr = app(rs, sum, cores = 6))
-      
+      sm <- app(rs, sum, cores = 6)
       sd <- app(rs, sd, cores = 6)
       return(list(sm, sd))
       
