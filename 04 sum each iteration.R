@@ -29,8 +29,18 @@ make_sum <- function(spc){
   cat('To get the name of each gcm\n')
   gcm <- str_split(basename(fls), '_')
   gcm <- sapply(gcm, function(x) x[1])
+  gcm <- unique(gcm)
   
-  
+  cat('To apply to each gcm\n')
+  system.time(expr = {rsl <- map(.x = 1:length(gcm), function(k){
+    
+    fl <- grep(gcm[k], fls, value = TRUE)
+    st <- raster::stack(fl)
+    sm <- sum(st)
+    sd <- calc(x = st, fun = 'sd')
+    return(list(sm, sd))
+    
+  })})
   
 }
 
