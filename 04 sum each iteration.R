@@ -43,10 +43,15 @@ make_sum <- function(spc){
       cat(gcm[k], '\n')
       fl <- grep(prd[i], fl, value = TRUE)
       rs <- terra::rast(fl)
-      sm <- terra::app(rs, sum, cores = 6)
-      mysd <- function(x){sd(x)}
-      sd <- terra::app(rs, mysd, cores = 6)
-      return(list(sm, sd))
+      tb <- terra::as.points(rs)
+      df <- terra::as.data.frame(x = tb)
+      names(df) <- paste0('y', yrs)
+      gm <- terra::geom(tb)
+      df <- cbind(gm[,3:4], df)
+      df <- as_tibble(df)
+      
+      return(df)
+      
       
     })
     
