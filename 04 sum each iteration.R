@@ -37,19 +37,24 @@ make_sum <- function(spc){
     prd <- str_sub(fls, start = nchar(fls) - 7, end = nchar(fls) - 4)
     prd <- unique(prd)
     
-    map(.x = 1:length(prd), .f = function(i){
+    rs <- map(.x = 1:length(prd), .f = function(i){
       
       cat(gcm[k], '\n')
       fl <- grep(gcm[k], fls, value = TRUE)
       fl <- grep(prd[i], fl, value = TRUE)
       rs <- terra::rast(fl)
       sm <- sum(rs)
+      
+      system.time(expr = sum(rs))
+      system.time(expr = app(rs, sum, cores = 6))
+      
       sd <- app(rs, sd, cores = 6)
       return(list(sm, sd))
       
     })
-
     
+    return(rs)
+
   })})
   
 }
