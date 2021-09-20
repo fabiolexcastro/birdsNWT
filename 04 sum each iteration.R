@@ -45,14 +45,17 @@ make_sum <- function(spc){
       rs <- terra::rast(fl)
       tb <- terra::as.points(rs)
       df <- terra::as.data.frame(x = tb)
-      av <- apply(X = df, MARGIN = 1, FUN = mean)
+      sm <- apply(X = df, MARGIN = 1, FUN = sum)
       sd <- apply(X = df, MARGIN = 1, FUN = sd)
       gm <- terra::geom(tb)
       df <- cbind(gm[,3:4], df)
-      df <- mutate(df, avg = av, std = sd)
-      rs.av <- dplyr::select(df, x, y, av) %>% rasterFromXYZ()
+      df <- mutate(df, sma = sm, std = sd)
+      rs.sm <- dplyr::select(df, x, y, sma) %>% rasterFromXYZ()
       rs.sd <- dplyr::select(df, x, y, std) %>% rasterFromXYZ()
-      
+      dr <- glue('../outputs/{spc}')
+      writeRaster(x = rs.sm, filename = glue('{dr}/sum_{spc}_{gcm[k]}_{prd[i]}.tif'))
+      writeRaster(x = rs.sd, filename = glue('{dr}/std_{spc}_{gcm[k]}_{prd[i]}.tif'))
+      cat('Done\n')
       
     })
     
