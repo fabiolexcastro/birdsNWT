@@ -34,13 +34,14 @@ make_sum <- function(spc){
   cat('To apply to each gcm\n')
   system.time(expr = {rsl <- map(.x = 1:length(gcm), function(k){
     
-    prd <- str_sub(fls, start = nchar(fls) - 8, end = nchar(fls) - 4)
+    prd <- str_sub(fls, start = nchar(fls) - 7, end = nchar(fls) - 4)
     prd <- unique(prd)
     
     map(.x = 1:length(prd), .f = function(i){
       
       cat(gcm[k], '\n')
       fl <- grep(gcm[k], fls, value = TRUE)
+      fl <- grep(prd[i], fl, value = TRUE)
       rs <- terra::rast(fl)
       sm <- sum(st)
       sd <- calc(x = st, fun = 'sd')
