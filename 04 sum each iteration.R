@@ -32,13 +32,13 @@ make_sum <- function(spc){
   gcm <- unique(gcm)
   
   cat('To apply to each gcm\n')
-  system.time(expr = {rsl <- map(.x = 1:length(gcm), function(k){
+  rsl <- map(.x = 1:length(gcm), function(k){
     
     prd <- str_sub(fls, start = nchar(fls) - 7, end = nchar(fls) - 4)
     prd <- unique(prd)
     fl <- grep(gcm[k], fls, value = TRUE)
     
-    system.time(expr = {rs <- map(.x = 1:length(prd), .f = function(i){
+    rs <- map(.x = 1:length(prd), .f = function(i){
       
       cat(gcm[k], '\n')
       fl <- grep(prd[i], fl, value = TRUE)
@@ -57,9 +57,9 @@ make_sum <- function(spc){
       writeRaster(x = rs.sd, filename = glue('{dr}/std_{spc}_{gcm[k]}_{prd[i]}.tif'), overwrite = T)
       cat('Done\n')
       
-    })})
+    })
 
-  })})
+  })
   
   cat(' --------------------- Finish --------------------\n')
   
