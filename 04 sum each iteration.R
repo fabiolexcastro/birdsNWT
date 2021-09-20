@@ -66,7 +66,10 @@ make_sum <- function(spc){
 }
 
 # Apply the function to make the sum --------------------------------------
-map(.x = spcs, .f = make_sum)
+make_sum(spc = spcs[1])
+map(.x = spcs[2:length(spcs)], .f = make_sum)
+
+# To make the maps --------------------------------------------------------
 
 
 
