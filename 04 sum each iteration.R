@@ -34,6 +34,7 @@ make_sum <- function(spc){
   cat('To apply to each gcm\n')
   system.time(expr = {rsl <- map(.x = 1:length(gcm), function(k){
     
+    cat(gcm[k], '\n')
     fl <- grep(gcm[k], fls, value = TRUE)
     st <- raster::stack(fl)
     sm <- sum(st)
