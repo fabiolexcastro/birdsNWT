@@ -48,6 +48,8 @@ make_sum <- function(spc){
       av <- apply(X = df, MARGIN = 1, FUN = mean)
       sd <- apply(X = df, MARGIN = 1, FUN = sd)
       gm <- terra::geom(tb)
+      df <- cbind(gm[,3:4], df)
+      
       
       
     })
