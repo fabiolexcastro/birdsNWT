@@ -52,7 +52,7 @@ make_sum <- function(spc){
       df <- mutate(df, sma = sm, std = sd)
       rs.sm <- dplyr::select(df, x, y, sma) %>% rasterFromXYZ()
       rs.sd <- dplyr::select(df, x, y, std) %>% rasterFromXYZ()
-      dr <- glue('../outputs/{spc}')
+      dr <- glue('./outputs/{spc}')
       writeRaster(x = rs.sm, filename = glue('{dr}/sum_{spc}_{gcm[k]}_{prd[i]}.tif'))
       writeRaster(x = rs.sd, filename = glue('{dr}/std_{spc}_{gcm[k]}_{prd[i]}.tif'))
       cat('Done\n')
