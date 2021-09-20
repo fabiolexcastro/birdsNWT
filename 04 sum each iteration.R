@@ -20,7 +20,7 @@ limt <- st_transform(x = limt, targetCRS)
 # Function to use ---------------------------------------------------------
 make_sum <- function(spc){
   
-  spc <- spcs[1] # Run and erase
+  # spc <- spcs[1] # Run and erase
   
   cat('Start ', spc, '\n')
   dir <- grep(spc, dirs, value = TRUE)
@@ -58,11 +58,15 @@ make_sum <- function(spc){
       cat('Done\n')
       
     })})
-    
-    return(rs)
 
   })})
   
+  cat(' --------------------- Finish --------------------\n')
+  
 }
+
+# Apply the function to make the sum --------------------------------------
+map(.x = spcs, .f = make_sum)
+
 
 
