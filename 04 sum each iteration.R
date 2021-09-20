@@ -47,7 +47,7 @@ make_sum <- function(spc){
       df <- terra::as.data.frame(x = tb)
       av <- apply(X = df, MARGIN = 1, FUN = mean)
       sd <- apply(X = df, MARGIN = 1, FUN = sd)
-      return(df)
+    
       
       
     })
