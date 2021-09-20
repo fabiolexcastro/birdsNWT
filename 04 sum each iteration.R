@@ -36,7 +36,7 @@ make_sum <- function(spc){
     
     cat(gcm[k], '\n')
     fl <- grep(gcm[k], fls, value = TRUE)
-    st <- raster::stack(fl)
+    rs <- terra::rast(fl)
     sm <- sum(st)
     sd <- calc(x = st, fun = 'sd')
     return(list(sm, sd))
