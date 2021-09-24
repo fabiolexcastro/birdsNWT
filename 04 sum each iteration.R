@@ -110,6 +110,19 @@ make_maps <- function(spc){
     tbl.std <- gather(tbl.std, var, value, -gid, -x, -y)
     tbl.std <- separate(data = tbl.std, col = var, into = c('type', 'spc', 'gcm', 'year'))
     
+    # Sum map
+    ggp.sum <- ggplot() + 
+      geom_tile(data = tbl.sum, aes(x = x, y = y, fill = value)) +
+      facet_wrap(.~ year) +
+      geom_sf(data = limt, fill = NA, col = 'grey20') +
+      coord_sf() + 
+      theme_bw() + 
+      theme(legend.position = 'bottom', 
+            legend.key.width = unit(1.5, 'line')) + 
+      labs(x = 'Lon', y = 'Lat', fill = 'Sum values')
+    
+    # Std maps
+    
   })
   
   
