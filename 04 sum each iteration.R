@@ -102,12 +102,13 @@ make_maps <- function(spc){
     tbl.sum <- rasterToPoints(sum, spatial = FALSE) %>% as_tibble()
     tbl.sum <- mutate(tbl.sum, gid = 1:nrow(tbl.sum))
     tbl.sum <- gather(tbl.sum, var, value, -gid, -x, -y)
+    tbl.sum <- separate(data = tbl.sum, col = var, into = c('type', 'spc', 'gcm', 'year'))
     
     # Std raster - Table
     tbl.std <- rasterToPoints(sum, spatial = FALSE) %>% as_tibble()
     tbl.std <- mutate(tbl.std, gid = 1:nrow(tbl.std))
     tbl.std <- gather(tbl.std, var, value, -gid, -x, -y)
-  
+    tbl.std <- separate(data = tbl.std, col = var, into = c('type', 'spc', 'gcm', 'year'))
     
   })
   
