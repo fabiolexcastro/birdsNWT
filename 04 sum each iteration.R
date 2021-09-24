@@ -28,7 +28,7 @@ make_sum <- function(spc){
   
   cat('To get the name of each gcm\n')
   gcm <- str_split(basename(fls), '_')
-  gcm <- sapply(gcm, function(x) x[1])
+  gcm <- sapply(gcm, function(x) x[3])
   gcm <- unique(gcm)
   
   cat('To apply to each gcm\n')
@@ -83,7 +83,7 @@ make_maps <- function(spc){
   fls <- grep(paste0(c('sum', 'std'), collapse = '|'), fls, value = TRUE)
   print(fls)
   gcm <- str_split(basename(fls), '_')
-  gcm <- sapply(gcm, function(x) x[4])
+  gcm <- sapply(gcm, function(x) x[3])
   gcm <- unique(gcm)
   
   map(.x = 1:length(gcm), .f = function(i){
@@ -93,8 +93,8 @@ make_maps <- function(spc){
     fle <- grep(gcm[i], fls, value = TRUE)
     sum <- grep('sum', fle, value = TRUE) 
     std <- grep('std', fle, value = TRUE)
-    sum <- raster(sum)
-    std <- raster(sum)
+    sum <- raster::stack(sum)
+    std <- raster::stack(std)
     tbl.sum <- rasterToPoints(sum, spatial = FALSE) %>% as_tibble()
     tbl.std <- rasterToPoints(sum, spatial = FALSE) %>% as_tibble()
   
