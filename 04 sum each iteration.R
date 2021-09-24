@@ -104,7 +104,7 @@ make_maps <- function(spc){
     tbl.sum <- separate(data = tbl.sum, col = var, into = c('type', 'spc', 'gcm', 'year'), sep = '_')
     
     # Std raster - Table
-    tbl.std <- rasterToPoints(sum, spatial = FALSE) %>% as_tibble()
+    tbl.std <- rasterToPoints(std, spatial = FALSE) %>% as_tibble()
     tbl.std <- mutate(tbl.std, gid = 1:nrow(tbl.std))
     tbl.std <- gather(tbl.std, var, value, -gid, -x, -y)
     tbl.std <- separate(data = tbl.std, col = var, into = c('type', 'spc', 'gcm', 'year'), sep = '_')
@@ -141,6 +141,7 @@ make_maps <- function(spc){
     ggsave(plot = ggp.std, filename = glue('./graphs/maps/sum/std_{spc}.png'), 
            units = 'in', width = 10, height = 8, dpi = 300)
     
+    cat('----Done----\n')
     
   })
   
