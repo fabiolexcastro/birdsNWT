@@ -113,6 +113,7 @@ make_maps <- function(spc){
     ggp.sum <- ggplot() + 
       geom_tile(data = tbl.sum, aes(x = x, y = y, fill = value)) +
       facet_wrap(.~ year) +
+      scale_fill_gradientn(colors = brewer.pal(name = 'PiYG', n = 5)) +
       geom_sf(data = limt, fill = NA, col = 'grey20') +
       coord_sf() + 
       theme_bw() + 
@@ -124,6 +125,7 @@ make_maps <- function(spc){
     ggp.std <- ggplot() + 
       geom_tile(data = tbl.std, aes(x = x, y = y, fill = value)) + 
       facet_wrap(.~ year) + 
+      scale_fill_gradientn(colors = brewer.pal(name = 'PiYG', n = 5)) +
       geom_sf(data = limt, fill = NA, col = 'grey20') + 
       coord_sf() + 
       theme_bw() + 
