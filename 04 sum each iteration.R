@@ -90,25 +90,24 @@ make_maps <- function(spc){
     
     i <- 1 # Run and comment
     
+    # Start reading the rasters
     fle <- grep(gcm[i], fls, value = TRUE)
     sum <- grep('sum', fle, value = TRUE) 
     std <- grep('std', fle, value = TRUE)
-    sum <- raster::stack(sum)
-    tsm <- terra::rast(sum)
-    tsd <- terra::rast(std)
-    std <- raster::stack(std)
+    sum <- raster::stack(sum) # tsm <- terra::rast(sum)
+    std <- raster::stack(std) # tsd <- terra::rast(std)
     
     # Sum raster - Table
     tbl.sum <- rasterToPoints(sum, spatial = FALSE) %>% as_tibble()
     tbl.sum <- mutate(tbl.sum, gid = 1:nrow(tbl.sum))
     tbl.sum <- gather(tbl.sum, var, value, -gid, -x, -y)
-    tbl.sum <- separate(data = tbl.sum, col = var, into = c('type', 'spc', 'gcm', 'year'))
+    tbl.sum <- separate(data = tbl.sum, col = var, into = c('type', 'spc', 'gcm', 'year'), sep = '_')
     
     # Std raster - Table
     tbl.std <- rasterToPoints(sum, spatial = FALSE) %>% as_tibble()
     tbl.std <- mutate(tbl.std, gid = 1:nrow(tbl.std))
     tbl.std <- gather(tbl.std, var, value, -gid, -x, -y)
-    tbl.std <- separate(data = tbl.std, col = var, into = c('type', 'spc', 'gcm', 'year'))
+    tbl.std <- separate(data = tbl.std, col = var, into = c('type', 'spc', 'gcm', 'year'), sep = '_')
     
     # Sum map
     ggp.sum <- ggplot() + 
@@ -122,6 +121,15 @@ make_maps <- function(spc){
       labs(x = 'Lon', y = 'Lat', fill = 'Sum values')
     
     # Std maps
+    ggp.std <- ggplot() + 
+      geom_tile(data = tbl.std, aes(x = x, y = y, fill = value)) + 
+      facet_wrap(.~ year) + 
+      geom_sf(data = limt, fill = NA, col = 'grey20') + 
+      coord_sf() + 
+      theme_bw() + 
+      theme(legend.position = 'bottom', 
+            legend.key.width = unit(1.5, 'line')) + 
+      labs(x = 'Lon', y = 'Lat', fill = 'Std values')
     
   })
   
