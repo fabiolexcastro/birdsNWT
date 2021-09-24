@@ -94,9 +94,19 @@ make_maps <- function(spc){
     sum <- grep('sum', fle, value = TRUE) 
     std <- grep('std', fle, value = TRUE)
     sum <- raster::stack(sum)
+    tsm <- terra::rast(sum)
+    tsd <- terra::rast(std)
     std <- raster::stack(std)
+    
+    # Sum raster - Table
     tbl.sum <- rasterToPoints(sum, spatial = FALSE) %>% as_tibble()
+    tbl.sum <- mutate(tbl.sum, gid = 1:nrow(.))
+    tbl.sum <- gather(tbl.sum, var, value, -gid, -x, -y)
+    
+    # Std raster - Table
     tbl.std <- rasterToPoints(sum, spatial = FALSE) %>% as_tibble()
+    tbl.std <- mutate(tbls.std, gid = 1:nrow(.))
+    tbl.std <- gather(tbls.std, var, value, -gid, -x, -y)
   
     
   })
