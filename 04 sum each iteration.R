@@ -109,6 +109,8 @@ make_maps <- function(spc){
     tbl.std <- gather(tbl.std, var, value, -gid, -x, -y)
     tbl.std <- separate(data = tbl.std, col = var, into = c('type', 'spc', 'gcm', 'year'), sep = '_')
     
+    cat('To make the maps')
+    
     # Sum map
     ggp.sum <- ggplot() + 
       geom_tile(data = tbl.sum, aes(x = x, y = y, fill = value)) +
@@ -121,6 +123,9 @@ make_maps <- function(spc){
             legend.key.width = unit(1.5, 'line')) + 
       labs(x = 'Lon', y = 'Lat', fill = 'Sum values')
     
+    ggsave(plot = ggp.sum, filename = glue('./graphs/maps/sum/sum_{spc}.png'),
+           units = 'in', width = 10, height = 8, dpi = 300)
+  
     # Std maps
     ggp.std <- ggplot() + 
       geom_tile(data = tbl.std, aes(x = x, y = y, fill = value)) + 
@@ -132,6 +137,10 @@ make_maps <- function(spc){
       theme(legend.position = 'bottom', 
             legend.key.width = unit(1.5, 'line')) + 
       labs(x = 'Lon', y = 'Lat', fill = 'Std values')
+    
+    ggsave(plot = ggp.std, filename = glue('./graphs/maps/sum/std_{spc}.png'), 
+           units = 'in', width = 10, height = 8, dpi = 300)
+    
     
   })
   
