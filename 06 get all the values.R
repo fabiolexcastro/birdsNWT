@@ -22,16 +22,14 @@ get_extreme_values <- function(spc){
   
   vls <- map(.x = 1:length(fls), .f = function(i){
     
-    i <- 1 # Run and erase
+    cat('Start ', fls[i], '\n')
     fl <- fls[i]
     rs <- raster(fl)
     vl <- getValues(rs)
     vl <- na.omit(vl)
-    head(vl)
-    vl <- rasterToPoints(rs, spatial = FALSE) %>% as_tibble() %>% pull(3)
-    fl
-    
-    
+    cat('Done\n')
+    return(vl)
+  
   })
   
   
