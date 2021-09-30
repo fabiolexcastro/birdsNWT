@@ -33,6 +33,7 @@ get_extreme_values <- function(spc){
   
   })
   
+  all <- Reduce(c, vls)
   
 }
 
