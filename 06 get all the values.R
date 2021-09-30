@@ -27,6 +27,7 @@ get_extreme_values <- function(spc){
     rs <- raster(fl)
     vl <- getValues(rs)
     vl <- na.omit(vl)
+    vl <- as.numeric(vl)
     cat('Done\n')
     return(vl)
   
