@@ -17,7 +17,10 @@ get_extreme_values <- function(spc){
   
   spc <- spcs[1]
   
-  f
+  cat('Start\n', scp, '\n')
+  dir <- grep(spc, spcs, value = TRUE)
+  fls <- dir_ls(fls, regexp = '.tif$')
+  
   
 }
 
