@@ -18,8 +18,16 @@ get_extreme_values <- function(spc){
   spc <- spcs[1]
   
   cat('Start\n', scp, '\n')
-  dir <- grep(spc, spcs, value = TRUE)
-  fls <- dir_ls(fls, regexp = '.tif$')
+  fls <- dir_ls(spc, regexp = '.tif$')
+  
+  vls <- map(.x = 1:length(fls), .f = function(i){
+    
+    i <- 1 # Run and erase
+    fl <- fls[i]
+    fl
+    
+    
+  })
   
   
 }
