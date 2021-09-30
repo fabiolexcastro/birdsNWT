@@ -5,9 +5,11 @@ pacman::p_load(raster, rgdal, rgeos, future, furrr, reproducible, RColorBrewer,
                colorspaces, ggspatial, ggpubr, gridExtra, terra, stringr, glue, 
                sf, tidyverse, RStoolbox, fs, future.apply, fst, trend)
 
-sort('raster', 'rgdal', 'rgeos', 'future', 'furrr', 'reproducible', 'RColorBrewer', 
-     'colorspaces', 'ggspatial', 'ggpubr', 'gridExtra', 'terra', 'stringr', 'glue', 
-     'sf', 'tidyverse', 'RStoolbox', 'fs', 'future.apply', 'fst', 'trend')
+pkg <- sort(c('raster', 'rgdal', 'rgeos', 'future', 'furrr', 'reproducible', 'RColorBrewer', 
+              'colorspaces', 'ggspatial', 'ggpubr', 'gridExtra', 'terra', 'stringr', 'glue', 
+              'sf', 'tidyverse', 'RStoolbox', 'fs', 'future.apply', 'fst', 'trend'))
+
+pacman::p_load(cat(noquote(pkg)))
 
 g <- gc(reset = TRUE)
 rm(list = ls())
@@ -38,6 +40,7 @@ get_extreme_values <- function(spc){
   })
   
   all <- Reduce(c, vls)
+  brk <- classIntervals(all, n = 5, style = 'fisher', dataPrecision = TRUE, na.rm = TRUE)
   
 }
 
