@@ -24,6 +24,10 @@ get_extreme_values <- function(spc){
     
     i <- 1 # Run and erase
     fl <- fls[i]
+    rs <- raster(fl)
+    vl <- getValues(rs)
+    head(vl)
+    vl <- rasterToPoints(rs, spatial = FALSE) %>% as_tibble() %>% pull(3)
     fl
     
     
