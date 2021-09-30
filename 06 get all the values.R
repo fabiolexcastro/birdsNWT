@@ -5,6 +5,10 @@ pacman::p_load(raster, rgdal, rgeos, future, furrr, reproducible, RColorBrewer,
                colorspaces, ggspatial, ggpubr, gridExtra, terra, stringr, glue, 
                sf, tidyverse, RStoolbox, fs, future.apply, fst, trend)
 
+sort('raster', 'rgdal', 'rgeos', 'future', 'furrr', 'reproducible', 'RColorBrewer', 
+     'colorspaces', 'ggspatial', 'ggpubr', 'gridExtra', 'terra', 'stringr', 'glue', 
+     'sf', 'tidyverse', 'RStoolbox', 'fs', 'future.apply', 'fst', 'trend')
+
 g <- gc(reset = TRUE)
 rm(list = ls())
 
