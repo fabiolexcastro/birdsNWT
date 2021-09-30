@@ -52,4 +52,5 @@ get_extreme_values <- function(spc){
 # Apply all the function --------------------------------------------------
 map(.x = spcs, .f = get_extreme_values)
 
+# End
 
