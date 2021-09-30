@@ -40,6 +40,7 @@ get_extreme_values <- function(spc){
   })
   
   all <- Reduce(c, vls)
+  prc <- percentile(all, seq(0, 1, 0.2))
   brk <- classIntervals(all, n = 5, style = 'fisher', dataPrecision = TRUE, na.rm = TRUE)
   
 }
