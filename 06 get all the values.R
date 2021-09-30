@@ -21,7 +21,7 @@ spcs <- dir_ls(root)
 # Get values  -------------------------------------------------------------
 get_extreme_values <- function(spc){
   
-  spc <- spcs[1]
+  # spc <- spcs[1]
   
   cat('Start\n', scp, '\n')
   fls <- dir_ls(spc, regexp = '.tif$')
@@ -40,8 +40,16 @@ get_extreme_values <- function(spc){
   })
   
   all <- Reduce(c, vls)
-  prc <- percentile(all, seq(0, 1, 0.2))
-  brk <- classIntervals(all, n = 5, style = 'fisher', dataPrecision = TRUE, na.rm = TRUE)
+  all <- rnorm(100)
+  prc <- quantile(all, seq(0, 1, 0.2))
+  prc <- as.numeric(prc)
+  dfm <- data.frame(specie = basename(spc), intervals = prc)
+  cat('Done\n')
+  return(dfm)
   
 }
+
+# Apply all the function --------------------------------------------------
+map(.x = spcs, .f = get_extreme_values)
+
 
