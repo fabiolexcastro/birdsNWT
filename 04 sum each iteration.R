@@ -96,6 +96,8 @@ make_maps <- function(spc){
     std <- grep('std', fle, value = TRUE)
     sum <- raster::stack(sum) # tsm <- terra::rast(sum)
     std <- raster::stack(std) # tsd <- terra::rast(std)
+    crs(sum) <- targetCRS
+    crs(std) <- targetCRS
     
     # Sum raster - Table
     tbl.sum <- rasterToPoints(sum, spatial = FALSE) %>% as_tibble()
@@ -123,8 +125,8 @@ make_maps <- function(spc){
             legend.key.width = unit(1.5, 'line')) + 
       labs(x = 'Lon', y = 'Lat', fill = 'Sum values')
     
-    ggsave(plot = ggp.sum, filename = glue('./graphs/maps/sum/sum_{spc}.png'),
-           units = 'in', width = 10, height = 8, dpi = 300)
+    ggsave(plot = ggp.sum, filename = glue('./graphs/maps/sum/sum_{basename(spc)}.png'),
+           units = 'in', width = 10, height = 8, dpi = 300) ### TESTING
   
     # Std maps
     ggp.std <- ggplot() + 
@@ -138,7 +140,7 @@ make_maps <- function(spc){
             legend.key.width = unit(1.5, 'line')) + 
       labs(x = 'Lon', y = 'Lat', fill = 'Std values')
     
-    ggsave(plot = ggp.std, filename = glue('./graphs/maps/sum/std_{spc}.png'), 
+    ggsave(plot = ggp.std, filename = glue('./graphs/maps/sum/std_{basename(spc)}.png'), 
            units = 'in', width = 10, height = 8, dpi = 300)
     
     cat('----Done----\n')
