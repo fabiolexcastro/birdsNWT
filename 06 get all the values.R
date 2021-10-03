@@ -28,7 +28,7 @@ get_extreme_values <- function(spc){
   
   ncores <- 45
   plan(multicore, workers = ncores)
-  future.apply::future_lapply(X = 1:length(fls), FUN = function(k){
+  future.apply::future_lapply(X = 1:length(fls), FUN = function(i){
     
     cat('Start ', fls[i], '\n')
     fl <- fls[i]
@@ -40,6 +40,7 @@ get_extreme_values <- function(spc){
     return(vl)
     
   })
+  future:::ClusterRegistry("stop")
   
   system.time(vls <- map(.x = 1:length(fls), .f = function(i){
     
