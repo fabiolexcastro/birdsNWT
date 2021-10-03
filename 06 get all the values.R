@@ -40,7 +40,8 @@ get_extreme_values <- function(spc){
   }, mc.cores = 30)
   
   all <- Reduce(c, vls)
-  all <- do.call(c, all)
+  system.time(all <- do.call(c, vls))
+  
   all <- rnorm(100)
   prc <- quantile(all, seq(0, 1, 0.2))
   prc <- as.numeric(prc)
