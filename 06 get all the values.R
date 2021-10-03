@@ -44,6 +44,7 @@ get_extreme_values <- function(spc){
   prc <- quantile(all, seq(0, 1, 0.2))
   prc <- as.numeric(prc)
   dfm <- data.frame(specie = basename(spc), intervals = prc)
+  dfm <- mutate(dfm, quantile = seq(0, 1, 0.2))
   cat('Done\n')
   return(dfm)
   
@@ -51,6 +52,7 @@ get_extreme_values <- function(spc){
 
 # Apply all the function --------------------------------------------------
 rsl <- map(.x = spcs, .f = get_extreme_values)
+saveRDS(object = rsl, file = './test.rds')
 
 # End
 
