@@ -26,7 +26,7 @@ get_extreme_values <- function(spc){
   cat('Start\n', scp, '\n')
   fls <- dir_ls(spc, regexp = '.tif$')
   
-  vls <- map(.x = 1:length(fls), .f = function(i){
+  system.time(vls <- map(.x = 1:length(fls), .f = function(i){
     
     cat('Start ', fls[i], '\n')
     fl <- fls[i]
@@ -37,7 +37,7 @@ get_extreme_values <- function(spc){
     cat('Done\n')
     return(vl)
   
-  })
+  }))
   
   all <- Reduce(c, vls)
   all <- rnorm(100)
@@ -45,6 +45,7 @@ get_extreme_values <- function(spc){
   prc <- as.numeric(prc)
   dfm <- data.frame(specie = basename(spc), intervals = prc)
   dfm <- mutate(dfm, quantile = seq(0, 1, 0.2))
+  dfm <- dplyr::select(dfm, specie, quantile, intervals)
   cat('Done\n')
   return(dfm)
   
