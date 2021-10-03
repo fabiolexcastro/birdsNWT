@@ -26,9 +26,7 @@ get_extreme_values <- function(spc){
   cat('Start\n', scp, '\n')
   fls <- dir_ls(spc, regexp = '.tif$')
   
-  ncores <- 45
-  plan(multicore, workers = ncores)
-  future.apply::future_lapply(X = 1:length(fls), FUN = function(i){
+  vls <- mclapply(X = 1:length(fls), FUN = function(i){
     
     cat('Start ', fls[i], '\n')
     fl <- fls[i]
@@ -39,36 +37,10 @@ get_extreme_values <- function(spc){
     cat('Done\n')
     return(vl)
     
-  })
-  future:::ClusterRegistry("stop")
-  
-  system.time(mclapply(X = 1:length(fls), FUN = function(i){
-    
-    cat('Start ', fls[i], '\n')
-    fl <- fls[i]
-    rs <- raster(fl)
-    vl <- getValues(rs)
-    vl <- na.omit(vl)
-    vl <- as.numeric(vl)
-    cat('Done\n')
-    return(vl)
-    
-  }, mc.cores = 30))
-  
-  system.time(vls <- map(.x = 1:length(fls), .f = function(i){
-    
-    cat('Start ', fls[i], '\n')
-    fl <- fls[i]
-    rs <- raster(fl)
-    vl <- getValues(rs)
-    vl <- na.omit(vl)
-    vl <- as.numeric(vl)
-    cat('Done\n')
-    return(vl)
-  
-  }))
+  }, mc.cores = 30)
   
   all <- Reduce(c, vls)
+  all <- do.call(c, all)
   all <- rnorm(100)
   prc <- quantile(all, seq(0, 1, 0.2))
   prc <- as.numeric(prc)
