@@ -4,11 +4,6 @@ require(pacman)
 pacman::p_load(raster, rgdal, rgeos, future, furrr, reproducible, RColorBrewer, 
                colorspaces, ggspatial, ggpubr, gridExtra, terra, stringr, glue, 
                sf, tidyverse, RStoolbox, fs, future.apply, fst, trend)
-
-pkg <- sort(c('raster', 'rgdal', 'rgeos', 'future', 'furrr', 'reproducible', 'RColorBrewer', 
-              'colorspaces', 'ggspatial', 'ggpubr', 'gridExtra', 'terra', 'stringr', 'glue', 
-              'sf', 'tidyverse', 'RStoolbox', 'fs', 'future.apply', 'fst', 'trend'))
-
 pacman::p_load(cat(noquote(pkg)))
 
 g <- gc(reset = TRUE)
@@ -50,6 +45,7 @@ get_extreme_values <- function(spc){
 
 # Apply all the function --------------------------------------------------
 system.time(alfl <- get_extreme_values(spc = spcs[1]))
+saveRDS(object = alfl, './outputs/rds/alfl_qntl.rds')
 
 rsl <- map(.x = spcs, .f = get_extreme_values)
 saveRDS(object = rsl, file = './test.rds')
