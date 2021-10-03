@@ -49,7 +49,7 @@ get_extreme_values <- function(spc){
 }
 
 # Apply all the function --------------------------------------------------
-system.time(alfl <- get_extreme_values(spc = 'ALFL'))
+system.time(alfl <- get_extreme_values(spc = spcs[1]))
 
 rsl <- map(.x = spcs, .f = get_extreme_values)
 saveRDS(object = rsl, file = './test.rds')
