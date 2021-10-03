@@ -42,6 +42,19 @@ get_extreme_values <- function(spc){
   })
   future:::ClusterRegistry("stop")
   
+  system.time(mclapply(X = 1:length(fls), FUN = function(i){
+    
+    cat('Start ', fls[i], '\n')
+    fl <- fls[i]
+    rs <- raster(fl)
+    vl <- getValues(rs)
+    vl <- na.omit(vl)
+    vl <- as.numeric(vl)
+    cat('Done\n')
+    return(vl)
+    
+  }, mc.cores = 30))
+  
   system.time(vls <- map(.x = 1:length(fls), .f = function(i){
     
     cat('Start ', fls[i], '\n')
