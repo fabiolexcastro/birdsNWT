@@ -48,7 +48,8 @@ system.time(alfl <- get_extreme_values(spc = spcs[1]))
 saveRDS(object = alfl, './outputs/rds/alfl_qntl.rds')
 
 rsl <- map(.x = spcs, .f = get_extreme_values)
-saveRDS(object = rsl, file = './test.rds')
+rsl <- bind_rows(rsl)
+saveRDS(object = rsl, file = './outputs/rds/all_qntl.rds')
 
 # End
 
