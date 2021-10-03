@@ -38,16 +38,11 @@ get_extreme_values <- function(spc){
     return(vl)
     
   }, mc.cores = 30)
-  
-  all <- Reduce(c, vls)
-  system.time(all <- do.call(c, vls))
-  
-  all <- rnorm(100)
+
+  all <- do.call(c, vls)
   prc <- quantile(all, seq(0, 1, 0.2))
   prc <- as.numeric(prc)
-  dfm <- data.frame(specie = basename(spc), intervals = prc)
-  dfm <- mutate(dfm, quantile = seq(0, 1, 0.2))
-  dfm <- dplyr::select(dfm, specie, quantile, intervals)
+  dfm <- data.frame(specie = basename(spc), quantile = seq(0, 1, 0.2),  intervals = prc)
   cat('Done\n')
   return(dfm)
   
