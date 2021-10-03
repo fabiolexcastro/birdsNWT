@@ -23,7 +23,7 @@ get_extreme_values <- function(spc){
   
   # spc <- spcs[1]
   
-  cat('Start\n', scp, '\n')
+  cat('Start\n', spc, '\n')
   fls <- dir_ls(spc, regexp = '.tif$')
   
   vls <- mclapply(X = 1:length(fls), FUN = function(i){
@@ -49,6 +49,8 @@ get_extreme_values <- function(spc){
 }
 
 # Apply all the function --------------------------------------------------
+system.time(alfl <- get_extreme_values(spc = 'ALFL'))
+
 rsl <- map(.x = spcs, .f = get_extreme_values)
 saveRDS(object = rsl, file = './test.rds')
 
