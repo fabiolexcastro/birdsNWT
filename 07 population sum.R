@@ -24,9 +24,9 @@ get_sum_population <- function(spc){
   
   cat('To get the name of each gcm\n')
   gcm <- str_split(basename(fls), '_')
-  gcm <- sapply(gcm, function(x) x[3])
+  gcm <- sapply(gcm, function(x) x[1])
   gcm <- unique(gcm)
-  
+  prd <- str_sub(string = basename(fls), start = nchar(basename(fls)) - 8, end = nchar(basename(fls)) - 4)
   
   cat('Done\n')
   
