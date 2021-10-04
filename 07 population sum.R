@@ -26,7 +26,17 @@ get_sum_population <- function(spc){
   gcm <- str_split(basename(fls), '_')
   gcm <- sapply(gcm, function(x) x[1])
   gcm <- unique(gcm)
-  prd <- str_sub(string = basename(fls), start = nchar(basename(fls)) - 8, end = nchar(basename(fls)) - 4)
+  prd <- str_sub(string = basename(fls), start = nchar(basename(fls)) - 7, end = nchar(basename(fls)) - 4)
+  prd <- unique(prd)
+  
+  map(.x = 1:length(gcm), .f = function(i){
+    map(.x = 1:length(prd), .f = function(j){
+      
+      i <- j <- 1 # Run and erase
+      grep(gcm[i], fls, value = TRUE) %>% 
+        grep(prd[j], ., value = TRUE)
+    })
+  })
   
   cat('Done\n')
   
