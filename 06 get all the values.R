@@ -8,6 +8,7 @@ pacman::p_load(cat(noquote(pkg)))
 
 g <- gc(reset = TRUE)
 rm(list = ls())
+options(scipen = 999)
 
 # Load data ---------------------------------------------------------------
 root <- './inputs/predictions'
@@ -50,6 +51,8 @@ saveRDS(object = alfl, './outputs/rds/alfl_qntl.rds')
 rsl <- map(.x = spcs, .f = get_extreme_values)
 rsl <- bind_rows(rsl)
 saveRDS(object = rsl, file = './outputs/rds/all_qntl.rds')
+
+rsl <- readRDS(file = './outputs/rds/all_qntl.rds')
 
 # End
 
