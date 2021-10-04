@@ -11,7 +11,7 @@ rm(list = ls())
 options(scipen = 999)
 
 # Load data ---------------------------------------------------------------
-root <- './input/predictions'
+root <- './inputs/predictions'
 spcs <- dir_ls(root)
 
 # Function ----------------------------------------------------------------
@@ -22,7 +22,10 @@ get_sum_population <- function(spc){
   cat('To start\n')
   fls <- dir_ls(spcs, regexp = '.tif$')
   
-  
+  cat('To get the name of each gcm\n')
+  gcm <- str_split(basename(fls), '_')
+  gcm <- sapply(gcm, function(x) x[3])
+  gcm <- unique(gcm)
   
   
   cat('Done\n')
