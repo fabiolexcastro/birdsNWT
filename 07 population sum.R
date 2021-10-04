@@ -46,8 +46,7 @@ get_sum_population <- function(spc){
     return(rsl)
   })
   
-  pop <- flatten(pop)
-  pop <- bind_rows(pop)
+  po2 <- flatten(pop)
   
   cat('Done\n')
   
