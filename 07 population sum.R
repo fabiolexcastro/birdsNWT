@@ -30,7 +30,7 @@ get_sum_population <- function(spc){
   prd <- unique(prd)
   
   pop <- map(.x = 1:length(gcm), .f = function(i){
-    map(.x = 1:length(prd), .f = function(j){
+    rsl <- map(.x = 1:length(prd), .f = function(j){
       stk <- grep(gcm[i], fls, value = TRUE) %>% 
         grep(prd[j], ., value = TRUE) %>% 
         as.character() %>% 
@@ -38,10 +38,11 @@ get_sum_population <- function(spc){
       cls <- cellStats(stk, 'sum')
       cls <- as.data.frame(cls)
       cls <- mutate(cls, model = gcm[i], period = prd[j], specie = basename(spc), run = 1:5)
-      cls <- dplyr::select(specie, model, period, run, sum_pop = cls)
+      cls <- dplyr::select(cls, specie, model, period, run, sum_pop = cls)
       cat('Done sum pop\n')
       return(cls)
     })
+    return(rsl)
   })
   
   pop
