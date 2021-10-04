@@ -31,6 +31,7 @@ get_sum_population <- function(spc){
   
   pop <- map(.x = 1:length(gcm), .f = function(i){
     rsl <- map(.x = 1:length(prd), .f = function(j){
+      cat('Start ', gcm[i], ' ', prd[j], '\n')
       stk <- grep(gcm[i], fls, value = TRUE) %>% 
         grep(prd[j], ., value = TRUE) %>% 
         as.character() %>% 
