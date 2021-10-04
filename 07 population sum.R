@@ -38,6 +38,9 @@ get_sum_population <- function(spc){
         as.character() %>% 
         stack()
       cls <- cellStats(stk, 'sum')
+      tbl <- rasterToPoints(stk[[1]], spatial = FALSE) %>% 
+        as_tibble() 
+      pull(tbl, 3) %>% sum()
       
     })
   })
