@@ -49,6 +49,8 @@ get_sum_population <- function(spc){
   po2 <- flatten(pop)
   po2 <- bind_rows(po2)
   rownames(po2) <- 1:nrow(po2)
+  glue('./outputs/rds/sum_pop_{basename(spc)}.rds')
+  saveRDS(object = po2, file = glue('./outputs/rds/sum_pop_{basename(spc)}.rds'))
   
   cat('Done\n')
   
