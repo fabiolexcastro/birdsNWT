@@ -29,19 +29,22 @@ get_sum_population <- function(spc){
   prd <- str_sub(string = basename(fls), start = nchar(basename(fls)) - 7, end = nchar(basename(fls)) - 4)
   prd <- unique(prd)
   
-  map(.x = 1:length(gcm), .f = function(i){
+  pop <- map(.x = 1:length(gcm), .f = function(i){
     map(.x = 1:length(prd), .f = function(j){
-      
-      i <- j <- 1 # Run and erase
       stk <- grep(gcm[i], fls, value = TRUE) %>% 
         grep(prd[j], ., value = TRUE) %>% 
         as.character() %>% 
         stack()
       cls <- cellStats(stk, 'sum')
       cls <- as.data.frame(cls)
-      
+      cls <- mutate(cls, model = gcm[i], period = prd[j], specie = basename(spc), run = 1:5)
+      cls <- dplyr::select(specie, model, period, run, sum_pop = cls)
+      cat('Done sum pop\n')
+      return(cls)
     })
   })
+  
+  pop
   
   cat('Done\n')
   
