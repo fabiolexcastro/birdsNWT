@@ -34,7 +34,8 @@ get_sum_population <- function(spc){
       
       i <- j <- 1 # Run and erase
       grep(gcm[i], fls, value = TRUE) %>% 
-        grep(prd[j], ., value = TRUE)
+        grep(prd[j], ., value = TRUE) %>% 
+        as.character()
     })
   })
   
