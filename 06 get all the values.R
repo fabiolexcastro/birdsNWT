@@ -53,6 +53,7 @@ rsl <- bind_rows(rsl)
 saveRDS(object = rsl, file = './outputs/rds/all_qntl.rds')
 
 rsl <- readRDS(file = './outputs/rds/all_qntl.rds')
+rsl <- mutate(rsl, intervals = round(intervals, digits = 3))
 
 # End
 
