@@ -20,7 +20,7 @@ get_sum_population <- function(spc){
   spc <- spcs[1]
   
   cat('To start\n')
-  fls <- dir_ls(spcs, regexp = '.tif$')
+  fls <- dir_ls(spc, regexp = '.tif$')
   
   cat('To get the name of each gcm\n')
   gcm <- str_split(basename(fls), '_')
@@ -33,9 +33,12 @@ get_sum_population <- function(spc){
     map(.x = 1:length(prd), .f = function(j){
       
       i <- j <- 1 # Run and erase
-      grep(gcm[i], fls, value = TRUE) %>% 
+      stk <- grep(gcm[i], fls, value = TRUE) %>% 
         grep(prd[j], ., value = TRUE) %>% 
-        as.character()
+        as.character() %>% 
+        stack()
+      cls <- cellStats(stk, 'sum')
+      
     })
   })
   
