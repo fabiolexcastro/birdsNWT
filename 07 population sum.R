@@ -17,7 +17,7 @@ spcs <- dir_ls(root)
 # Function ----------------------------------------------------------------
 get_sum_population <- function(spc){
   
-  spc <- spcs[1]
+  # spc <- spcs[1]
   
   cat('To start\n')
   fls <- dir_ls(spc, regexp = '.tif$')
@@ -51,9 +51,10 @@ get_sum_population <- function(spc){
   rownames(po2) <- 1:nrow(po2)
   glue('./outputs/rds/sum_pop_{basename(spc)}.rds')
   saveRDS(object = po2, file = glue('./outputs/rds/sum_pop_{basename(spc)}.rds'))
-  
   cat('Done\n')
   
 }
 
+# Apply the function ------------------------------------------------------
+map(spcs, get_sum_population)
 
