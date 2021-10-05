@@ -61,5 +61,7 @@ map(spcs, get_sum_population)
 
 # To read the results -----------------------------------------------------
 fles <- dir_ls('./outputs/rds', regexp = '.rds$')
-fles
+fles <- grep('sum_pop', fles, value = TRUE)
+tbls <- map(.x = fles, .f = readRDS)
+tbls <- map(.x = tbls, .f = as_tibble)
 
