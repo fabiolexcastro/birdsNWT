@@ -80,11 +80,13 @@ make_graph <- function(spc){
   ggg <- ggplot(data = tbl, aes(x = period, y = sum_pop, fill = run)) + 
     geom_bar(stat = 'identity', position = position_dodge()) + 
     facet_wrap(.~model, nrow = 1, ncol = 3) +
-    scale_fill_manual(colors = c("#D43F3A", "#EEA236", "#5CB85C", "#46B8DA", "#9632B8")) +
+    scale_fill_manual(values = c("#D43F3A", "#EEA236", "#5CB85C", "#46B8DA", "#9632B8")) +
+    ggtitle(label = glue('Specie: {spc}')) +
     theme_bw() + 
     theme(legend.position = 'bottom', 
-          axis.text.y = element_text(angle = 90, vjust = 0.5)) +
-    labs(x = '', y = 'Sum population', fill = 'Run')
+          axis.text.y = element_text(angle = 90, vjust = 0.5, hjust = 0.5), 
+          plot.title = element_text(size = 16, hjust = 0.5, face = 'bold')) +
+    labs(x = '', y = 'Total population', fill = 'Run')
   
   
   
