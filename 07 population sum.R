@@ -85,8 +85,7 @@ make_graph <- function(spc){
     facet_wrap(.~model, nrow = 1, ncol = 3) +
     scale_fill_manual(values = c("#D43F3A", "#EEA236", "#5CB85C", "#46B8DA", "#9632B8")) +
     ggtitle(label = glue('Specie: {spc}')) +
-    scale_y_continuous(breaks = seq(0, 10000000, 1000000)) +
-    theme_bw() + 
+    scale_y_continuous(breaks = seq(0, 10000000, 1000000), limits = c(0, 10000000)) +
     theme(legend.position = 'bottom', 
           axis.text.y = element_text(angle = 90, vjust = 0.5, hjust = 0.5), 
           plot.title = element_text(size = 16, hjust = 0.5, face = 'bold')) +
