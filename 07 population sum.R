@@ -73,7 +73,7 @@ supr <- max(tble$sum_pop)
 # To make the graph -------------------------------------------------------
 make_graph <- function(spc){
   
-  spc <- spcs[1] # Run and erase
+  # spc <- spcs[1] # Run and erase
   
   cat('Start ', spc, '\n')
   tbl <- filter(tble, specie == spc)
@@ -94,6 +94,10 @@ make_graph <- function(spc){
   out <- glue('./graphs/figs/sum_pop/{spc}.png')
   
   ggsave(plot = ggg, filename = out, units = 'in', width = 12, height = 9, dpi = 300)
+  cat('Done\n')
   
 }
+
+map(spcs, make_graph)
+
 
