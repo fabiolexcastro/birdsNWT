@@ -77,7 +77,7 @@ make_graph <- function(spc){
   tbl <- mutate(tbl, period = factor(period, levels = c('2011', '2031', '2051', '2071', '2091', '2100')))
   
   ggplot() + 
-    geom_col(data = tbl, aes(x = period, y = sum_pop, group = model, fill = run)) + 
+    geom_col(data = tbl, aes(x = period, y = sum_pop, group = model, fill = run), stat = 'identity', position = 'dodge') + 
     theme_bw() + 
     theme(legend.position = 'bottom')
   
