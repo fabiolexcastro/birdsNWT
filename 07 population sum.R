@@ -74,6 +74,12 @@ make_graph <- function(spc){
   
   cat('Start ', spc, '\n')
   tbl <- filter(tble, specie == spc)
+  tbl <- mutate(tbl, period = factor(period, levels = c('2011', '2031', '2051', '2071', '2091', '2100')))
+  
+  ggplot() + 
+    geom_col(data = tbl, aes(x = period, y = sum_pop, group = model, fill = run)) + 
+    theme_bw() + 
+    theme(legend.position = 'bottom')
   
   
   
