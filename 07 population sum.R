@@ -77,8 +77,8 @@ make_graph <- function(spc){
   tbl <- mutate(tbl, period = factor(period, levels = c('2011', '2031', '2051', '2071', '2091', '2100')))
   tbl <- mutate(tbl, run = factor(run, levels = c('1', '2', '3', '4', '5')))
   
-  ggplot(data = tbl, aes(x = period, y = sum_pop, group = period, fill = run)) + 
-    geom_bar(stat = 'identity', position = 'dodge') + 
+  ggg <- ggplot(data = tbl, aes(x = period, y = sum_pop, group = period, fill = run)) + 
+    geom_bar(stat = 'identity', position = position_dodge()) + 
     facet_wrap(.~model, nrow = 1, ncol = 3) +
     theme_bw() + 
     theme(legend.position = 'bottom')
