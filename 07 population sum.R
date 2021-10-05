@@ -64,4 +64,18 @@ fles <- dir_ls('./outputs/rds', regexp = '.rds$')
 fles <- grep('sum_pop', fles, value = TRUE)
 tbls <- map(.x = fles, .f = readRDS)
 tbls <- map(.x = tbls, .f = as_tibble)
+tble <- bind_rows(tbls)
+spcs <- unique(tble$specie)
+
+# To make the graph -------------------------------------------------------
+make_graph <- function(spc){
+  
+  spc <- spcs[1] # Run and erase
+  
+  cat('Start ', spc, '\n')
+  tbl <- filter(tble, specie == spc)
+  
+  
+  
+}
 
