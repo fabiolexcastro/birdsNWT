@@ -67,6 +67,9 @@ tbls <- map(.x = tbls, .f = as_tibble)
 tble <- bind_rows(tbls)
 spcs <- unique(tble$specie)
 
+infr <- min(tble$sum_pop)
+supr <- max(tble$sum_pop)
+
 # To make the graph -------------------------------------------------------
 make_graph <- function(spc){
   
