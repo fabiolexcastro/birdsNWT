@@ -91,7 +91,9 @@ make_graph <- function(spc){
           plot.title = element_text(size = 16, hjust = 0.5, face = 'bold')) +
     labs(x = '', y = 'Total population (x 1000000)', fill = 'Run')
   
+  out <- glue('./graphs/figs/sum_pop/{spc}.png')
   
+  ggsave(plot = ggg, filename = out, units = 'in', width = 12, height = 9, dpi = 300)
   
 }
 
