@@ -58,3 +58,8 @@ get_sum_population <- function(spc){
 # Apply the function ------------------------------------------------------
 map(spcs, get_sum_population)
 
+
+# To read the results -----------------------------------------------------
+fles <- dir_ls('./outputs/rds', regexp = '.rds$')
+fles
+
