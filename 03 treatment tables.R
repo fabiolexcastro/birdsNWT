@@ -77,7 +77,7 @@ see_changes <- function(spc){
     cat(k, '\n')
     znl <- exact_extract(rst.avg[[k]], ecrg_limt, c('mean', 'stdev'))
     znl <- round(znl, digits = 2)
-    znl <- mutate(znl, gcm = gcm[k], ecoprovince = ecrg_limt$ECOPROVINC)
+    znl <- mutate(znl, mdl = gcm[k], ecoprovince = ecrg_limt$REGION_NAM)
     cat('Done\n')
     return(znl)
     
@@ -87,14 +87,15 @@ see_changes <- function(spc){
   znl <- drop_na(znl)
   
   cat('To make the graph\n')
-  gbr <- ggplot(data = znl, aes(x = ecoregion, y = mean, fill = gcm, group = gcm)) + 
+  gbr <- ggplot(data = znl, aes(x = ecoregion, y = mean)) + 
     geom_errorbar(aes(ymin = mean - stdev, ymax = mean + stdev), width = .2, position = position_dodge(.9)) +
     geom_bar(position = position_dodge(), stat = 'identity') + 
     scale_fill_manual(values = c('#38610B', '#FF8000', '#29088A')) +
     scale_x_discrete(labels = function(x) str_wrap(x, width = 6)) +
+    facet_wrap(.~mdl, ncol = 1, nrow = 3) +
     theme_bw() +
     theme(legend.position = 'bottom', 
-          axis.text.x = element_text(size = 5)) + 
+          axis.text.x = element_text(size = 7)) + 
     labs(x = 'Ecoprovince', y = 'Change', fill = 'GCM')
   
   ogb <- glue('./graphs/figs/bar_ratio_{spc}.png')
