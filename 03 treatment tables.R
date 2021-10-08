@@ -78,9 +78,12 @@ see_changes <- function(spc){
   gbn <- ggplot() + 
     geom_tile(data = tbl, aes(x = lon, y = lat, fill = rt_bn)) + 
     facet_wrap(.~gc, ncol = 3, nrow = 1) + 
-    scale_fill_manual(values = c('red', 'green', 'blue')) + 
+    scale_fill_manual(values = c('#A82525', '#6E6E6E', '#0B6121')) + 
+    ggtitle(label = spc) +
     theme_ipsum_es() + 
-    theme(legend.position = 'bottom')
+    theme(legend.position = 'bottom', 
+          axis.text.y = element_text(angle = 90, vjust = 0.5)) +
+    labs(x = 'Longitude', y = 'Latitude', fill = 'Change')
   
   ggsave(plot = gbn, filename = glue('./graphs/maps/bin_gcm_change_{spc}.png'),
          units = 'in', width = 12, height = 9, dpi = 300)
