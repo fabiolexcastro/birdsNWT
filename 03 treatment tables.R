@@ -76,7 +76,11 @@ see_changes <- function(spc){
   
   cat('To make the map binary\n')
   gbn <- ggplot() + 
-    geom_tile(tbl, aes(x = lon, y = lat, fill = rt_bn))
+    geom_tile(tbl, aes(x = lon, y = lat, fill = rt_bn)) + 
+    facet_wrap(.~gc) + 
+    scale_fill_manual(values = c('red', 'green', 'blue')) + 
+    theme_ipsum_es() + 
+    theme(legend.position = 'bottom')
   
   
   
