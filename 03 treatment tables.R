@@ -1,3 +1,4 @@
+
 # Load libraries ----------------------------------------------------------
 require(pacman)
 pacman::p_load(raster, rgdal, rgeos, future, furrr, reproducible, RColorBrewer, 
@@ -41,7 +42,10 @@ see_changes <- function(spc){
   cat('To see the average in a raster file\n')
   rst.avg <- map(.x = 1:length(gcm), .f = function(k){
     cat('Start -- ', k, '\n')
-    rs <- tbl %>% filter(gc == gcm[k]) %>% dplyr::select(lon, lat, avg) %>% rasterFromXYZ()
+    rs <- tbl %>% 
+      filter(gc == gcm[k]) %>% 
+      dplyr::select(lon, lat, avg) %>% 
+      rasterFromXYZ()
     return(rs)
   })
   
@@ -82,10 +86,11 @@ see_changes <- function(spc){
   znl <- bind_rows(znl) 
   
   cat('To make the graph\n')
-  gbr <- ggplot(data = znl, aes(x = ecoprovince, y = mean, fill = gcm, group = gcm)) + 
+  gbr <- ggplot(data = znl, aes(x = ecoregion, y = mean, fill = gcm, group = gcm)) + 
     geom_errorbar(aes(ymin = mean - stdev, ymax = mean + stdev), width = .2, position = position_dodge(.9)) +
     geom_bar(position = position_dodge(), stat = 'identity') + 
     scale_fill_manual(values = c('#38610B', '#FF8000', '#29088A')) +
+    scale_x_discrete(labels = function(x) str_wrap(x, width = 8)) +
     theme_bw() +
     theme(legend.position = 'bottom') + 
     labs(x = 'Ecoprovince', y = 'Change', fill = 'GCM')
