@@ -71,6 +71,8 @@ see_changes <- function(spc){
   tbl <- mutate(tbl, ratio = (y2100 - y2011) / y2011 * 100)
   tbl <- mutate(tbl, rt_bn = ifelse(ratio < 0, 'Negative', 'Positive'))
   
+  tbl %>% group_by(gc, rt_bn) %>% summarise(count = n()) %>% ungroup()
+  
   cat('Now to make the zonal statistical\n')
   znl <- map(.x = 1:length(rst.avg), .f = function(k){
     
