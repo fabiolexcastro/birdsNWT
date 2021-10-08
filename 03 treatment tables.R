@@ -69,9 +69,17 @@ see_changes <- function(spc){
   
   cat('To estimate the change (ration), initial and final year\n')
   tbl <- mutate(tbl, ratio = (y2100 - y2011) / y2011 * 100)
-  tbl <- mutate(tbl, rt_bn = ifelse(ratio < 0, 'Negative', 'Positive'))
-  
+  tbl <- mutate(tbl, rt_bn = ifelse(ratio < 0, 'Negative', ifelse(ratio == 0, 'None', 'Positive')))
+  tbl <- mutate(tbl, rt_bn = factor(rt_bn, levels = c('Negative', 'None', 'Positive')))
   tbl %>% group_by(gc, rt_bn) %>% summarise(count = n()) %>% ungroup()
+  
+  
+  cat('To make the map binary\n')
+  gbn <- ggplot() + 
+    geom_tile(tbl, aes(x = lon, y = lat, fill = rt_bn))
+  
+  
+  
   
   cat('Now to make the zonal statistical\n')
   znl <- map(.x = 1:length(rst.avg), .f = function(k){
