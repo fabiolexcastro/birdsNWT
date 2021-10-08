@@ -84,19 +84,20 @@ see_changes <- function(spc){
   })
   
   znl <- bind_rows(znl) 
+  znl <- drop_na(znl)
   
   cat('To make the graph\n')
   gbr <- ggplot(data = znl, aes(x = ecoregion, y = mean, fill = gcm, group = gcm)) + 
     geom_errorbar(aes(ymin = mean - stdev, ymax = mean + stdev), width = .2, position = position_dodge(.9)) +
     geom_bar(position = position_dodge(), stat = 'identity') + 
     scale_fill_manual(values = c('#38610B', '#FF8000', '#29088A')) +
-    scale_x_discrete(labels = function(x) str_wrap(x, width = 8)) +
+    scale_x_discrete(labels = function(x) str_wrap(x, width = 6)) +
     theme_bw() +
     theme(legend.position = 'bottom') + 
     labs(x = 'Ecoprovince', y = 'Change', fill = 'GCM')
   
   ogb <- glue('./graphs/figs/bar_ratio_{spc}.png')
-  ggsave(plot = gbr, filename = ogb, units = 'in', width = 9, height = 6.8, dpi = 300)
+  ggsave(plot = gbr, filename = ogb, units = 'in', width = 13, height = 6.8, dpi = 300)
   
   cat('To calculate the slopes\n')
   tbl <- map(.x = 1:3, function(k){tbl %>% filter(gc == gcm[k]) %>% mutate(gid = 1:nrow(.))}) %>% bind_rows()
