@@ -93,7 +93,8 @@ see_changes <- function(spc){
     scale_fill_manual(values = c('#38610B', '#FF8000', '#29088A')) +
     scale_x_discrete(labels = function(x) str_wrap(x, width = 6)) +
     theme_bw() +
-    theme(legend.position = 'bottom') + 
+    theme(legend.position = 'bottom', 
+          axis.text.x = element_text(size = 5)) + 
     labs(x = 'Ecoprovince', y = 'Change', fill = 'GCM')
   
   ogb <- glue('./graphs/figs/bar_ratio_{spc}.png')
