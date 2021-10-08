@@ -76,14 +76,14 @@ see_changes <- function(spc){
   
   cat('To make the map binary\n')
   gbn <- ggplot() + 
-    geom_tile(tbl, aes(x = lon, y = lat, fill = rt_bn)) + 
-    facet_wrap(.~gc) + 
+    geom_tile(data = tbl, aes(x = lon, y = lat, fill = rt_bn)) + 
+    facet_wrap(.~gc, ncol = 3, nrow = 1) + 
     scale_fill_manual(values = c('red', 'green', 'blue')) + 
     theme_ipsum_es() + 
     theme(legend.position = 'bottom')
   
-  
-  
+  ggsave(plot = gbn, filename = glue('./graphs/maps/bin_gcm_change_{spc}.png'),
+         units = 'in', width = 12, height = 9, dpi = 300)
   
   cat('Now to make the zonal statistical\n')
   znl <- map(.x = 1:length(rst.avg), .f = function(k){
