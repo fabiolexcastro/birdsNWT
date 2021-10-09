@@ -122,7 +122,7 @@ see_changes <- function(spc){
   cat('Table to raster\n')
   rst <- map(.x = 1:length(gcm), .f = function(k){
     
-    k <- 1
+    cat(k)
     sub <- tbl %>% 
       filter(gc == gcm[k]) %>% 
       dplyr::select(lon, lat, y2011:y2100)
@@ -130,6 +130,9 @@ see_changes <- function(spc){
     rsr <- map(.x = 3:ncol(sub), .f = function(z){
       sub %>% dplyr::select(1, 2, z) %>% rasterFromXYZ()
     })
+    
+    cat('Done\n')
+    return(rsr)
     
   })
   
