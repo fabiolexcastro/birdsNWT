@@ -119,6 +119,19 @@ see_changes <- function(spc){
   ogb <- glue('./graphs/figs/bar_ratio_{spc}.png')
   ggsave(plot = gbr, filename = ogb, units = 'in', width = 13, height = 6.8, dpi = 300)
   
+  cat('Table to raster\n')
+  rst <- map(.x = 1:length(gcm), .f = function(k){
+    
+    k <- 1
+    sub <- tbl %>% 
+      filter(gc == gcm[k]) %>% 
+      dplyr::select(x, y, y2011:y2100)
+    
+    
+  })
+  
+  
+  
   cat('To calculate the slopes\n')
   tbl <- map(.x = 1:3, function(k){tbl %>% filter(gc == gcm[k]) %>% mutate(gid = 1:nrow(.))}) %>% bind_rows()
   gds <- tbl %>% pull(gid) %>% unique()
