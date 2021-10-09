@@ -139,8 +139,11 @@ see_changes <- function(spc){
   
   cat('To calculate the slopes\n')
   stck <- rst[[1]]
+  midb <- ecrg %>% filter(REGION_NAM == 'Mid-Boreal Uplands')
+  midb <- as(midb, 'Spatial')
+  stck <- raster::crop(stck, midb)
+  stck <- raster::mask(stck, midb)
   slpe <- raster.kendall(x = stck, p.value = TRUE)
-  tstn <- calc(stck, fun = func)
   
   
   
