@@ -125,8 +125,11 @@ see_changes <- function(spc){
     k <- 1
     sub <- tbl %>% 
       filter(gc == gcm[k]) %>% 
-      dplyr::select(x, y, y2011:y2100)
+      dplyr::select(lon, lat, y2011:y2100)
     
+    rsr <- map(.x = 3:ncol(sub), .f = function(z){
+      sub %>% dplyr::select(1, 2, z) %>% rasterFromXYZ()
+    })
     
   })
   
