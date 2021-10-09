@@ -3,7 +3,7 @@
 require(pacman)
 pacman::p_load(raster, rgdal, rgeos, future, furrr, reproducible, RColorBrewer, 
                colorspaces, ggspatial, ggpubr, gridExtra, terra, stringr, glue, 
-               sf, tidyverse, RStoolbox, fs, future.apply, fst, trend)
+               sf, tidyverse, RStoolbox, spatialEco, fs, future.apply, fst, trend)
 
 g <- gc(reset = TRUE)
 rm(list = ls())
@@ -138,9 +138,9 @@ see_changes <- function(spc){
   })
   
   cat('To calculate the slopes\n')
-  func <- function(x){unlist(sens.slope(x)[1:6])}
   stck <- rst[[1]]
-  tstn <- calc(stk, fun = func)
+  slpe <- raster.kendall(x = stck, p.value = TRUE)
+  tstn <- calc(stck, fun = func)
   
   
   
