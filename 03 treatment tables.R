@@ -138,8 +138,9 @@ see_changes <- function(spc){
   })
   
   cat('To calculate the slopes\n')
-  func <- function(x){unlist(sens.slope(x)[1:3])}
-  tstn <- calc(rst[[1]], fun = func)
+  func <- function(x){unlist(sens.slope(x)[1:6])}
+  stck <- rst[[1]]
+  tstn <- calc(stk, fun = func)
   
   
   
