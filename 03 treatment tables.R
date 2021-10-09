@@ -131,6 +131,7 @@ see_changes <- function(spc){
       sub %>% dplyr::select(1, 2, z) %>% rasterFromXYZ()
     })
     
+    rsr <- raster::stack(rsr)
     cat('Done\n')
     return(rsr)
     
