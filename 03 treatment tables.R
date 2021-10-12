@@ -84,7 +84,7 @@ see_changes <- function(spc){
   tbl <- bind_rows(tbl)
   tbl <- mutate(tbl, rt_bn = factor(rt_bn, levels = c('Negative', 'None', 'Positive')))
   tbl %>% group_by(gc, rt_bn) %>% summarise(count = n()) %>% ungroup()
-  qsave(tbl, file = glue('../qs/{spc}_table_ratio.qs'))
+  qsave(x = tbl, file = glue('./qs/{spc}_table_ratio.qs'))
   
   cat('To make the map binary\n')
   gbn <- ggplot() + 
@@ -150,18 +150,12 @@ see_changes <- function(spc){
   })
   
   cat('To calculate the slopes\n')
-  stck <- rst[[1]]
-  midb <- ecrg %>% filter(REGION_NAM == 'Mid-Boreal Uplands')
-  midb <- as(midb, 'Spatial')
-  crs(stck) <- crs(midb)
-  stck <- raster::crop(stck, midb)
-  stck <- raster::mask(stck, midb)
-  slpe <- raster.kendall(x = stck, p.value = TRUE)
-  
-  
-  
-  
-  
+  slpe <- map(.x = rst, .f = function(k){
+    cat('Start\n')
+    slp <- raster.kendall(x = k, p.value = TRUE)
+    cat('Done\n')
+  })
+
   cat('To calculate the slopes\n')
   tbl <- map(.x = 1:3, function(k){tbl %>% filter(gc == gcm[k]) %>% mutate(gid = 1:nrow(.))}) %>% bind_rows()
   gds <- tbl %>% pull(gid) %>% unique()
