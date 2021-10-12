@@ -156,42 +156,16 @@ see_changes <- function(spc){
     cat('Done\n')
   })
 
-  cat('To calculate the slopes\n')
-  tbl <- map(.x = 1:3, function(k){tbl %>% filter(gc == gcm[k]) %>% mutate(gid = 1:nrow(.))}) %>% bind_rows()
-  gds <- tbl %>% pull(gid) %>% unique()
+  slpe
+  slpe.tbl <- rasterToPoints(slpe, spatial = FALSE)
+  slpe.tbl <- as_tibble(slpe.tbl)
   
-  cat('To sentence the function\n')
-  run_slope <- function(pix){
-    
-    cat(j, '\n')
-    tb <- tbl %>% filter(gid == gds[j])
-    
-    rs <- map(.x = 1:3, .f = function(g){
-      
-      cat(gcm[g], '\n')
-      df <- tb %>% filter(gc == gcm[g]) 
-      ts <- df %>% dplyr::select(contains('y'))
-      ts <- ts %>% gather(year, value) %>% mutate(year = parse_number(year))
-      tm <- ts %>% pull(value) %>% ts()
-      sl <- sens.slope(tm)
-      df <- data.frame(gcm = gcm[g], gid = gds[j], slp = sl$estimates, pvl = sl$p.value)
-      df <- as_tibble(df)
-      
-    })
-    
-    rs <- bind_rows(rs)
-    cat('Done\n')
-    return(rs)
-    
-  }
   
-  cat('To estimate the slopes\n')
-  plan(multicore, workers = 30)
-  options(future.globals.maxSize = 3460300800)
-  rsl <- future.apply::future_lapply(X = gds, FUN = run_slope)
-  # Update
+  cat('Done\n')
+  return(rs)
+    
+}
   
- }
 
 # Apply the function ------------------------------------------------------
 
