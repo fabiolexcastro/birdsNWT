@@ -169,7 +169,8 @@ see_changes <- function(spc){
     theme_ipsum_es() +
     coord_sf() +
     theme(legend.position = 'bottom', 
-          legend.key.width = unit(3, 'line')) 
+          legend.key.width = unit(3, 'line')) +
+    labs(x = 'Lon', y = 'Lat', fill = 'Slope')
   
   ggsave(plot = gslp, 
          filename = './slp.png', 
