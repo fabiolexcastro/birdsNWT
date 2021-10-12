@@ -69,7 +69,17 @@ see_changes <- function(spc){
   
   cat('To estimate the change (ration), initial and final year\n')
   tbl <- mutate(tbl, ratio = (y2100 - y2011) / y2011 * 100)
-  std <- tbl %>% group_by(gc) %>% summarise(std = sd(avg)) %>% ungroup()
+  std <- tbl %>% group_by(gc) %>% summarise(std = sd(ratio)) %>% ungroup()
+  tst <- map(.x = 1:3, .f = function(i){
+    st <- std %>% filter(gc == gcm[i]) %>% pull(std)
+    tb <- tbl %>% 
+      filter(gc == gcm[i]) %>% 
+      mutate(rt_bn = ifelse(ratio > st * -1 & ratio < st * 1, 'None', 
+                            ifelse(ratio > std, 'Positive', 
+                                   ifelse(ratio < std, 'Negative', NA))))
+    
+  })
+  
   tbl <- mutate(tbl, rt_bn = ifelse(ratio < 0, 'Negative', ifelse(ratio == 0, 'None', 'Positive')))
   tbl <- mutate(tbl, rt_bn = factor(rt_bn, levels = c('Negative', 'None', 'Positive')))
   tbl %>% group_by(gc, rt_bn) %>% summarise(count = n()) %>% ungroup()
