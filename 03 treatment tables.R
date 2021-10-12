@@ -69,6 +69,7 @@ see_changes <- function(spc){
   
   cat('To estimate the change (ration), initial and final year\n')
   tbl <- mutate(tbl, ratio = (y2100 - y2011) / y2011 * 100)
+  std <- tbl %>% group_by(gc) %>% summarise(std = sd(avg)) %>% ungroup()
   tbl <- mutate(tbl, rt_bn = ifelse(ratio < 0, 'Negative', ifelse(ratio == 0, 'None', 'Positive')))
   tbl <- mutate(tbl, rt_bn = factor(rt_bn, levels = c('Negative', 'None', 'Positive')))
   tbl %>% group_by(gc, rt_bn) %>% summarise(count = n()) %>% ungroup()
@@ -141,6 +142,7 @@ see_changes <- function(spc){
   stck <- rst[[1]]
   midb <- ecrg %>% filter(REGION_NAM == 'Mid-Boreal Uplands')
   midb <- as(midb, 'Spatial')
+  crs(stck) <- crs(midb)
   stck <- raster::crop(stck, midb)
   stck <- raster::mask(stck, midb)
   slpe <- raster.kendall(x = stck, p.value = TRUE)
