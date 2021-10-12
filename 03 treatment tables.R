@@ -72,11 +72,16 @@ see_changes <- function(spc){
   std <- tbl %>% group_by(gc) %>% summarise(std = sd(ratio)) %>% ungroup()
   tst <- map(.x = 1:3, .f = function(i){
     st <- std %>% filter(gc == gcm[i]) %>% pull(std)
+    st <- st / 2
     tb <- tbl %>% 
       filter(gc == gcm[i]) %>% 
-      mutate(rt_bn = ifelse(ratio > st * -1 & ratio < st * 1, 'None', 
-                            ifelse(ratio > std, 'Positive', 
-                                   ifelse(ratio < std, 'Negative', NA))))
+      mutate(rt_bn = case_when(between(ratio, st * -1, st) ~ 'None',
+                               ratio > st ~ Positive,
+                               ratio < st * -1 ~ Negative, 
+                               TRUE ~ NA))
+    
+    tb %>% distinct(rt_bn)
+    
     
   })
   
