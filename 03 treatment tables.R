@@ -165,10 +165,14 @@ see_changes <- function(spc){
   cat('To make the map\n')
   gslp <- ggplot() + 
     geom_tile(data = slpe.tbl, aes(x = x, y = y, fill = slp)) + 
-    scale_fill_binned_diverging(palette = 'YlOrRd') + 
+    scale_fill_binned_sequential(palette = 'YlOrRd') + 
     theme_ipsum_es() +
     theme(legend.position = 'bottom', 
           legend.key.width = unit(3, 'line')) 
+  
+  ggsave(plot = gslp, 
+         filename = './slp.png', 
+         units = 'in', width = 9, height = 8, dpi = 300)
   
   
   cat('Done\n')
