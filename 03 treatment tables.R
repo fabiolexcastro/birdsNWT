@@ -75,7 +75,7 @@ see_changes <- function(spc){
     st <- st / 4
     tb <- tbl %>% 
       filter(gc == gcm[i]) %>% 
-      mutate(rt_bn = case_when(ratio >= st & ratio <= st ~ 'None',
+      mutate(rt_bn = case_when(ratio >= st * -1 & ratio <= st ~ 'None',
                                ratio > st ~ 'Positive',
                                ratio < st * -1 ~ 'Negative'))
     
