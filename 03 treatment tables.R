@@ -160,9 +160,16 @@ see_changes <- function(spc){
   slpe.tbl <- rasterToPoints(slpe, spatial = FALSE)
   slpe.tbl <- as_tibble(slpe.tbl)
   slpe.tbl <- slpe.tbl %>% setNames(c('x', 'y', 'slp', 'pvalue'))
-  slpe.tbl <- slpe.tbl %>% mutate(pvalue_bin = ifelse(p.value < 0.10, 1, 0))
+  slpe.tbl <- slpe.tbl %>% mutate(pvalue_bin = ifelse(pvalue < 0.10, 1, 0))
   
-  cat('To make the graph\n')
+  cat('To make the map\n')
+  gslp <- ggplot() + 
+    geom_tile(data = slpe.tbl, aes(x = x, y = y, fill = slp)) + 
+    scale_fill_binned_diverging(palette = 'YlOrRd') + 
+    theme_ipsum_es() +
+    theme(legend.position = 'bottom', 
+          legend.key.width = unit(3, 'line')) 
+  
   
   cat('Done\n')
   return(rs)
