@@ -72,7 +72,7 @@ see_changes <- function(spc){
   std <- tbl %>% group_by(gc) %>% summarise(std = sd(ratio)) %>% ungroup()
   tst <- map(.x = 1:3, .f = function(i){
     st <- std %>% filter(gc == gcm[i]) %>% pull(std)
-    st <- st / 2
+    st <- st / 4
     tb <- tbl %>% 
       filter(gc == gcm[i]) %>% 
       mutate(rt_bn = case_when(ratio >= st & ratio <= st ~ 'None',
