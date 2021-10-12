@@ -159,7 +159,9 @@ see_changes <- function(spc){
   slpe
   slpe.tbl <- rasterToPoints(slpe, spatial = FALSE)
   slpe.tbl <- as_tibble(slpe.tbl)
+  slpe.tbl <- slpe.tbl %>% setNames(c('x', 'y', 'slp', 'pvalue'))
   
+  cat('To make the graph\n')
   
   cat('Done\n')
   return(rs)
