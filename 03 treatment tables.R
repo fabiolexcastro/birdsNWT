@@ -167,6 +167,7 @@ see_changes <- function(spc){
     geom_tile(data = slpe.tbl, aes(x = x, y = y, fill = slp)) + 
     scale_fill_binned_sequential(palette = 'YlOrRd') + 
     theme_ipsum_es() +
+    coord_sf() +
     theme(legend.position = 'bottom', 
           legend.key.width = unit(3, 'line')) 
   
