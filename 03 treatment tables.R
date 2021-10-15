@@ -154,6 +154,7 @@ see_changes <- function(spc){
     cat('Start\n')
     slp <- raster.kendall(x = k, p.value = TRUE)
     cat('Done\n')
+    return(slp)
   })
 
   slpe
