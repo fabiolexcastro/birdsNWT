@@ -155,11 +155,23 @@ see_changes <- function(spc){
     library(spatialEco); library(raster)
     cat('Start\n')
     slp <- raster.kendall(x = k, p.value = TRUE)
+    writeRaster(x = slp[[1]], filename = glue('./outputs/{spc}/slp_{gcm[k]}.tif'), overwrite = TRUE)
+    writeRaster(x = slp[[2]], filename = glue('./outputs/{spc}/pvl_{gcm[k]}.tif'), overwrite = TRUE)
     cat('Done\n')
     return(slp)
   })
   future:::ClusterRegistry('stop')
 
+  map(.x = 1:length(slpe), .f = function(k){
+    cat('To start\n')
+    writeRaster(x = slpe[[k]][[1]], filename = glue('./outputs/{spc}/slp_{gcm[k]}.tif'), overwrite = TRUE)
+    writeRaster(x = slpe[[k]][[2]], filename = glue('./outputs/{spc}/pvl_{gcm[k]}.tif'), overwrite = TRUE)
+    cat('Done\n')
+  })
+
+  
+  
+  
   slpe
   slpe.tbl <- rasterToPoints(slpe, spatial = FALSE)
   slpe.tbl <- as_tibble(slpe.tbl)
