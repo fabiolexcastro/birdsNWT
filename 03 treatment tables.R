@@ -151,7 +151,7 @@ see_changes <- function(spc){
   
   cat('To calculate the slopes\n')
   plan(cluster, workers = 3, gc = TRUE)
-  slpe <- furrr::future_map::map(.x = rst, .f = function(k){
+  slpe <- furrr::future_map(.x = rst, .f = function(k){
     library(spatialEco); library(raster)
     cat('Start\n')
     slp <- raster.kendall(x = k, p.value = TRUE)
