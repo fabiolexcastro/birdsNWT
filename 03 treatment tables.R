@@ -162,17 +162,17 @@ see_changes <- function(spc){
   })
   future:::ClusterRegistry('stop')
 
-  map(.x = 1:length(slpe), .f = function(k){
-    cat('To start\n')
-    writeRaster(x = slpe[[k]][[1]], filename = glue('./outputs/{spc}/slp_{gcm[k]}.tif'), overwrite = TRUE)
-    writeRaster(x = slpe[[k]][[2]], filename = glue('./outputs/{spc}/pvl_{gcm[k]}.tif'), overwrite = TRUE)
-    cat('Done\n')
+  slpe.tble <- map(.x = 1:length(slpe), .f = function(k){
+    cat(k, '\n')
+    rsl <- slpe[[k]] %>% 
+      rasterToPoints(., spatial = FALSE) %>% 
+      as_tibble() %>% 
+      mutate(model = gcm[k]) %>% 
+      setNames(c('x', 'y', 'slp', 'pvl', 'model'))
+    return(rsl)
   })
-
   
   
-  
-  slpe
   slpe.tbl <- rasterToPoints(slpe, spatial = FALSE)
   slpe.tbl <- as_tibble(slpe.tbl)
   slpe.tbl <- slpe.tbl %>% setNames(c('x', 'y', 'slp', 'pvalue'))
