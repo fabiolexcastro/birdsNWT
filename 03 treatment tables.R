@@ -177,7 +177,8 @@ see_changes <- function(spc){
   
   cat('To make the map\n')
   gslp <- ggplot() + 
-    geom_tile(data = slpe.tbl, aes(x = x, y = y, fill = slp)) + 
+    geom_tile(data = slpe.tble, aes(x = x, y = y, fill = slp)) + 
+    facet_wrap(.~model, ncol = 3, nrow = 1) +
     scale_fill_binned_sequential(palette = 'YlOrRd') + 
     theme_ipsum_es() +
     coord_sf() +
