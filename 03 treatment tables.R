@@ -173,9 +173,8 @@ see_changes <- function(spc){
     return(rsl)
   })
   
-  cat('Checking\n')
-  tst <- rst[[1]] %>% rasterToPoints() %>% as_tibble()
-
+  slpe.tble <- bind_rows(slpe.tble)
+  
   cat('To make the map\n')
   gslp <- ggplot() + 
     geom_tile(data = slpe.tbl, aes(x = x, y = y, fill = slp)) + 
