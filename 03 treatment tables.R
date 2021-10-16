@@ -194,7 +194,7 @@ see_changes <- function(spc){
     coord_sf() +
     theme(legend.position = 'bottom', 
           legend.key.width = unit(3, 'line')) +
-    labs(x = 'Lon', y = 'Lat', fill = 'Slope')
+    labs(x = 'Lon', y = 'Lat', fill = 'p-value')
   
   ggsave(plot = gslp, 
          filename = './slp.png', 
