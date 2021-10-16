@@ -189,7 +189,7 @@ see_changes <- function(spc){
   gpvl <- ggplot() + 
     geom_tile(data = slpe.tble, aes(x = x, y = y, fill = pvl)) + 
     facet_wrap(.~model, ncol = 3, nrow = 1) +
-    scale_fill_binned_sequential(palette = 'ag_GrnYl', rev = FALSE) + 
+    scale_fill_binned_sequential(palette = 'ag_GrnYl', rev = FALSE, breaks = c(0.05, 0.25, 0.5, 0.75)) + 
     theme_void() +
     coord_sf() +
     theme(legend.position = 'bottom', 
