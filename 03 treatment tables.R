@@ -196,9 +196,11 @@ see_changes <- function(spc){
           legend.key.width = unit(3, 'line')) +
     labs(x = 'Lon', y = 'Lat', fill = 'p-value')
   
-  ggsave(plot = gslp, 
-         filename = './slp.png', 
-         units = 'in', width = 9, height = 8, dpi = 300)
+  gall <- ggarrange(gslp, gpvl, ncol = 1, nrow = 2)
+  
+  ggsave(plot = gall, 
+         filename = './slp_pvl.png', 
+         units = 'in', width = 13, height = 10, dpi = 300)
   
   
   cat('Done\n')
