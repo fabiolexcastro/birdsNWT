@@ -202,7 +202,7 @@ see_changes <- function(spc){
   gall <- ggarrange(gslp, gpvl, ncol = 1, nrow = 2)
   
   ggsave(plot = gall, 
-         filename = './slp_pvl.png', 
+         filename = glue('./graphs/maps/{spc}_slp_pvl.png'), 
          units = 'in', width = 13, height = 10, dpi = 300)
   
   cat('------------------------------------------------------------------------------------------------------\n')
