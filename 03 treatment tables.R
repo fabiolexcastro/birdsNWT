@@ -180,7 +180,7 @@ see_changes <- function(spc){
     geom_tile(data = slpe.tble, aes(x = x, y = y, fill = slp)) + 
     facet_wrap(.~model, ncol = 3, nrow = 1) +
     scale_fill_binned_sequential(palette = 'YlOrRd') + 
-    theme_ipsum_es() +
+    theme_void() +
     coord_sf() +
     theme(legend.position = 'bottom', 
           legend.key.width = unit(3, 'line')) +
