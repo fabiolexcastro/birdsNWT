@@ -162,15 +162,6 @@ see_changes <- function(spc){
   })
   future:::ClusterRegistry('stop')
 
-  # Run and erase
-  raster::writeRaster(x = slpe[[1]][[2]], filename = glue('./outputs/{spc}/pvl_{gcm[1]}.tif'), overwrite = TRUE)
-  raster::writeRaster(x = slpe[[1]][[2]], filename = glue('./outputs/{spc}/pvl_{gcm[1]}.tif'), overwrite = TRUE)
-  raster::writeRaster(x = slpe[[2]][[1]], filename = glue('./outputs/{spc}/slp_{gcm[2]}.tif'), overwrite = TRUE)
-  raster::writeRaster(x = slpe[[2]][[2]], filename = glue('./outputs/{spc}/pvl_{gcm[2]}.tif'), overwrite = TRUE)
-  raster::writeRaster(x = slpe[[3]][[1]], filename = glue('./outputs/{spc}/slp_{gcm[3]}.tif'), overwrite = TRUE)
-  raster::writeRaster(x = slpe[[3]][[2]], filename = glue('./outputs/{spc}/pvl_{gcm[3]}.tif'), overwrite = TRUE)
-  
-  
   slpe.tble <- map(.x = 1:length(slpe), .f = function(k){
     cat(k, '\n')
     rsl <- slpe[[k]] %>% 
