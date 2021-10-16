@@ -162,6 +162,15 @@ see_changes <- function(spc){
   })
   future:::ClusterRegistry('stop')
 
+  # Run and erase
+  writeRaster(x = slp[[1]][[1]], filename = glue('./outputs/{spc}/slp_{gcm[1]}.tif'), overwrite = TRUE)
+  writeRaster(x = slp[[1]][[2]], filename = glue('./outputs/{spc}/pvl_{gcm[1]}.tif'), overwrite = TRUE)
+  writeRaster(x = slp[[2]][[1]], filename = glue('./outputs/{spc}/slp_{gcm[2]}.tif'), overwrite = TRUE)
+  writeRaster(x = slp[[2]][[2]], filename = glue('./outputs/{spc}/pvl_{gcm[2]}.tif'), overwrite = TRUE)
+  writeRaster(x = slp[[3]][[1]], filename = glue('./outputs/{spc}/slp_{gcm[3]}.tif'), overwrite = TRUE)
+  writeRaster(x = slp[[3]][[2]], filename = glue('./outputs/{spc}/pvl_{gcm[3]}.tif'), overwrite = TRUE)
+  
+  
   slpe.tble <- map(.x = 1:length(slpe), .f = function(k){
     cat(k, '\n')
     rsl <- slpe[[k]] %>% 
@@ -173,16 +182,9 @@ see_changes <- function(spc){
     return(rsl)
   })
   
-  slpe.tble <- map(.x = 1:length(slpe.tble), .f = function(k){
-    slpe.tble[[k]] %>% mutate(model = gcm[k])
-  })
-  
-  
-  slpe.tbl <- rasterToPoints(slpe, spatial = FALSE)
-  slpe.tbl <- as_tibble(slpe.tbl)
-  slpe.tbl <- slpe.tbl %>% setNames(c('x', 'y', 'slp', 'pvalue'))
-  slpe.tbl <- slpe.tbl %>% mutate(pvalue_bin = ifelse(pvalue < 0.10, 1, 0))
-  
+  cat('Checking\n')
+  tst <- rst[[1]] %>% rasterToPoints() %>% as_tibble()
+
   cat('To make the map\n')
   gslp <- ggplot() + 
     geom_tile(data = slpe.tbl, aes(x = x, y = y, fill = slp)) + 
