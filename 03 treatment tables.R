@@ -186,6 +186,16 @@ see_changes <- function(spc){
           legend.key.width = unit(3, 'line')) +
     labs(x = 'Lon', y = 'Lat', fill = 'Slope')
   
+  gpvl <- ggplot() + 
+    geom_tile(data = slpe.tble, aes(x = x, y = y, fill = pvl)) + 
+    facet_wrap(.~model, ncol = 3, nrow = 1) +
+    scale_fill_binned_sequential(palette = 'ag_GrnYl', rev = FALSE) + 
+    theme_void() +
+    coord_sf() +
+    theme(legend.position = 'bottom', 
+          legend.key.width = unit(3, 'line')) +
+    labs(x = 'Lon', y = 'Lat', fill = 'Slope')
+  
   ggsave(plot = gslp, 
          filename = './slp.png', 
          units = 'in', width = 9, height = 8, dpi = 300)
