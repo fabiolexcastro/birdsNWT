@@ -172,6 +172,10 @@ see_changes <- function(spc){
     return(rsl)
   })
   
+  slpe.tbl2 <- map(.x = 1:length(slpe.tble), .f = function(k){
+    slpe.tble[[k]] %>% mutate(model = gcm[k])
+  })
+  
   
   slpe.tbl <- rasterToPoints(slpe, spatial = FALSE)
   slpe.tbl <- as_tibble(slpe.tbl)
