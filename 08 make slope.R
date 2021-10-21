@@ -35,7 +35,7 @@ make_slope <- function(spc){
   
   message(crayon::red('Make stack'))
   st1 <- grep(gcm[1], fls, value = TRUE)
-  st1 <- grep('100', st1, value = TRUE)
+  st1 <- st1[-grep('100', st1, value = FALSE)]
   
   
   dtSP <- lapply(X = rst, FUN = function(sp){
