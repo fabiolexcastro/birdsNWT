@@ -47,7 +47,7 @@ make_slope <- function(spc){
   st3 <- raster::stack(st3)
   
   
-  dtSP <- lapply(X = rst, FUN = function(sp){
+  dtSP <- lapply(X = st1, FUN = function(sp){
     browser()
     arrayStack <- raster::as.array(x = sp)
     times <- c(2011, 2031, 2051, 2071, 2091)
