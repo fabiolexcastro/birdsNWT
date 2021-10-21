@@ -214,4 +214,4 @@ see_changes <- function(spc){
 
 # Apply the function ------------------------------------------------------
 
-map(.x = spsc[1:5], .f = see_changes)
+map(.x = spcs[1:5], .f = see_changes)
