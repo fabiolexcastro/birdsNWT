@@ -36,15 +36,15 @@ make_slope <- function(spc){
   message(crayon::red('Make stack'))
   st1 <- grep(gcm[1], fls, value = TRUE)
   st1 <- st1[-grep('100', st1, value = FALSE)]
-  st1 <- raster::stack(st1)
+  st1 <- map(st1, raster)
   
   st2 <- grep(gcm[2], fls, value = TRUE)
   st2 <- st2[-grep('100', st2, value = FALSE)]
-  st2 <- raster::stack(st2)
+  st2 <- map(st2, raster)
   
   st3 <- grep(gcm[3], fls, value = TRUE)
   st3 <- st3[-grep('100', st3, value = FALSE)]
-  st3 <- raster::stack(st3)
+  st3 <- map(st3, raster)
   
   
   dtSP <- lapply(X = st1, FUN = function(sp){
