@@ -39,12 +39,12 @@ make_slope <- function(spc){
   st1 <- raster::stack(st1)
   
   st2 <- grep(gcm[2], fls, value = TRUE)
-  st2 <- st1[-grep('100', st1, value = FALSE)]
-  st2 <- raster::stack(st1)
+  st2 <- st2[-grep('100', st2, value = FALSE)]
+  st2 <- raster::stack(st2)
   
   st3 <- grep(gcm[3], fls, value = TRUE)
-  st3 <- st1[-grep('100', st1, value = FALSE)]
-  st3 <- raster::stack(st1)
+  st3 <- st2[-grep('100', st2, value = FALSE)]
+  st3 <- raster::stack(st2)
   
   
   dtSP <- lapply(X = rst, FUN = function(sp){
