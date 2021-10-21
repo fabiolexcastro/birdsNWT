@@ -22,7 +22,7 @@ prds <- c('')
 # Main function -----------------------------------------------------------
 make_slope <- function(spc){
   
-  spc <- spcs[1] # Run and erase 
+  # spc <- spcs[1] # Run and erase 
   
   message(crayon::green("Loading: ", spc))
   fls <- dir_ls(spc, regexp = '.tif$')
@@ -76,9 +76,27 @@ make_slope <- function(spc){
     return(list(slopeCoefficient = slopeCoeff, slopeSignificancy = slopeSignificancy))
   })
   
+  slpe <- lapply(dtSP, `[[`, 1)
+  pvle <- lapply(dtSP, `[[`, 2)
   
+  dout <- glue('./outputs/{basename(spc)}')
+  
+  lapply(1:length(slpe), function(k){
+    raster::writeRaster(x = slpe[[k]], 
+                        filename = glue('{dout}/slpe_{gcm[i]}.tif'))
+    raster::writeRaster(x = pvle[[k]], 
+                        filename = glue('{dout}/pvle_{gcm[i]}.tif'))
+    cat('Write done\n')
+  })
+  
+  cat('-----------------Finish-------------------\n')
   
 }
+
+
+# Apply the function ------------------------------------------------------
+map(.x = spcs, .f = make_slope)
+
 
 
 
