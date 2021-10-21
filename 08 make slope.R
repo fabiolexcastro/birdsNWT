@@ -27,6 +27,11 @@ make_slope <- function(spc){
   message(crayon::green("Loading: ", spc))
   fls <- dir_ls(spc, regexp = '.tif$')
   fls <- grep('mean', fls, value = TRUE)
+  fls <- as.character(fls)
+  
+  message(crayon::green("GCMS"))
+  gcm <- grep('2011', fls, value = TRUE)
+  gcm <- str_sub(gcm, 16, nchar(gcm) - 4)
   
   
   
