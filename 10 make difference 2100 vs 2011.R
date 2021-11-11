@@ -21,7 +21,7 @@ make_difference <- function(spc){
   
   cat('Start ', spc, '\n')
   fls <- dir_ls(grep(spc, spcs, value = TRUE))
-  fls
+  fls <- grep('mean', fls, value = TRUE)
   
   
 }
