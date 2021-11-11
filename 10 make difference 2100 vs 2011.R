@@ -36,7 +36,7 @@ make_difference <- function(spc){
     tbl <- as_tibble(rasterToPoints(dfr))
     names(tbl) <- c('x', 'y', paste0('diff_', basename(spc), '_', gcm[i]))
     out <- glue('./tables/qs/diff_{basename(spc)}_{gcm}.qs')
-    qsave(x = out, file = out)
+    qsave(x = tbl, file = out)
     cat('Done!\n')
   })
   
