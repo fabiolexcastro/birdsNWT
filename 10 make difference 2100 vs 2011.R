@@ -32,6 +32,8 @@ make_difference <- function(spc){
   lapply(1:length(gcm), function(i){
     cat('Start ', gcm[i], '\n')
     stk <- raster::stack(grep(gcm[i], fls, value = TRUE))
+    dfr <- stk[[2]] - stk[[1]]
+    stk <- addLayers(stk, dfr)
     return()
   })
 }
