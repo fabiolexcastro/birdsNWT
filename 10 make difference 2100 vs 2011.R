@@ -24,7 +24,9 @@ make_difference <- function(spc){
   fls <- grep('mean', fls, value = TRUE)
   fls <- as.character(fls)
   fls <- grep(paste0(c('2011', '2100'), collapse = '|'), fls, value = TRUE)
-  
+  gcm <- str_split(fls, pattern = '_')
+  gcm <- sapply(gcm, function(k) k[[4]])
+  gcm <- gsub('.tif', '', gcm)
 }
 
 
