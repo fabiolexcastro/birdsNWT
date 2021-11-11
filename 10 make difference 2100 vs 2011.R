@@ -17,7 +17,7 @@ spcs <- dir_ls(root)
 # Make difference ---------------------------------------------------------
 make_difference <- function(spc){
   
-  spc <- spcs[1]
+  # spc <- spcs[1]
   
   cat('Start ', spc, '\n')
   fls <- dir_ls(grep(spc, spcs, value = TRUE))
@@ -35,10 +35,15 @@ make_difference <- function(spc){
     dfr <- stk[[2]] - stk[[1]]
     tbl <- as_tibble(rasterToPoints(dfr))
     names(tbl) <- c('x', 'y', paste0('diff_', basename(spc), '_', gcm[i]))
-    out <- glue('../')
-    return(tbl)
+    out <- glue('./tables/qs/diff_{basename(spc)}_{gcm}.qs')
+    qsave(x = out, file = out)
+    cat('Done!\n')
   })
+  
+  cat('----- Finish ----- \n')
   
 }
 
+# Apply the function ------------------------------------------------------
+lapply(spcs, make_difference)
 
