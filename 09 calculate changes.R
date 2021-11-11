@@ -90,3 +90,4 @@ change <- long %>% mutate(Previous = lag(Value),
                           changeFromYrOne = (Value))
 
 chn_cns <- change %>% filter(gc == 'CanESM2')
+chn_cns_alfl <- chn_cns %>% filter(species == 'ALFL')
