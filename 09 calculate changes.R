@@ -89,5 +89,14 @@ change <- long %>% mutate(Previous = lag(Value),
                           pctRate = (Value/lag(Value) -1) * 100,
                           changeFromYrOne = (Value))
 
+change <- long %>% 
+  group_by(gc, species, Year) %>% 
+  mutate(Previous = lag(Value), 
+         Next = lead(Value),
+         Change = Value - Previous,
+         pctRate = (Value/lag(Value) -1) * 100,
+         changeFromYrOne = (Value)) %>% 
+  ungroup()
+
 chn_cns <- change %>% filter(gc == 'CanESM2')
 chn_cns_alfl <- chn_cns %>% filter(species == 'ALFL')
