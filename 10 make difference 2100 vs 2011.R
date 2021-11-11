@@ -33,11 +33,12 @@ make_difference <- function(spc){
     cat('Start ', gcm[i], '\n')
     stk <- raster::stack(grep(gcm[i], fls, value = TRUE))
     dfr <- stk[[2]] - stk[[1]]
-    stk <- addLayer(stk, dfr)
-    names(stk)[3] <- 'difference'
-    tbl <- as_tibble(rasterToPoints(stk))
+    tbl <- as_tibble(rasterToPoints(dfr))
+    names(tbl) <- c('x', 'y', paste0('diff_', basename(spc), '_', gcm[i]))
+    out <- glue('../')
     return(tbl)
   })
+  
 }
 
 
