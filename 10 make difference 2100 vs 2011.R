@@ -20,6 +20,8 @@ make_difference <- function(spc){
   spc <- spcs[1]
   
   cat('Start ', spc, '\n')
+  fls <- dir_ls(grep(spc, spcs, value = TRUE))
+  fls
   
   
 }
