@@ -22,7 +22,8 @@ make_difference <- function(spc){
   cat('Start ', spc, '\n')
   fls <- dir_ls(grep(spc, spcs, value = TRUE))
   fls <- grep('mean', fls, value = TRUE)
-  
+  fls <- as.character(fls)
+  fls <- grep(paste0(c('2011', '2100'), collapse = '|'), fls, value = TRUE)
   
 }
 
