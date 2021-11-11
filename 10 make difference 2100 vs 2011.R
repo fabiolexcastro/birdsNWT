@@ -27,6 +27,13 @@ make_difference <- function(spc){
   gcm <- str_split(fls, pattern = '_')
   gcm <- sapply(gcm, function(k) k[[4]])
   gcm <- gsub('.tif', '', gcm)
+  gcm <- unique(gcm)
+  
+  lapply(1:length(gcm), function(i){
+    cat('Start ', gcm[i], '\n')
+    stk <- raster::stack(grep(gcm[i], fls, value = TRUE))
+    return()
+  })
 }
 
 
