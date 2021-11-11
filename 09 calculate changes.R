@@ -83,6 +83,9 @@ long <- totalTable %>%  gather(Year, Value, - c(gc, species)) %>%
 
 yearOneVal <- long[1, c('Value')]
 
+long <- long %>% 
+  arrange(gc, species, Year)
+
 change <- long %>% mutate(Previous = lag(Value), 
                           Next = lead(Value),
                           Change = Value - Previous,
@@ -100,3 +103,5 @@ change <- long %>%
 
 chn_cns <- change %>% filter(gc == 'CanESM2')
 chn_cns_alfl <- chn_cns %>% filter(species == 'ALFL')
+
+lag(ldeaths, 12)
