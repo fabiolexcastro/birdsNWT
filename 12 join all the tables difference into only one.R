@@ -12,6 +12,12 @@ rm(list = ls())
 # Load data ---------------------------------------------------------------
 root <- '../tables/qs'
 fles <- dir_ls(root, regexp = '.qs')
+fles <- grep('diff', fles, value = TRUE)
+
+gcms <- str_split(fles, pattern = '_')
+gcms <- lapply(gcms, `[[`, 3)
+gcms <- unique(gcms)
+gcms <- gsub('.qs', '', gcms)
 
 # Function ----------------------------------------------------------------
 join_tble <- function(gcm){
