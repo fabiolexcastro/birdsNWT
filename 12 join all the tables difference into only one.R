@@ -30,6 +30,11 @@ join_tble <- function(gcm){
   tbl <- map(fle, qs::qread)
   all <- tbl %>% reduce(., inner_join, by = c('x', 'y'))
   map(tbl, colnames)
-  
+  colnames(all) <- gsub('diff_', '', colnames(all))
+  colnames(all) <- gsub(glue('_{gcm}'), '', colnames(all))
+  colnames(all)
+ 
+  # Analisis de diversidad de especies
+   
 }
 
