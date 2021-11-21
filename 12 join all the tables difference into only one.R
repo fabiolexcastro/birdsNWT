@@ -27,7 +27,8 @@ join_tble <- function(gcm){
   fle <- grep(gcm, gcm, value = TRUE)
   fle <- mixedsort(fle)
   fle <- as.character(fle)
-  tbl <- map(fle, qread)
+  tbl <- map(fle, qs::qread)
+  all <- tbl %>% reduce(., inner_join, by = c('x', 'y'))
   map(tbl, colnames)
   
 }
