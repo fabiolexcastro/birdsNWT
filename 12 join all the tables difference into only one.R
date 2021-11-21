@@ -22,8 +22,9 @@ gcms <- gsub('.qs', '', gcms)
 # Function ----------------------------------------------------------------
 join_tble <- function(gcm){
   
-  gcm <- gcms[1]
+  # gcm <- gcms[1]
   
+  cat(gcm, '\n')
   fle <- grep(gcm, gcm, value = TRUE)
   fle <- mixedsort(fle)
   fle <- as.character(fle)
@@ -33,8 +34,12 @@ join_tble <- function(gcm){
   colnames(all) <- gsub('diff_', '', colnames(all))
   colnames(all) <- gsub(glue('_{gcm}'), '', colnames(all))
   colnames(all)
- 
+  qs::qsave(x = all, file = glue('./tables/qs/diff/{gcm}.qs'))
+  cat('Done!\n')
   # Analisis de diversidad de especies
    
 }
+
+# Apply this function -------------------------------------------------------
+map(.x = gcms, .f = join_tble)
 
