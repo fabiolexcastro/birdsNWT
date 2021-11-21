@@ -26,7 +26,9 @@ join_tble <- function(gcm){
   
   fle <- grep(gcm, gcm, value = TRUE)
   fle <- mixedsort(fle)
-  tbl <- qs::qread(file = fle)
-  colnames(tbl)
+  fle <- as.character(fle)
+  tbl <- map(fle, qread)
+  map(tbl, colnames)
   
 }
+
