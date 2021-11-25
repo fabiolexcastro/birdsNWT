@@ -16,9 +16,9 @@ yea1 <- 2011
 yea2 <- 2100
 
 # For  ---------------------------------------------------------------------
-map(.x = 1:length(spcs), .f = function(i){
+fles <- map(.x = 1:length(spcs), .f = function(i){
   
-  i <- 1 # Run and erase
+  # i <- 1 # Run and erase
   
   cat('Start ', i, '\n')
   fls <- dir_ls(spcs[i], regexp = '.tif$')
@@ -26,8 +26,8 @@ map(.x = 1:length(spcs), .f = function(i){
   fl2 <- grep(yea2, fls, value = TRUE)
   fl1 <- as.character(fl1)
   fl2 <- as.character(fl2)
-  
   cat('Done!\n')
+  return(list(fl1, fl2))
   
 })
 
