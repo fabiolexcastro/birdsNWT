@@ -24,7 +24,8 @@ map(.x = 1:length(spcs), .f = function(i){
   fls <- dir_ls(spcs[i], regexp = '.tif$')
   fl1 <- grep(yea1, fls, value = TRUE)
   fl2 <- grep(yea2, fls, value = TRUE)
-  
+  fl1 <- as.character(fl1)
+  fl2 <- as.character(fl2)
   
   cat('Done!\n')
   
