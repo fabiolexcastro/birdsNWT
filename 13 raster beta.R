@@ -11,15 +11,16 @@ rm(list = ls())
 
 
 # Load data ---------------------------------------------------------------
+spcs <- dir_ls('./outputs', type = 'directory')
 
 
-
-rst1 <- lapply(1:length(meanStack), function(i)[
+rst1 <- lapply(1:length(meanStack), function(i){
   cat(i, '\n')
   rst <- meanStack[[i]][[1]]
   cat('Done!\n')
   return(rst)
-])
+}
+
 
 
 # Load data
