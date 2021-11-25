@@ -30,8 +30,9 @@ cns1 <- raster::stack(cns1)
 css1 <- raster::stack(css1)
 inm1 <- raster::stack(inm1)
 
-library(raster)
-library(BAT)
+# Bat processing ----------------------------------------------------------
+beta.cns1 <- raster.beta(cns1)
+
 
 sp1 <- raster::raster(matrix(c(NA,1,1,1,1,0,0,0,0), nrow = 3, ncol = 3, byrow = TRUE))
 sp2 <- raster::raster(matrix(c(0,0,0,0,1,1,1,1,1), nrow = 3, ncol = 3, byrow = TRUE))
