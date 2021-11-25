@@ -21,9 +21,9 @@ alld <- map(.x = spcs, .f = dir_ls)
 # GCMs --------------------------------------------------------------------
 
 allf <- map(.x = 1:length(allf), .f = function(i){as.character(grep(yea1, allf[[i]], value = TRUE))})
-cns1 <- map(.x = 1:length(allf), function(k) allf[[k]][1])
-css1 <- map(.x = 1:length(allf), function(k) allf[[k]][2])
-inm1 <- map(.x = 1:length(allf), function(k) allf[[k]][3])
+cns1 <- map(.x = 1:length(allf), function(k) allf[[k]][1]) %>% unlist()
+css1 <- map(.x = 1:length(allf), function(k) allf[[k]][2]) %>% unlist()
+inm1 <- map(.x = 1:length(allf), function(k) allf[[k]][3]) %>% unlist()
 
 
 library(raster)
