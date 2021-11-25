@@ -25,6 +25,10 @@ cns1 <- map(.x = 1:length(allf), function(k) allf[[k]][1]) %>% unlist()
 css1 <- map(.x = 1:length(allf), function(k) allf[[k]][2]) %>% unlist()
 inm1 <- map(.x = 1:length(allf), function(k) allf[[k]][3]) %>% unlist()
 
+# Read as a stack ---------------------------------------------------------
+cns1 <- raster::stack(cns1)
+css1 <- raster::stack(css1)
+inm1 <- raster::stack(inm1)
 
 library(raster)
 library(BAT)
