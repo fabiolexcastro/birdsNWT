@@ -14,22 +14,23 @@ rm(list = ls())
 spcs <- dir_ls('./outputs', type = 'directory')
 yea1 <- 2011
 yea2 <- 2100
+gcms <- c('CanESM2', 'CCSM4', 'INM-CM4')
 
-# For  ---------------------------------------------------------------------
-fles <- map(.x = 1:length(spcs), .f = function(i){
+# GCMs --------------------------------------------------------------------
+
+# CanESM2
+map(.x = 1:length(spcs), .f = function(i){
   
-  # i <- 1 # Run and erase
-  
+  i <- 1
   cat('Start ', i, '\n')
-  fls <- dir_ls(spcs[i], regexp = '.tif$')
-  fl1 <- grep(yea1, fls, value = TRUE)
-  fl2 <- grep(yea2, fls, value = TRUE)
-  fl1 <- as.character(fl1)
-  fl2 <- as.character(fl2)
-  cat('Done!\n')
-  return(list(fl1, fl2))
+  dir_ls(spcs[i], regexp = '.tif') %>% 
+    grep(gcms[1], ., value = TRUE) %>% 
+    grep('2011', ., value = TRUE)
   
 })
+
+
+
 
 library(raster)
 library(BAT)
