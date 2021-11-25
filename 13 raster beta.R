@@ -12,22 +12,23 @@ rm(list = ls())
 
 # Load data ---------------------------------------------------------------
 spcs <- dir_ls('./outputs', type = 'directory')
+yea1 <- 2011
+yea2 <- 2100
 
-
-rst1 <- lapply(1:length(meanStack), function(i){
-  cat(i, '\n')
-  rst <- meanStack[[i]][[1]]
+# For  ---------------------------------------------------------------------
+map(.x = 1:length(spcs), .f = function(i){
+  
+  i <- 1 # Run and erase
+  
+  cat('Start ', i, '\n')
+  fls <- dir_ls(spcs[i], regexp = '.tif$')
+  fl1 <- grep(yea1, fls, value = TRUE)
+  fl2 <- grep(yea2, fls, value = TRUE)
+  
+  
   cat('Done!\n')
-  return(rst)
-}
-
-
-
-# Load data
-
-
-
-
+  
+})
 
 library(raster)
 library(BAT)
