@@ -21,8 +21,11 @@ make_graph <- function(fle){
   tbl
   
   grp <- ggplot(data = tbl, aes(x = region, y = average, col = model)) + 
-    geom_point() + 
-    coord_flip()
+    geom_point(size = 3) + 
+    coord_flip() +
+    theme_ipsum_es() + 
+    theme(legend.position = 'bottom') + 
+    labs(x = 'EcoRegion', y = 'Average')
   
 }
 
