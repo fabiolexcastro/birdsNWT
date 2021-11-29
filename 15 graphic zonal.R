@@ -20,6 +20,9 @@ make_graph <- function(fle){
   tbl <- qs::qread(file = fle)
   tbl
   
+  grp <- ggplot(data = tbl, aes(x = region, y = average, col = model)) + 
+    geom_point() + 
+    coord_flip()
   
 }
 
