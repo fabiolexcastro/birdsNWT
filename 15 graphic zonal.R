@@ -9,7 +9,7 @@ pacman::p_load(glue, raster, rgdal, rgeos, readxl, stringr, sf, R.filesets,
 rm(list = ls())
 
 # Load data ---------------------------------------------------------------
-fles <- dir_ls('./qs/zonal', regexp = 'table_ratio')
+fles <- dir_ls('./qs/zonal', regexp = 'log')
 
 # Function ----------------------------------------------------------------
 make_graph <- function(fle){
