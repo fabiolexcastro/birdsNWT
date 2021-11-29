@@ -35,8 +35,8 @@ get_max_min <- function(fle){
     tbl <- dplyr::select(tbl, lon, lat, logRatio)
     rst <- rasterFromXYZ(tbl)
     plot(rst) # Run and erase
-    znl <- exactextractr::exact_extract(rst, ecrg_limt, 'mean')
-    znl
+    znl.avg <- exactextractr::exact_extract(rst, ecrg_limt, 'mean')
+    znl.sdt <- exactextractr::exact_extract(rst, ecrg_limt, 'sd')
     
     
   })
