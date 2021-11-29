@@ -32,6 +32,8 @@ get_max_min <- function(fle){
     
     k <- 1 # Run and erase
     tbl <- filter(qst, gc == gcm)
+    tbl <- dplyr::select(tbl, lon, lat, logRatio)
+    rst <- rasterFromXYZ(tbl)
     
     
   })
