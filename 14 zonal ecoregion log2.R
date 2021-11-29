@@ -16,7 +16,7 @@ rm(list = ls())
 
 fles <- dir_ls('./qs', regexp = 'table_ratio')
 fles
-shpf <- shapefile('../shapeecoregiones.shp')
+shpf <- shapefile('inputs/ecoregions/ecoregions.shp')
 
 # Function ----------------------------------------------------------------
 get_max_min <- function(fle){
@@ -26,8 +26,15 @@ get_max_min <- function(fle){
   cat('Start\n')
   spc <- str_sub(basename(fle), 1, 4)
   qst <- qs::qread(fle)
-  q
-
+  gcm <- unique(qst$gc)
+  
+  rsl <- map(.x = 1:length(gcm), .f = function(k){
+    
+    k <- 1 # Run and erase
+    tbl <- filter(qst, gc == gcm)
+    
+    
+  })
     
 }
 
