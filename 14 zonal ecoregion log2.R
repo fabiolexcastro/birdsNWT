@@ -5,7 +5,7 @@
 # Load libraries ----------------------------------------------------------
 library(pacman)
 pacman::p_load(glue, raster, rgdal, rgeos, readxl, stringr, sf, R.filesets,
-               tidyverse, terra, foreach, fs, future.apply, furrr, fst,
+               tidyverse, terra, foreach, fs, future.apply, furrr, fst, exactextractr,
                stringr, glue, compiler, hrbrthemes, gtools, ggpubr, gridExtra, hrbrthemes, colorspace)
 
 rm(list = ls())
@@ -35,6 +35,8 @@ get_max_min <- function(fle){
     tbl <- dplyr::select(tbl, lon, lat, logRatio)
     rst <- rasterFromXYZ(tbl)
     plot(rst) # Run and erase
+    znl <- exactextractr::exact_extract(rst, ecrg_limt, 'mean')
+    znl
     
     
   })
