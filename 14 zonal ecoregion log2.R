@@ -45,6 +45,11 @@ get_max_min <- function(fle){
     return(dfm)
     
   })
+  
+  rsl <- bind_rows(rsl)
+  qs::qsave(x = rsl, file = glue('./qs/{spc}_logZonal.qs'))
+  return(rsl)
+  cat('Done!\n')
     
 }
 
