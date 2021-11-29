@@ -21,7 +21,7 @@ shpf <- shapefile('inputs/ecoregions/ecoregions.shp')
 # Function ----------------------------------------------------------------
 get_max_min <- function(fle){
   
-  fle <- fles[1]
+  # fle <- fles[1]
   
   cat('Start\n')
   spc <- str_sub(basename(fle), 1, 4)
@@ -47,9 +47,24 @@ get_max_min <- function(fle){
   })
   
   rsl <- bind_rows(rsl)
-  qs::qsave(x = rsl, file = glue('./qs/{spc}_logZonal.qs'))
-  return(rsl)
+  qs::qsave(x = rsl, file = glue('./qs/zonal/{spc}_logZonal.qs'))
   cat('Done!\n')
+  return(rsl)
+
     
 }
 
+# Apply the function ------------------------------------------------------
+cat('To calculate the slopes\n')
+plan(cluster, workers = 3, gc = TRUE)
+options(future.globals.maxSize= 4194304000) ## this option helps with  the error about global sizes 
+znl_all <- furrr::future_map(.x = 1:length(fles), .f = function(i){
+  cat('Start\n')
+  znl <- get_max_min(fle = fles[i])
+  cat('Done!\n')
+  return(znl)
+})
+future:::ClusterRegistry('stop')                       
+                        
+                        
+                        
