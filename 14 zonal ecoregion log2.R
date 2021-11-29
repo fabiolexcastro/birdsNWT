@@ -38,7 +38,8 @@ get_max_min <- function(fle){
     crs(rst) <- targetCRS
     znl.avg <- exactextractr::exact_extract(rst, ecrg_limt, 'mean')
     znl.sdt <- exactextractr::exact_extract(rst, ecrg_limt, 'sd')
-    
+    dfm <- data.frame(region = pull(ecrg_limt, 'REGION_NAM'), average = znl.avg, sdt = znl.sdt)
+    dfm
     
   })
     
