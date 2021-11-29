@@ -16,3 +16,18 @@ rm(list = ls())
 
 fles <- dir_ls('./qs', regexp = 'table_ratio')
 fles
+shpf <- shapefile('../shapeecoregiones.shp')
+
+# Function ----------------------------------------------------------------
+get_max_min <- function(fle){
+  
+  fle <- fles[1]
+  
+  cat('Start\n')
+  spc <- str_sub(basename(fle), 1, 4)
+  qst <- qs::qread(fle)
+  q
+
+    
+}
+
