@@ -17,6 +17,8 @@ make_graph <- function(fle){
   fle <- fles[1]
   
   cat('Start\n')
+  tbl <- qs::qread(file = fle)
+  tbl
   
   
 }
