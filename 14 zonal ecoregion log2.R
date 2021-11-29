@@ -40,6 +40,7 @@ get_max_min <- function(fle){
     znl.sdt <- exactextractr::exact_extract(rst, ecrg_limt, 'stdev')
     dfm <- data.frame(region = pull(ecrg_limt, 'REGION_NAM'), average = znl.avg, sdt = znl.sdt)
     dfm <- as_tibble(dfm)
+    dfm <- mutate(dfm, model = gcm[k])
     cat('Done ', gcm[k], '\n')
     return(dfm)
     
