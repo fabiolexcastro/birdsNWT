@@ -30,16 +30,18 @@ get_max_min <- function(fle){
   
   rsl <- map(.x = 1:length(gcm), .f = function(k){
     
-    k <- 1 # Run and erase
-    tbl <- filter(qst, gc == gcm)
+    cat(gcm[k], '\n')
+    tbl <- filter(qst, gc == gcm[k])
     tbl <- dplyr::select(tbl, lon, lat, logRatio)
     rst <- rasterFromXYZ(tbl)
-    plot(rst) # Run and erase
+    # plot(rst) # Run and erase
     crs(rst) <- targetCRS
     znl.avg <- exactextractr::exact_extract(rst, ecrg_limt, 'mean')
-    znl.sdt <- exactextractr::exact_extract(rst, ecrg_limt, 'sd')
+    znl.sdt <- exactextractr::exact_extract(rst, ecrg_limt, 'stdev')
     dfm <- data.frame(region = pull(ecrg_limt, 'REGION_NAM'), average = znl.avg, sdt = znl.sdt)
-    dfm
+    dfm <- as_tibble(dfm)
+    cat('Done ', gcm[k], '\n')
+    return(dfm)
     
   })
     
