@@ -29,7 +29,14 @@ get_scatterplot <- function(spc){
   tbl <- dplyr::select(tbl, lon, lat, gc, avg)
   tbl <- tbl %>% spread(gc, avg)
   colnames(tbl) <- gsub('-', '_', colnames(tbl)) 
-   
+  tbl <- mutate(tbl, gid = 1:nrow(tbl))
+  
+  set.seet(1234)
+  smp <- sample_n(tbl = tbl, size = nrow(tbl) * 0.01, replace = FALSE)
+  smp$gid
+  
+  cat('Scatterplot 1')
+  
   cat('Done!\n')
   
 }
