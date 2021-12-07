@@ -34,8 +34,10 @@ make_slopeMaps<- function(spc){
   gcm <- unique(gcm)
   
   slopes <- list()
+  pvalue <- list()
   for (i in 1:length(fls)){
     slopes[[i]] <- raster(fls[i])
+    pvalue[[i]] <- raster(pvl[i])
   }
   
   slpe.tble <- map(.x = 1:length(slopes), .f = function(k){
