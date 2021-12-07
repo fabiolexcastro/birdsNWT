@@ -27,8 +27,9 @@ get_scatterplot <- function(spc){
   tbl <- dplyr::select(tbl, lon, lat, everything())
   tbl <- as_tibble(tbl)
   tbl <- dplyr::select(tbl, lon, lat, gc, avg)
-  tbl %>% spread(gc, avg)
-    
+  tbl <- tbl %>% spread(gc, avg)
+  colnames(tbl) <- gsub('-', '_', colnames(tbl)) 
+   
   cat('Done!\n')
   
 }
