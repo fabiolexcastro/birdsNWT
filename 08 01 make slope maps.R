@@ -35,9 +35,11 @@ make_slopeMaps<- function(spc){
   
   slopes <- list()
   pvalue <- list()
+  stackn <- list()
   for (i in 1:length(fls)){
     slopes[[i]] <- raster(fls[i])
     pvalue[[i]] <- raster(pvl[i])
+    stackn[[i]] <- raster::stack(slopes[[i]], pvalue[[i]])
   }
   
   slpe.tble <- map(.x = 1:length(slopes), .f = function(k){
