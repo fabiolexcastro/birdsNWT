@@ -44,11 +44,11 @@ make_slopeMaps<- function(spc){
   
   slpe.tble <- map(.x = 1:length(slopes), .f = function(k){
     cat(k, '\n')
-    rsl <- slopes[[k]] %>% 
+    rsl <- stackn[[k]] %>% 
       rasterToPoints(., spatial = FALSE) %>% 
       as_tibble() %>% 
       mutate(model = gcm[k]) %>% 
-      setNames(c('x', 'y', 'slp', 'model')) %>% 
+      setNames(c('x', 'y', 'slp', 'pvl', 'model')) %>% 
       mutate(model = gcm[k])
     return(rsl)
   })
