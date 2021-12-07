@@ -3,7 +3,7 @@
 # Load libraries ----------------------------------------------------------
 require(pacman)
 pacman::p_load(raster, rgdal, rgeos, future, furrr, reproducible, RColorBrewer, 
-               colorspaces, ggspatial, ggpubr, gridExtra, terra, stringr, glue, 
+               colorspace, ggspatial, ggpubr, gridExtra, terra, stringr, glue, 
                sf, tidyverse, RStoolbox, fs, future.apply, fst, trend, crayon)
 
 g <- gc(reset = TRUE)
@@ -23,10 +23,11 @@ get_scatterplot <- function(spc){
   cat('Start\n')
   dir <- grep(spc, dirs, value = TRUE)
   fle <- dir_ls(dir, regexp = '.qs')
-  tbl <- qs::qread(file = glue('../qs/{spc}_table_ratio.qs'))
+  tbl <- qs::qread(file = glue('./qs/{spc}_table_ratio.qs'))
   tbl <- dplyr::select(tbl, lon, lat, everything())
   tbl <- as_tibble(tbl)
-  
+  tbl <- dplyr::select(tbl, lon, lat, gc, avg)
+  tbl %>% spread(gc, avg)
     
   cat('Done!\n')
   
