@@ -47,11 +47,12 @@ qs::qsave(x = data, file = './tables/totalAbundance.qs')
 # gcm2 - gcm3
 
 # A simple scatterplot 
-data |> 
+data <- data |> 
   filter(year %in% c(2011, 2091)) |> 
-  spread(year, value)
+  spread(year, value) |> 
+  setNames(c('specie', 'gcm', 'y2011', 'y2091'))
 
-gsct <- ggplot(data = tble, aes(x = a)) 
+gsct <- ggplot(data = data |> filter(specie == 'ALFL'), aes(x = y2011, y = y2091)) 
 
 
 
