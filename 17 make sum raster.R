@@ -19,4 +19,4 @@ map(data, class)
 
 # Unlist 
 data <- flatten(data)
-data
+data <- map(data, as.data.frame)
