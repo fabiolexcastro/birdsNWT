@@ -26,3 +26,8 @@ data <- map(1:length(data), function(k){
     setNames(c('name', 'value'))
 })
 bind_rows(data) |> as_tibble()
+
+data <- data |> 
+  mutate(value = value * 6.25) |> 
+  separate(data = ., col = name, into = c('mean', 'specie', 'year', 'gcm'), sep = '_')
+
