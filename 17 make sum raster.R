@@ -16,3 +16,7 @@ data <- a
 a
 flatten(a)
 map(data, class)
+
+# Unlist 
+data <- flatten(data)
+data
