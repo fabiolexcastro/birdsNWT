@@ -15,3 +15,4 @@ makeSum <- function(rasterStack){
 data <- a
 a
 flatten(a)
+map(data, class)
