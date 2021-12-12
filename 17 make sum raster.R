@@ -20,3 +20,4 @@ map(data, class)
 # Unlist 
 data <- flatten(data)
 data <- map(data, as.data.frame)
+data <- map(data, rownames_to_column)
