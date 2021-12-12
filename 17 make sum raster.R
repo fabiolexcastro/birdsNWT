@@ -35,4 +35,38 @@ data <- data |>
 data <- data |> 
   dplyr::select(-mean)
 
-qs::qsave(x = data, file = '../tables.qs')
+qs::qsave(x = data, file = './tables/totalAbundance.qs')
+
+# To make the scatterplot -------------------------------------------------
+
+# x <- 2011
+# y <- 2091
+ 
+# gcm1 - gcm2 
+# gcm1 - gcm3
+# gcm2 - gcm3
+
+# A simple scatterplot 
+data |> 
+  filter(year %in% c(2011, 2091)) |> 
+  spread(year, value)
+
+gsct <- ggplot(data = tble, aes(x = a)) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
