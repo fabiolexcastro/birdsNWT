@@ -34,3 +34,5 @@ data <- data |>
 
 data <- data |> 
   dplyr::select(-mean)
+
+qs::qsave(x = data, file = '../tables.qs')
