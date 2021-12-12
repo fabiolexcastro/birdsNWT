@@ -21,3 +21,8 @@ map(data, class)
 data <- flatten(data)
 data <- map(data, as.data.frame)
 data <- map(data, rownames_to_column)
+data <- map(1:length(data), function(k){
+  data[[k]] |> 
+    setNames(c('name', 'value'))
+})
+bind_rows(data) |> as_tibble()
