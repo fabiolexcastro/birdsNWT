@@ -22,7 +22,7 @@ get_pssn <- function(spc){
   spc <- spcs[1] # Run and erase
   
   cat('Start ', spc, '\n')
-  fls <- dir_ls(spc, regepx = '.tif$')
+  fls <- dir_ls(spc, regexp = '.tif$')
   
   # Testing CanESM2
   fle <- grep('CanESM2', fls, value = TRUE)
