@@ -31,6 +31,14 @@ get_pssn <- function(spc){
   fle <- as.character(fle)
   rst <- raster(fle)
   lmd <- cellStats(x = rst, stat = 'mean', na.rm = TRUE)
+  tbl <- as_tibble(rasterToPoints(x = rst, spatial = FALSE))
+  colnames(tbl) <- c('x', 'y', 'raw')
+  tbl <- mutate(tbl, value = dpois(x = raw, lambda = lmd))
+  head(tbl)
+  
+  
+  vct <- terra::rast(fle)
+  dps <- terra::app()
   dps <- calc(x = rst, fun = function(x){dpois(x, lambda = lmd)})
   
   
