@@ -26,6 +26,7 @@ get_pssn <- function(spc){
   
   # Testing CanESM2
   fle <- grep('CanESM2', fls, value = TRUE)
+  fle <- grep('mean', fle, value = TRUE)
   fle <- grep('2011', fle, value = TRUE)
   rst <- raster(fle)
   
