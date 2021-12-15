@@ -39,7 +39,7 @@ get_pssn <- function(spc){
   
   vct <- terra::rast(fle)
   dps <- terra::app()
-  dps <- calc(x = rst, fun = function(x){dpois(x, lambda = lmd)})
+  dps <- calc(x = rst, fun = function(k){dpois(x = k, lambda = lmd)})
   
   
   
