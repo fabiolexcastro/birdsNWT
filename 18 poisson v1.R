@@ -31,7 +31,8 @@ get_pssn <- function(spc){
   fle <- as.character(fle)
   rst <- raster(fle)
   lmd <- cellStats(x = rst, stat = 'mean', na.rm = TRUE)
-  dps <- dpois(x = rst, lambda = lmd)
+  dps <- calc(x = rst, fun = function(x){dpois(x, lambda = lmd)})
+  
   
   
   dpois(x = 2, lambda = 1)
