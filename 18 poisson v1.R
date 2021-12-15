@@ -30,8 +30,8 @@ get_pssn <- function(spc){
   fle <- grep('2011', fle, value = TRUE)
   fle <- as.character(fle)
   rst <- raster(fle)
-  
-  calc()
+  lmd <- cellStats(x = rst, stat = 'mean', na.rm = TRUE)
+  dpois(x = 2, lambda = 1)
   
   
 }
