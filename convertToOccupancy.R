@@ -55,7 +55,9 @@ get_probOcc <- function(spc){
       sfl <- grep(yrs[yr], fl, value = TRUE)
       rst <- raster::raster(sfl)
       dps <- calc(x = rst, fun = function(pxl){1- dpois(x = 0, lambda = pxl)})
-      writeRaster(x = dps, filename = glue('./ouputs/{spc}/ocurr/occu_{gcm[k]}_{yrs[yr]}.tif'), overwrite = TRUE)
+      out <- glue('./outputs/{spc}/ocurr')
+      ifelse(!dir.exists(out), dir.create(out, recursive = TRUE), print('Folder already exist'))
+      writeRaster(x = dps, filename = glue('./outputs/{spc}/ocurr/occu_{gcm[k]}_{yrs[yr]}.tif'), overwrite = TRUE)
       cat('Done!\n')
     return(dps)
     })
@@ -69,7 +71,7 @@ get_probOcc <- function(spc){
   # 
   ou <- glue('./outputs/{spc}/occur/occu_{spc}_{gcm}_{yr}.tif')
   dr <- dirname(ou)
-  #ifelse(!dir.exists(ou), dir.create(dr), print('Folder already exist'))
+  # ifelse(!dir.exists(ou), dir.create(dr, recursive = TRUE), print('Folder already exist'))
   message(crayon::green(paste0('Writing prob of occurrence raster for:', spc, '\n',
                                gcm,'\n', yr ,'\n')))
   # writeRaster(x = dps, filename = name, overwrite = TRUE) #guarda el raster 
