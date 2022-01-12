@@ -19,7 +19,6 @@ znes <- unique(shpf$gid)
 # Function to use ----------------------------
 make_sample <- function(zne){
   
-  zne <- 1
   cat('Start ', zne, '\n')
   nmr <- filter(nmrs, PolyID == zne)
   pxl <- ceiling(nmr$n)
@@ -29,10 +28,18 @@ make_sample <- function(zne){
   rst <- raster::mask(rst , lim)
   tbl <- rasterToPoints(rst, spatial = FALSE)
   tbl <- as_tibble(tbl)
-  tbl <- slice_sample(tbl, n = pxl)
-  head(tbl)
   
+  cat('To replicate 10000 times\n')
+  dfm <- map(.x = 1:10000, .f = function(k){
+    cat('Replicating :', k, '\n')
+    rsl <- slice_sample(tbl, n = pxl)
+    colnames(rsl) <- c('x', 'y', 'PolyID')
+    rsl <- mutate(rsl, rep = k)
+    return(rsl)
+  })
   
+  length(dfm)
+  return(tbl)
   cat('Done!\n')
   
   
