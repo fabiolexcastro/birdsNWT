@@ -22,6 +22,7 @@ make_sample <- function(zne){
   zne <- 1
   cat('Start ', zne, '\n')
   nmr <- filter(nmrs, PolyID == zne)
+  pxl <- celiling(nmr$n)
   head(nmr)
   
   
