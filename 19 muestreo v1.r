@@ -11,12 +11,18 @@ options(scipen = 999)
 # Load data ---------------------------------
 nmrs <- read_csv('')[,1:4] # Leer la tabla de las proporciones de area por pixel 
 mask <- raster('') # Leer el raster de los poligonos 
-shpf <- shapefile('') # Leer el shape de las ecoregiones
+shpf <- st_read('') # Leer el shape de las ecoregiones
+shpf$gid <- 1:nrow(shpf)
 
 crs(mask) <- targetCRS
 
 # Function to use ----------------------------
-
+make_sample <- function(){
+  
+  
+  
+  
+}
 
 
 
