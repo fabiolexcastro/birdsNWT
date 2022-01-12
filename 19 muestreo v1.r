@@ -37,12 +37,13 @@ make_sample <- function(zne){
     rsl <- mutate(rsl, rep = k)
     return(rsl)
   })
-  
-  length(dfm)
-  return(tbl)
+  dfm <- bind_rows(dfm)
+  cat('To write the result\n')
+  out <- glue('./qs/sample')
+  dir.create(out) # Run and erase
+  qsave(x = dfm, file = glue('{out}/PolyID_{zne}.qs'))
   cat('Done!\n')
-  
-  
+  return(dfm)
 }
 
 
