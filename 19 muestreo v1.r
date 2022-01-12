@@ -46,6 +46,8 @@ make_sample <- function(zne){
   return(dfm)
 }
 
+# Apply the function ------------------------------------------------------
+smpls <- map(.x = znes, .f = make_sample)
 
 
 
