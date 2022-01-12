@@ -24,9 +24,10 @@ make_sample <- function(zne){
   nmr <- filter(nmrs, PolyID == zne)
   pxl <- ceiling(nmr$n)
   lim <- filter(shpf, gid == zne)
-  plot(st_geometry(shpf))
-  plot(st_geometry(lim), add = TRUE, col = 'red')
-  head(nmr)
+  lim <- as(lim, 'spatial')
+  rst <- raster::crop(mask, lim)
+  rst <- raster::mask(rst , lim)
+  
   
   
   cat('Done!\n')
