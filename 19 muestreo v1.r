@@ -28,6 +28,7 @@ make_sample <- function(zne){
   rst <- raster::crop(mask, lim)
   rst <- raster::mask(rst , lim)
   tbl <- rasterToPoints(rst, spatial = FALSE)
+  tbl <- as_tibble(tbl)
   tbl <- slice_sample(tbl, n = pxl)
   head(tbl)
   
