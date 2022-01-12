@@ -9,7 +9,7 @@ rm(list = ls())
 options(scipen = 999)
 
 # Load data ---------------------------------
-nmrs <- read_csv('') # Leer la tabla de las proporciones de area por pixel 
+nmrs <- read_csv('')[,1:4] # Leer la tabla de las proporciones de area por pixel 
 mask <- raster('') # Leer el raster de los poligonos 
 shpf <- shapefile('') # Leer el shape de las ecoregiones
 
