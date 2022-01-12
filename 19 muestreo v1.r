@@ -24,10 +24,12 @@ make_sample <- function(zne){
   nmr <- filter(nmrs, PolyID == zne)
   pxl <- ceiling(nmr$n)
   lim <- filter(shpf, gid == zne)
-  lim <- as(lim, 'spatial')
+  lim <- as(lim, 'Spatial')
   rst <- raster::crop(mask, lim)
   rst <- raster::mask(rst , lim)
-  
+  tbl <- rasterToPoints(rst, spatial = FALSE)
+  tbl <- slice_sample(tbl, n = pxl)
+  head(tbl)
   
   
   cat('Done!\n')
