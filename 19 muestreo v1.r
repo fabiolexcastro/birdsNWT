@@ -2,7 +2,7 @@
 
 # Load libraries ----------------------------
 require(pacman)
-pacman::p_load(raster, rgdal, rgeos, stringr, sf, tidyverse, fs, gtools, glue)
+pacman::p_load(raster, rgdal, rgeos, stringr, sf, fasterize, tidyverse, fs, gtools, glue)
 
 g <- gc(reset = TRUE)
 rm(list = ls())
@@ -18,7 +18,7 @@ znes <- unique(shpf$gid)
 
 # Fasterize 
 mask <- mask * 0 
-# Copiar aqui lo del fasterize
+fstr <- fasterize::fasterize(shpf, tmp, field = 'gid')
 
 
 # Function to use ----------------------------
