@@ -16,8 +16,10 @@ shpf$gid <- 1:nrow(shpf)
 crs(mask) <- targetCRS
 znes <- unique(shpf$gid)
 
-# Intersection 
-mask_poly <- raster::rasterToPolygons(mask)
+# Fasterize 
+mask <- mask * 0 
+# Copiar aqui lo del fasterize
+
 
 # Function to use ----------------------------
 make_sample <- function(zne){
