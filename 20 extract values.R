@@ -12,5 +12,11 @@ options(scipen = 999)
 fles <- dir_ls('./qs/sample')
 tbls <- map(fles, qread)
 
+# list files ocurrences
+occStack
+
+# To process --------------------------------------------------------------
+
+
 
 
