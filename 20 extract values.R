@@ -45,6 +45,7 @@ get_values <- function(gcm){
     k <- 1 # Run and erase
     fls <- grep(yrs[k], dir, value = TRUE)
     stk <- raster::stack(fls)
+    trr <- terra::rast(stk)
     
   })
   
