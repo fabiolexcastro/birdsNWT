@@ -38,4 +38,6 @@ test[which(test[] != 1)] <- NA
 test
 plot(test)
 
+raster::extract(test, test, cellnumbers = TRUE)
+
 
