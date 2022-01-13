@@ -21,13 +21,14 @@ fstr <- fasterize::fasterize(shpf, mask, field = 'gid')
 znes <- sort(as.numeric(na.omit(unique(fstr[]))))
 
 # Getting the sample n
-cntr <- mask %>% 
+cntr <- fstr %>% 
   rasterToPoints() %>% 
   as_tibble() %>% 
   setNames(c('x', 'y', 'value')) %>% 
   group_by(value) %>% 
   summarise(count = n()) %>% 
-  ungroup()
+  ungroup() %>%
+  mutate(porc = count / sum(count) * 100)
 head(cntr)
 
 # Function to use ----------------------------
