@@ -15,11 +15,20 @@ shpf <- st_read('') # Leer el shape de las ecoregiones
 shpf$gid <- 1:nrow(shpf)
 crs(mask) <- targetCRS
 
-
 # Fasterize 
 mask <- mask * 0 
 fstr <- fasterize::fasterize(shpf, mask, field = 'gid')
 znes <- sort(as.numeric(na.omit(unique(fstr[]))))
+
+# Getting the sample n
+cntr <- mask %>% 
+  rasterToPoints() %>% 
+  as_tibble() %>% 
+  setNames(c('x', 'y', 'value')) %>% 
+  group_by(value) %>% 
+  summarise(count = n()) %>% 
+  ungroup()
+head(cntr)
 
 # Function to use ----------------------------
 make_sample <- function(zne){
@@ -68,16 +77,7 @@ miss <- c(20, 3, 4)
 
 # Check the results -------------------------------------------------------
 
-# Masking
-cntr <- mask %>% 
-  rasterToPoints() %>% 
-  as_tibble() %>% 
-  setNames(c('x', 'y', 'value')) %>% 
-  group_by(value) %>% 
-  summarise(count = n()) %>% 
-  ungroup() 
 
-as.data.frame(cntr)
 
 
 
