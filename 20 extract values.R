@@ -16,10 +16,15 @@ tbls <- bind_rows(tbls)
 # list files ocurrences
 root <- './outputs'
 dirs <- dir_ls(root, type = 'directory')
-glue('{dirs}/occur')
+dirs <- glue('{dirs}/occur')
+gcms <- c('', '', '')
 
 # To process --------------------------------------------------------------
-
+get_values <- function(gcm){
+  
+  
+  
+}
 
 
 
