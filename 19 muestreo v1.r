@@ -57,6 +57,6 @@ smpls <- map(smpls, qread)
 nrw <- map(smpls, nrow) %>% unlist() %>% as.numeric() 
 which(nrw == 0)
 
-dir_ls('./qs/sample')[which(nrw == 0)]
+miss <- parse_number(dir_ls('./qs/sample')[which(nrw == 0)])
 
 
