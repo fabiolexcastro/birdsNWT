@@ -30,6 +30,7 @@ cntr <- fstr %>%
   ungroup() %>%
   mutate(porc = count / sum(count) * 100, 
          n = (count * porc) / 100)
+nmrs <- cntr
 head(cntr)
 
 # Function to use ----------------------------
