@@ -42,7 +42,7 @@ get_values <- function(gcm){
   cat('To get the table for each period\n')
   map(1:length(prd), function(k){
     
-    flatten()
+    k <- 1 # Run and erase
     
   })
   
