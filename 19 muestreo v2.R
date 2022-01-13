@@ -41,4 +41,5 @@ plot(test)
 temp <- raster::extract(test, rasterToPoints(test)[,1:2], cellnumbers = TRUE)
 clls <- sample_n(tbl = as.data.frame(temp), size = 28, replace = FALSE)
 test[!clls] <- NA
+plot(test)
 
