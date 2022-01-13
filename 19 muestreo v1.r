@@ -19,7 +19,7 @@ crs(mask) <- targetCRS
 # Fasterize 
 mask <- mask * 0 
 fstr <- fasterize::fasterize(shpf, mask, field = 'gid')
-znes <- as.numeric(na.omit(unique(fstr[])))
+znes <- sort(as.numeric(na.omit(unique(fstr[]))))
 
 # Function to use ----------------------------
 make_sample <- function(zne){
