@@ -54,7 +54,8 @@ smpls <- dir_ls('./qs/sample')
 smpls
 smpls <- map(smpls, qread)
 
-map(smpls, nrow) %>% unlist() %>% as.numeric() %>% which(. == 0)
+nrw <- map(smpls, nrow) %>% unlist() %>% as.numeric() 
+which(nrw == 0)
 
 
 
