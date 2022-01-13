@@ -31,3 +31,11 @@ cntr <- fstr %>%
          n = (count * porc) / 100)
 nmrs <- cntr
 head(cntr)
+
+# Get the cell IDS for each polygon ---------------------------------------
+test <- mask
+test[which(test[] != 1)] <- NA
+test
+plot(test)
+
+
