@@ -58,5 +58,13 @@ nrw <- map(smpls, nrow) %>% unlist() %>% as.numeric()
 which(nrw == 0)
 
 miss <- parse_number(dir_ls('./qs/sample')[which(nrw == 0)])
+# 20, 3, 4
+miss <- c(20, 3, 4)
+
+# Check the results -------------------------------------------------------
+
+# Masking
+mask %>% rasterToPoints() %>% as_tibble() %>% setNames(c('x', 'y', 'value')) %>% group_by(value) %>% summarise(count = n()) %>% ungroup() 
+
 
 
