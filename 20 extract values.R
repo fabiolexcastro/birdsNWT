@@ -2,7 +2,7 @@
 
 # Load libraries ----------------------------
 require(pacman)
-pacman::p_load(raster, rgdal, rgeos, stringr, sf, fasterize, tidyverse, fs, gtools, glue)
+pacman::p_load(raster, exactextractr, rgdal, rgeos, stringr, sf, fasterize, tidyverse, fs, gtools, glue)
 
 g <- gc(reset = TRUE)
 rm(list = ls())
@@ -50,6 +50,7 @@ get_values <- function(gcm){
     rsl <- map(1:10000, function(j){
       cat(j, '\n')
       sub <- filter(tbls, rep == k)
+      vls <- exactextractr::exact_extract(x = stk, y = sub[,1:2])
       vls <- terra::extract(trr, sub[,1:2])
       vls <- as.data.frame(vls)
       vls <- as_tibble(vls)
