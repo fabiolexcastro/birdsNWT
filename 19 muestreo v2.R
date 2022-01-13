@@ -38,6 +38,6 @@ test[which(test[] != 1)] <- NA
 test
 plot(test)
 
-raster::extract(test, test, cellnumbers = TRUE)
+raster::extract(test, rasterToPoints(test)[,1:2], cellnumbers = TRUE)
 
 
