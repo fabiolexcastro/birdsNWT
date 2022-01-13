@@ -34,8 +34,17 @@ get_values <- function(gcm){
   cat('Start ', gcm, '\n')
   dir <- map(dirs, dir_ls)
   dir <- map(dir, as.character)
-  dir <- map(1:length(dir), function(i){grep(gcm, dir[i], value = TRUE)})
+  dir <- map(1:length(dir), function(i){grep(gcm, dir[[i]], value = TRUE)})
+  dir <- flatten(dir)
+  dir <- unlist(dir)
+  prd <- c('2011', '2031', '2051', '2071', '2091')
   
+  cat('To get the table for each period\n')
+  map(1:length(prd), function(k){
+    
+    flatten()
+    
+  })
   
   
 }
