@@ -14,12 +14,12 @@ mask <- raster('') # Leer el raster de los poligonos
 shpf <- st_read('') # Leer el shape de las ecoregiones
 shpf$gid <- 1:nrow(shpf)
 crs(mask) <- targetCRS
-znes <- unique(shpf$gid)
+
 
 # Fasterize 
 mask <- mask * 0 
 fstr <- fasterize::fasterize(shpf, mask, field = 'gid')
-
+znes <- as.numeric(na.omit(unique(fstr[])))
 
 # Function to use ----------------------------
 make_sample <- function(zne){
