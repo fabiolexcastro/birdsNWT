@@ -46,6 +46,7 @@ get_values <- function(gcm){
     fls <- grep(yrs[k], dir, value = TRUE)
     stk <- raster::stack(fls)
     trr <- terra::rast(fls)
+    vls <- terra::extract(trr, tbls[1:10,1:2])
     
   })
   
