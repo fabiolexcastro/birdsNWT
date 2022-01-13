@@ -47,12 +47,17 @@ get_values <- function(gcm){
     stk <- raster::stack(fls)
     trr <- terra::rast(fls)
     
-    map(1:10000, function(j){
-      
+    rsl <- map(1:10000, function(j){
+      cat(j, '\n')
       sub <- filter(tbls, rep == k)
       vls <- terra::extract(trr, sub[,1:2])
-      
+      vls <- as.data.frame(vls)
+      vls <- as_tibble(vls)
+      vls <- mutate(vls, rep = k)
+      cat('Done!\n')
     })
+    
+    rsl[[1]]; rsl[[2]]
     
   })
   
