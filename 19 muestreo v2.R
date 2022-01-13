@@ -33,11 +33,11 @@ nmrs <- cntr
 head(cntr)
 
 # Get the cell IDS for each polygon ---------------------------------------
-test <- mask
+test <- fstr
 test[which(test[] != 1)] <- NA
 test
 plot(test)
 
-raster::extract(test, rasterToPoints(test)[,1:2], cellnumbers = TRUE)
-
+temp <- raster::extract(test, rasterToPoints(test)[,1:2], cellnumbers = TRUE)
+sample_n(tbl = as.data.frame(temp), size = 28, replace = FALSE)
 
