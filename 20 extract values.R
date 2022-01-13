@@ -50,7 +50,8 @@ get_values <- function(gcm){
     rsl <- map(1:10000, function(j){
       cat(j, '\n')
       sub <- filter(tbls, rep == k)
-      vls <- exactextractr::exact_extract(x = stk, y = sub[,1:2])
+      sft <- st_as_sf(x = sub, coords = c('x', 'y'))
+      vls <- exactextractr::exact_extract(x = stk, y = sft)
       vls <- terra::extract(trr, sub[,1:2])
       vls <- as.data.frame(vls)
       vls <- as_tibble(vls)
