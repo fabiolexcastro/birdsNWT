@@ -28,7 +28,8 @@ cntr <- fstr %>%
   group_by(value) %>% 
   summarise(count = n()) %>% 
   ungroup() %>%
-  mutate(porc = count / sum(count) * 100)
+  mutate(porc = count / sum(count) * 100, 
+         n = (count * porc) / 100)
 head(cntr)
 
 # Function to use ----------------------------
