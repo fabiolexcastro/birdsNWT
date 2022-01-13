@@ -64,7 +64,15 @@ miss <- c(20, 3, 4)
 # Check the results -------------------------------------------------------
 
 # Masking
-mask %>% rasterToPoints() %>% as_tibble() %>% setNames(c('x', 'y', 'value')) %>% group_by(value) %>% summarise(count = n()) %>% ungroup() 
+cntr <- mask %>% 
+  rasterToPoints() %>% 
+  as_tibble() %>% 
+  setNames(c('x', 'y', 'value')) %>% 
+  group_by(value) %>% 
+  summarise(count = n()) %>% 
+  ungroup() 
+
+as.data.frame(cntr)
 
 
 
