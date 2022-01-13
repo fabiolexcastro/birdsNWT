@@ -20,7 +20,9 @@ dirs <- glue('{dirs}/occur')
 
 # Get the name of each GCM
 gcms <- dir_ls(dirs[1], regexp = '.tif$') 
-gcms <- gcms[1]
+gcms <- basename(gcms)
+gcms <- grep('2011', gcms, value = TRUE)
+gcms <- basename(gcms)
 
 # To process --------------------------------------------------------------
 get_values <- function(gcm){
