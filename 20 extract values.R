@@ -14,7 +14,9 @@ tbls <- map(fles, qread)
 tbls <- bind_rows(tbls)
 
 # list files ocurrences
-occStack
+root <- './outputs'
+dirs <- dir_ls(root, type = 'directory')
+glue('{dirs}/occur')
 
 # To process --------------------------------------------------------------
 
