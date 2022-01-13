@@ -54,6 +54,8 @@ smpls <- dir_ls('./qs/sample')
 smpls
 smpls <- map(smpls, qread)
 
+map(smpls, nrow)
+
 
 
 
