@@ -11,6 +11,7 @@ options(scipen = 999)
 # Load data ---------------------------------------------------------------
 fles <- dir_ls('./qs/sample')
 tbls <- map(fles, qread)
+tbls <- bind_rows(tbls)
 
 # list files ocurrences
 occStack
