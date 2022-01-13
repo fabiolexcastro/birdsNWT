@@ -18,7 +18,7 @@ znes <- unique(shpf$gid)
 
 # Fasterize 
 mask <- mask * 0 
-fstr <- fasterize::fasterize(shpf, tmp, field = 'gid')
+fstr <- fasterize::fasterize(shpf, mask, field = 'gid')
 
 
 # Function to use ----------------------------
