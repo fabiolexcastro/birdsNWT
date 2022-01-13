@@ -33,6 +33,7 @@ get_values <- function(gcm){
   
   cat('Start ', gcm, '\n')
   dir <- map(dirs, dir_ls)
+  dir <- map(dir, as.character)
   dir <- map(1:length(dir), function(i){grep(gcm, dir[i], value = TRUE)})
   
   
