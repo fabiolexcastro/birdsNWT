@@ -31,6 +31,9 @@ get_values <- function(gcm){
   
   gcm <- gcms[1]
   
+  cat('Start ', gcm, '\n')
+  dir <- map(dirs, dir_ls)
+  
   
   
 }
