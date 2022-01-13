@@ -49,6 +49,10 @@ make_sample <- function(zne){
 # Apply the function ------------------------------------------------------
 smpls <- map(.x = znes, .f = make_sample)
 
+# Read the results --------------------------------------------------------
+smpls <- dir_ls('./qs/sample')
+smpls
+smpls <- map(smpls, qread)
 
 
 
