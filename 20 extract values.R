@@ -17,7 +17,10 @@ tbls <- bind_rows(tbls)
 root <- './outputs'
 dirs <- dir_ls(root, type = 'directory')
 dirs <- glue('{dirs}/occur')
-gcms <- c('', '', '')
+
+# Get the name of each GCM
+gcms <- dir_ls(dirs[1], regexp = '.tif$') 
+gcms <- gcms[1]
 
 # To process --------------------------------------------------------------
 get_values <- function(gcm){
