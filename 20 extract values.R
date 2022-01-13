@@ -55,6 +55,7 @@ get_values <- function(gcm){
       vls <- as_tibble(vls)
       vls <- mutate(vls, rep = k)
       cat('Done!\n')
+      return(vls)
     })
     
     rsl[[1]]; rsl[[2]]
