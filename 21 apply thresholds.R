@@ -44,7 +44,7 @@ my_rcl <- function(spc){
     return(rc)
   })})
   
-  
+  cat('Done!\n')
   
   
 }
