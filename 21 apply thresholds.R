@@ -45,8 +45,11 @@ my_rcl <- function(spc){
   })
   
   cat('Raster to table\n')
-  tbl <- map(.x = rst, .f = as.points)
-  tst <- as.data.frame(rst[[1]])
+  tbl <- map(.x = 1:length(rst), .f = function(j){
+    return(as.data.frame(rst[[j]], xy = TRUE))
+  })
+  dfm <- tbl %>% purrr::reduce(inner_join)
+  
   
   
   
