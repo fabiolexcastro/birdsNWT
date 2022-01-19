@@ -46,8 +46,8 @@ my_rcl <- function(spc){
   
   cat('Raster to table\n')
   tbl <- map(.x = rst, .f = as.points)
-  tst <- as.points(x = rst[[1]])
-  tst <- as_tibble(tst)
+  tst <- terra::as.points(rst[[1]])
+  tst <- data.frame(values(tst), geom(tst))
   
   
   
