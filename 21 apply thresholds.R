@@ -1,7 +1,7 @@
 
 # Load libraries ----------------------------
 require(pacman)
-pacman::p_load(raster, rgdal, rgeos, stringr, sf, fasterize, tidyverse, fs, gtools, glue)
+pacman::p_load(raster, rgdal, rgeos, terra, stringr, sf, fasterize, tidyverse, fs, gtools, glue)
 
 g <- gc(reset = TRUE)
 rm(list = ls())
@@ -39,6 +39,14 @@ my_rcl <- function(spc){
   system.time(expr = {rst <- map(.x = 1:length(fls), .f = function(i){
     cat(i, '\n')
     rs <- raster(fls[i])
+    rc <- rs
+    rc[which(rc[] < vle)] <- 0
+    return(rc)
+  })})
+  
+  system.time(expr = {rst <- map(.x = 1:length(fls), .f = function(i){
+    cat(i, '\n')
+    rs <- terra::rast(fls[i])
     rc <- rs
     rc[which(rc[] < vle)] <- 0
     return(rc)
