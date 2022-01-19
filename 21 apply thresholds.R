@@ -33,7 +33,13 @@ my_rcl <- function(spc){
   cat('Start ', spc, '\n')
   fls <- grep(spc, fles, value = TRUE)
   thr <- filter(thrs, spec == spc)
+  vle <- unique(thr$pOccMean)
   
+  cat('To reclassify')
+  rst <- map(.1 = 1:length(fls), .f = function(i){
+    cat(i, '\n')
+    rs <- raster(fls[i])
+  })
   
   
   
