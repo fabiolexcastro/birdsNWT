@@ -39,6 +39,9 @@ my_rcl <- function(spc){
   rst <- map(.1 = 1:length(fls), .f = function(i){
     cat(i, '\n')
     rs <- raster(fls[i])
+    rc <- rs
+    rc[which(rc[] < vle)] <- 0
+    
   })
   
   
