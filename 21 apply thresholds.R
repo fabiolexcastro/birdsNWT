@@ -28,7 +28,7 @@ spcs <- str_sub(dirs, 11, 14)
 # Function ----------------------------------------------------------------
 my_rcl <- function(spc){
   
-  spc <- spcs[1] # Run and erase
+  # spc <- spcs[1] # Run and erase
   
   cat('Start ', spc, '\n')
   fls <- grep(spc, fles, value = TRUE)
@@ -49,12 +49,11 @@ my_rcl <- function(spc){
     return(as.data.frame(rst[[j]], xy = TRUE))
   })
   dfm <- tbl %>% purrr::reduce(inner_join)
-  
-  
-  
-  
+  return(dfm)
   cat('Done!\n')
   
-  
 }
+
+# Apply the function ------------------------------------------------------
+rslt <- map(.x = spcs, .f = my_rcl)
 
