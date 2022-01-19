@@ -35,22 +35,20 @@ my_rcl <- function(spc){
   thr <- filter(thrs, spec == spc)
   vle <- unique(thr$pOccMean)
   
-  cat('To reclassify')
-  system.time(expr = {rst <- map(.x = 1:length(fls), .f = function(i){
-    cat(i, '\n')
-    rs <- raster(fls[i])
-    rc <- rs
-    rc[which(rc[] < vle)] <- 0
-    return(rc)
-  })})
-  
-  system.time(expr = {rst <- map(.x = 1:length(fls), .f = function(i){
+  cat('To reclassify\n')
+  rst <- map(.x = 1:length(fls), .f = function(i){
     cat(i, '\n')
     rs <- terra::rast(fls[i])
     rc <- rs
     rc[which(rc[] < vle)] <- 0
     return(rc)
-  })})
+  })
+  
+  cat('Raster to table\n')
+  tbl <- map(.x = rst, .f = as.points)
+  
+  
+  
   
   cat('Done!\n')
   
