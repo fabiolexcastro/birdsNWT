@@ -21,3 +21,6 @@ gcms <- grep('2011', gcms, value = TRUE)
 gcms <- basename(gcms)
 gcms <- str_sub(gcms, 16, nchar(gcms) - 4)
 
+# List each directory -----------------------------------------------------
+flatten(map(.x = dirs, .f = function(k){dir_ls(k, regexp = '.tif')}))
+
