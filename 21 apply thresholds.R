@@ -36,13 +36,13 @@ my_rcl <- function(spc){
   vle <- unique(thr$pOccMean)
   
   cat('To reclassify')
-  rst <- map(.1 = 1:length(fls), .f = function(i){
+  system.time(expr = {rst <- map(.x = 1:length(fls), .f = function(i){
     cat(i, '\n')
     rs <- raster(fls[i])
     rc <- rs
     rc[which(rc[] < vle)] <- 0
-    
-  })
+    return(rc)
+  })})
   
   
   
