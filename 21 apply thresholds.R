@@ -22,5 +22,5 @@ gcms <- basename(gcms)
 gcms <- str_sub(gcms, 16, nchar(gcms) - 4)
 
 # List each directory -----------------------------------------------------
-as.character(flatten(map(.x = dirs, .f = function(k){dir_ls(k, regexp = '.tif')})))
-
+fles <- as.character(flatten(map(.x = dirs, .f = function(k){dir_ls(k, regexp = '.tif')})))
+spcs <- str_sub(dirs, 11, 15)
