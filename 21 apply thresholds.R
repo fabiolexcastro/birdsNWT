@@ -8,7 +8,7 @@ rm(list = ls())
 options(scipen = 999)
 
 # Load data ---------------------------------
-trhs <- read_csv('./inputs/prevOcc.csv')
+thrs <- read_csv('./inputs/prevOcc.csv')
 root <- './outputs'
 dirs <- dir_ls(root, type = 'directory')
 dirs <- glue('{dirs}/occur')
@@ -23,4 +23,20 @@ gcms <- str_sub(gcms, 16, nchar(gcms) - 4)
 
 # List each directory -----------------------------------------------------
 fles <- as.character(flatten(map(.x = dirs, .f = function(k){dir_ls(k, regexp = '.tif')})))
-spcs <- str_sub(dirs, 11, 15)
+spcs <- str_sub(dirs, 11, 14)
+
+# Function ----------------------------------------------------------------
+my_rcl <- function(spc){
+  
+  spc <- spcs[1] # Run and erase
+  
+  cat('Start ', spc, '\n')
+  fls <- grep(spc, fles, value = TRUE)
+  thr <- filter(thrs, spec == spc)
+  
+  
+  
+  
+  
+}
+
