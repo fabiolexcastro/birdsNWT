@@ -90,17 +90,22 @@ tbl2rst <- function(fle){
     mutate(rsl[[i]], gc = gcm[i])
   })
   rsl <- bind_rows(rsl)
+  rsl <- mutate(rsl, class = ifelse(change < 0, 'Loss', ifelse(change == 0, 'No change', 'Gain')))
+  rsl <- mutate(rsl, class = factor(class, levels = c('Loss', 'No change', 'Gain')))
   
   cat('To make the map\n')
   ggp <- ggplot() +
     geom_tile(data = rsl, aes(x = x, y = y, fill = change)) + 
+    scale_fill_manual(colors = c('#2596be', '#b87180', '#c8c8c8')) +
     facet_wrap(.~gc) + 
-    labs(x = 'Lon', y = 'Lat', title = glue('Change {spc}')) +
+    labs(x = 'Lon', y = 'Lat', title = glue('Change {spc}'), fill = '') +
     theme_bw() + 
     theme(panel.grid.major = element_blank(), 
           panel.grid.minor = element_blank(), 
           axis.text.y = element_text(angle = 90, hjust = 0.5), 
-          plot.title = element_text(size = 16, hjust = 0.5)) +
+          plot.title = element_text(size = 16, hjust = 0.5), 
+          legend.position = 'bottom', 
+          legend.key.width = unit(1.5, 'cm')) +
     coord_sf()
   
   dou <- glue('./graphs/figs/occur/{spc}/map_change_{spc}.png')
