@@ -89,7 +89,23 @@ tbl2rst <- function(fle){
   rsl <- map(.x = 1:length(gcm), .f = function(i){
     mutate(rsl[[i]], gc = gcm[i])
   })
+  rsl <- bind_rows(rsl)
   
+  cat('To make the map\n')
+  ggp <- ggplot() +
+    geom_tile(data = rsl, aes(x = x, y = y, fill = change)) + 
+    facet_wrap(.~gc) + 
+    labs(x = 'Lon', y = 'Lat', title = glue('Change {spc}')) +
+    theme_bw() + 
+    theme(panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(), 
+          axis.text.y = element_text(angle = 90, hjust = 0.5), 
+          plot.title = element_text(size = 16, hjust = 0.5)) +
+    coord_sf()
+  
+  dou <- glue('./graphs/figs/occur/{spc}/map_change_{spc}.png')
+  ggsave(plot = ggp, filename = dou, units = 'in', width = 12, height = 9, dpi = 300)
+  cat('------ Done ------!\n')
   
 }
 
