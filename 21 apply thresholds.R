@@ -60,5 +60,5 @@ rslt <- map(.x = spcs[58:75], .f = reclass_ras)
 # Now raster to table -----------------------------------------------------
 fles <- glue('./outputs/{spcs}/occur/occmsk_yrs_{spcs}.qs')
 fles <- as.character(fles)
-head(qs::qread(fles[1]))
-
+test <- qs::qread(fles[1])
+unique(test$gc)
