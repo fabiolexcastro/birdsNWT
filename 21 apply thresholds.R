@@ -74,8 +74,10 @@ tbl2rst <- function(fle){
   gcm <- unique(tbl$gc)
   map(gcm, function(i){
     tb <- filter(tbl, gc == i)
-    tr <- terra::rast(tb[1:8], type = 'xyz')
-    
+    colnames(tb) <- c('x', 'y', 'y2011', 'y2031', 'y2051', 'y2071', 'y2091', 'y2100', 'gc')
+    tb <- mutate(tb, change = y2091 - y2011, ratio = (y2091/y2011), logRatio = log2(ratio))
+    tr <- terra::rast(tb[1:11], type = 'xyz')
+    plot(tr)
     
   })
   
