@@ -73,7 +73,8 @@ tbl2rst <- function(fle){
   spc <- basename(fle) %>% str_split(., '_') %>% sapply(., `[[`, 3) %>% gsub('.qs', '', .) 
   gcm <- unique(tbl$gc)
   
-  map(gcm, function(i){
+  rsl <- map(gcm, function(i){
+    cat(i, '\n')
     tb <- filter(tbl, gc == i)
     colnames(tb) <- c('x', 'y', 'y2011', 'y2031', 'y2051', 'y2071', 'y2091', 'y2100', 'gc')
     tb <- mutate(tb, change = y2091 - y2011, ratio = (y2091/y2011), logRatio = log2(ratio))
@@ -82,8 +83,8 @@ tbl2rst <- function(fle){
     do <- glue('{dout}/{spc}')
     ifelse(!dir.exists(do), dir_create(do), print('Fld alrdy exists'))
     terra::writeRaster(x = tr, filename = glue('{do}/occ_change_msk_{spc}_{i}.tif'), overwrite = TRUE)
-    plot(tr)
-    
+    cat('Done!\n')
+    return(tb[,c(1, 2, 9)])
   })
   
   
