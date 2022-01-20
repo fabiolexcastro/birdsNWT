@@ -70,11 +70,12 @@ tbl2rst <- function(fle){
   fle <- fles[1] # Run and erase (after)
   cat('Start ', basename(fle), '\n')
   tbl <- qs::qread(fle)
-  head(tbl)
+
   gcm <- unique(tbl$gc)
   map(gcm, function(i){
     tb <- filter(tbl, gc == i)
-    head(tb)
+    tr <- terra::rast(tb[1:8], type = 'xyz')
+    
     
   })
   
