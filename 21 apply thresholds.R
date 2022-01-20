@@ -81,7 +81,7 @@ tbl2rst <- function(fle){
     tr <- terra::rast(tb[1:9], type = 'xyz')
     do <- glue('{dout}/{spc}')
     ifelse(!dir.exists(do), dir_create(do), print('Fld alrdy exists'))
-    terra::writeRaster(x = tr, filename = glue('{dout}'))
+    terra::writeRaster(x = tr, filename = glue('{do}/occ_change_msk_{spc}_{i}.tif'), overwrite = TRUE)
     plot(tr)
     
   })
