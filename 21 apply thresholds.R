@@ -70,7 +70,7 @@ tbl2rst <- function(fle){
   fle <- fles[1] # Run and erase (after)
   cat('Start ', basename(fle), '\n')
   tbl <- qs::qread(fle)
-  spc <- basename(fle) %>% str_split(., '_') %>% sapply(., `[[`, 2) 
+  spc <- basename(fle) %>% str_split(., '_') %>% sapply(., `[[`, 3) %>% gsub('.qs', '', .) 
   gcm <- unique(tbl$gc)
   
   map(gcm, function(i){
@@ -79,7 +79,8 @@ tbl2rst <- function(fle){
     tb <- mutate(tb, change = y2091 - y2011, ratio = (y2091/y2011), logRatio = log2(ratio))
     tb <- dplyr::select(tb, -gc)
     tr <- terra::rast(tb[1:9], type = 'xyz')
-    do <- glue('{dout}/')
+    do <- glue('{dout}/{spc}')
+    ifelse(!dir.exists(do), dir_create(do), print('Fld alrdy exists'))
     terra::writeRaster(x = tr, filename = glue('{dout}'))
     plot(tr)
     
