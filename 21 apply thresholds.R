@@ -86,6 +86,9 @@ tbl2rst <- function(fle){
     cat('Done!\n')
     return(tb[,c(1, 2, 9)])
   })
+  rsl <- map(.x = 1:length(gcm), .f = function(i){
+    mutate(rsl[[i]], gc = gcm[i])
+  })
   
   
 }
