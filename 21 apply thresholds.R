@@ -77,7 +77,7 @@ tbl2rst <- function(fle){
     colnames(tb) <- c('x', 'y', 'y2011', 'y2031', 'y2051', 'y2071', 'y2091', 'y2100', 'gc')
     tb <- mutate(tb, change = y2091 - y2011, ratio = (y2091/y2011), logRatio = log2(ratio))
     tb <- dplyr::select(tb, -gc)
-    tr <- terra::rast(tb[1:11], type = 'xyz')
+    tr <- terra::rast(tb[1:9], type = 'xyz')
     plot(tr)
     
   })
@@ -85,7 +85,7 @@ tbl2rst <- function(fle){
   
 }
 
-
+##
 
 
 
