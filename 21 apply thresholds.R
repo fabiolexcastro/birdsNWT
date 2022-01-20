@@ -1,59 +1,64 @@
-
-# Load libraries ----------------------------
+# Load libraries --------------------------------------------------------
 require(pacman)
-pacman::p_load(raster, rgdal, rgeos, terra, stringr, sf, fasterize, tidyverse, fs, gtools, glue)
+
+pacman::p_load(raster, rgdal, rgeos, terra, stringr, glue, sf, tidyverse, RStoolbox, fs, fst, trend)
 
 g <- gc(reset = TRUE)
 rm(list = ls())
 options(scipen = 999)
 
-# Load data ---------------------------------
-thrs <- read_csv('./inputs/prevOcc.csv')
+# Load data ---------------------------------------------------------------
+thrs <- read_csv('./inputs/prevOcc3.csv')
 root <- './outputs'
-dirs <- dir_ls(root, type = 'directory')
+dirs <- fs::dir_ls(root, type = 'directory')
+spcs <- basename(dirs)
 dirs <- glue('{dirs}/occur')
 dirs <- as.character(dirs)
 
-# Get the name of each GCM
-gcms <- dir_ls(dirs[1], regexp = '.tif$') 
-gcms <- basename(gcms)
-gcms <- grep('2011', gcms, value = TRUE)
-gcms <- basename(gcms)
-gcms <- str_sub(gcms, 16, nchar(gcms) - 4)
-
-# List each directory -----------------------------------------------------
-fles <- as.character(flatten(map(.x = dirs, .f = function(k){dir_ls(k, regexp = '.tif')})))
-spcs <- str_sub(dirs, 11, 14)
-
-# Function ----------------------------------------------------------------
-my_rcl <- function(spc){
+# See the changes  --------------------------------------------------------
+reclass_ras <- function(spc){
   
-  # spc <- spcs[1] # Run and erase
-  
+  # Proof
+  #spc <- spcs[2] # Run and comment (after)
   cat('Start ', spc, '\n')
-  fls <- grep(spc, fles, value = TRUE)
+  dir <- grep(spc,dirs, value = TRUE)
+  fls <- list.files(dir, pattern = 'occu', full.names = TRUE)
+  fls <- grep('occu', fls, value = TRUE)
+  yrs <- parse_number(basename(fls))
+  yrs <- unique(yrs)
+  yrs <- na.omit(yrs)
+  gcm <- str_sub(basename(fls), start = 16, end = nchar(basename(fls)) - 4)
+  gcm <- unique(gcm)
   thr <- filter(thrs, spec == spc)
   vle <- unique(thr$pOccMean)
   
-  cat('To reclassify\n')
-  rst <- map(.x = 1:length(fls), .f = function(i){
-    cat(i, '\n')
-    rs <- terra::rast(fls[i])
-    rc <- rs
-    rc[which(rc[] < vle)] <- 0
-    return(rc)
+  cat('Reclassifying\n')
+  dfm <- map(.x = 1:length(gcm), .f = function(k){
+    
+    cat(k, '\n')
+    fl <- grep(gcm[k], fls, value = TRUE)
+    cat(gcm[k],'\n')
+    rs <- terra::rast(fl)
+    rs[rs < vle] <- 0
+    df <- terra::as.data.frame(x = rs, xy = TRUE, na.rm = TRUE)
+    colnames(df) <- c('x', 'y', yrs)
+    df <- as_tibble(df)
+    df <- mutate(df, gc = gcm[k])
+    return(df)
+    
   })
   
-  cat('Raster to table\n')
-  tbl <- map(.x = 1:length(rst), .f = function(j){
-    return(as.data.frame(rst[[j]], xy = TRUE))
-  })
-  dfm <- tbl %>% purrr::reduce(inner_join)
-  return(dfm)
-  cat('Done!\n')
+  rsl <- bind_rows(dfm)
+  qs::qsave(x = rsl, file = glue('./outputs/{spc}/occur/occmsk_yrs_{spc}.qs'))
   
-}
-
+  cat('------- Done -------\n')
+  return(rsl)
+} 
 # Apply the function ------------------------------------------------------
-rslt <- map(.x = spcs, .f = my_rcl)
+rslt <- map(.x = spcs[58:75], .f = reclass_ras)
+
+# Now raster to table -----------------------------------------------------
+fles <- glue('./outputs/{spc}/occur/occmsk_yrs_{spc}.qs')
+
+
 
