@@ -70,14 +70,17 @@ tbl2rst <- function(fle){
   fle <- fles[1] # Run and erase (after)
   cat('Start ', basename(fle), '\n')
   tbl <- qs::qread(fle)
-
+  spc <- basename(fle) %>% str_split(., '_') %>% sapply(., `[[`, 2) 
   gcm <- unique(tbl$gc)
+  
   map(gcm, function(i){
     tb <- filter(tbl, gc == i)
     colnames(tb) <- c('x', 'y', 'y2011', 'y2031', 'y2051', 'y2071', 'y2091', 'y2100', 'gc')
     tb <- mutate(tb, change = y2091 - y2011, ratio = (y2091/y2011), logRatio = log2(ratio))
     tb <- dplyr::select(tb, -gc)
     tr <- terra::rast(tb[1:9], type = 'xyz')
+    do <- glue('{dout}/')
+    terra::writeRaster(x = tr, filename = glue('{dout}'))
     plot(tr)
     
   })
