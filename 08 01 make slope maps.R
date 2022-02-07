@@ -58,7 +58,7 @@ make_slopeMaps<- function(spc){
   min <- min(slpe.tble$slp) 
   max <- max(slpe.tble$slp)
   
-  # If the pvalue is less than 0.05 changing the slope value to NA
+  # If the pvalue is bigger than 0.05 change the slope value to NA
   slpe.tble <- mutate(slpe.tble, slp = ifelse(test = pvl > 0.05, NA, slp))
   
   cat('Making the map\n')

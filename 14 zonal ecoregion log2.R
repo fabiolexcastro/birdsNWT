@@ -55,7 +55,7 @@ get_max_min <- function(fle){
 }
 
 # Apply the function ------------------------------------------------------
-cat('To calculate the slopes\n')
+cat('Calculating zonal\n')
 plan(cluster, workers = 3, gc = TRUE)
 options(future.globals.maxSize= 4194304000) ## this option helps with  the error about global sizes 
 znl_all <- furrr::future_map(.x = 1:length(fles), .f = function(i){

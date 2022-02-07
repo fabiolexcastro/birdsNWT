@@ -25,7 +25,7 @@ join_tble <- function(gcm){
   # gcm <- gcms[1]
   
   cat(gcm, '\n')
-  fle <- grep(gcm, gcm, value = TRUE)
+  fle <- grep(gcm, gcm, value = TRUE)z
   fle <- mixedsort(fle)
   fle <- as.character(fle)
   tbl <- map(fle, qs::qread)
@@ -36,7 +36,7 @@ join_tble <- function(gcm){
   colnames(all)
   qs::qsave(x = all, file = glue('./tables/qs/diff/{gcm}.qs'))
   cat('Done!\n')
-  # Analisis de diversidad de especies
+  # Analisis de diversidad de especies # Package: vegan
    
 }
 

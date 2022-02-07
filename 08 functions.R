@@ -1,5 +1,5 @@
 
-loadMeanRas<- function(birdList, 
+loadMeanRas <- function(birdList, 
                        pathData,
                        climateScenario = NULL,
                        year = NULL){

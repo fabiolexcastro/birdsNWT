@@ -93,7 +93,7 @@ change <- long %>% mutate(Previous = lag(Value),
                           changeFromYrOne = (Value))
 
 change <- long %>% 
-  group_by(gc, species, Year) %>% 
+  group_by(gc, species) %>% 
   mutate(Previous = lag(Value), 
          Next = lead(Value),
          Change = Value - Previous,

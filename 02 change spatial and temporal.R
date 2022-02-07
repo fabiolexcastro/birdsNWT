@@ -2,7 +2,7 @@
 
 # Load libraries --------------------------------------------------------
 require(pacman)
-pacman::p_load(raster, rgdal, rgeos, terra, stringr, glue, sf, tidyverse, RStoolbox, fs, fst, trend)
+pacman::p_load(raster, rgdal, rgeos, reproducible, terra, stringr, glue, sf, tidyverse, RStoolbox, fs, fst, trend)
 
 g <- gc(reset = TRUE)
 rm(list = ls())
@@ -53,7 +53,8 @@ dirs <- fs::dir_ls(root, type = 'directory')
 spcs <- basename(dirs)
 
 # Raster to table ---------------------------------------------------------
-dfrm <- map(.x = spcs[2:length(spcs)], .f = see_changes)
+dfrm <- map(.x = spcs[2:length(spcs)], .f = raster_to_table)
+# dfrm <- reproducible::Cache(map(.x = spcs[2:length(spcs)], .f = raster_to_table))
 dim(dfrm)
 object.size(dfrm)
 

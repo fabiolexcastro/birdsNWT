@@ -31,7 +31,7 @@ get_scatterplot <- function(spc){
   colnames(tbl) <- gsub('-', '_', colnames(tbl)) 
   tbl <- mutate(tbl, gid = 1:nrow(tbl))
   
-  set.seet(1234)
+  set.seed(1234)
   smp <- sample_n(tbl = tbl, size = nrow(tbl) * 0.01, replace = FALSE)
   smp$gid
   
