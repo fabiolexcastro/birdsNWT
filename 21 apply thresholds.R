@@ -95,8 +95,8 @@ tbl2rst <- function(fle){
   
   cat('To make the map\n')
   ggp <- ggplot() +
-    geom_tile(data = rsl, aes(x = x, y = y, fill = change)) + 
-    scale_fill_manual(colors = c('#2596be', '#b87180', '#c8c8c8')) +
+    geom_tile(data = rsl, aes(x = x, y = y, fill = class)) + 
+    scale_fill_manual(values = c('#2596be', '#b87180', '#c8c8c8')) +
     facet_wrap(.~gc) + 
     labs(x = 'Lon', y = 'Lat', title = glue('Change {spc}'), fill = '') +
     theme_bw() + 
@@ -110,7 +110,7 @@ tbl2rst <- function(fle){
   
   dou <- glue('./graphs/figs/occur/{spc}/map_change_{spc}.png')
   ggsave(plot = ggp, filename = dou, units = 'in', width = 12, height = 9, dpi = 300)
-  cat('------ Done ------!\n')
+  cat('------ Done ---------!\n')
   
 }
 
