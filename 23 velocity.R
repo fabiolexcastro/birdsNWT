@@ -30,13 +30,14 @@ get_velocity <- function(sp){
     
     i <- 1 # Run and erase
     flePrd <- flsPrd[i]
-    rstCur <- raster::raster(fleCur)
-    rstPrd <- raster::raster(flePrd)
+    rstCur <- terra::rast(fleCur)
+    rstPrd <- terra::rast(flePrd)
     
-    par(mfrow = c(1, 2))
-    plot(rstCur)
-    plot(rstPrd)
-    par(mfrow = c(1, 1))
+    msk <- rstCur * 0 + 1
+    empty <- c(empty, empty)
+    
+    
+     
     
     
   })
