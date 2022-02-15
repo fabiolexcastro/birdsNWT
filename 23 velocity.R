@@ -24,6 +24,7 @@ get_velocity <- function(sp){
   flsCur <- grep(sp, dirsCurr, value = TRUE)
   flsPrd <- dir_ls(flsPrd)
   flsCur <- dir_ls(flsCur)
+  flsCur <- grep('NA_range.tif', flsCur, value = TRUE)
   
   fls <- fs::dir_ls(sp)
   yrs <- parse_number(basename(fls))
