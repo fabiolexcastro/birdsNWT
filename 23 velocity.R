@@ -20,8 +20,10 @@ get_velocity <- function(sp){
   
   sp <- species[1]
   
-  flsPrd <- grep(sp, dirPred, value = TRUE)
-  
+  flsPrd <- grep(sp, dirsPred, value = TRUE)
+  flsCur <- grep(sp, dirsCurr, value = TRUE)
+  flsPrd <- dir_ls(flsPrd)
+  flsCur <- dir_ls(flsCur)
   
   fls <- fs::dir_ls(sp)
   yrs <- parse_number(basename(fls))
