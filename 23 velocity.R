@@ -34,10 +34,13 @@ get_velocity <- function(sp){
     rstPrd <- terra::rast(flePrd)
     
     msk <- rstCur * 0 + 1
-    msk <- c(msk, msk)
-    msk <- terra::subset(msk, c(1,2))
     
-     
+    tblCur <- terra::as.data.frame(rstCur, xy = TRUE)
+    colnames(tblCur)[3] <- 'prev'
+    tblPrd <- terra::as.data.frame(rstPrd, xy = TRUE)
+    colnames(tblPrd)[3] <- 'prev'
+  
+    
     
     
   })
@@ -53,3 +56,6 @@ get_velocity <- function(sp){
   present <- terra::rast(fl)
   
 }
+
+head(mtcars[, c("mpg", "cyl"), drop = FALSE])
+head(mtcars[, c("mpg", "cyl")])
