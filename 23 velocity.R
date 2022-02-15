@@ -34,8 +34,8 @@ get_velocity <- function(sp){
     rstPrd <- terra::rast(flePrd)
     
     msk <- rstCur * 0 + 1
-    empty <- c(empty, empty)
-    
+    msk <- c(msk, msk)
+    msk <- terra::subset(msk, c(1,2))
     
      
     
