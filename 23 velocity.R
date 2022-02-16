@@ -82,6 +82,8 @@ get_velocity <- function(sp){
     refstack <- c(msk, sppref)
     futprevstack <- c(msk, rstPrd)
     
+    terra::crs(sppref) <- terra::crs(msk)
+    
     # Run and erase
     par(mfrow = c(1, 2))
     plot(msk, main = 'mask')
