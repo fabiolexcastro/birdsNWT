@@ -40,7 +40,7 @@ get_velocity <- function(sp){
     tblPrd <- terra::as.data.frame(rstPrd, xy = TRUE)
     colnames(tblPrd)[3] <- 'prev'
   
-    p.xy <- mutate(tblCur, pixelID = 1:nrow(tblCur)) %>% as.matrix()
+    p.xy <- mutate(tblCur, pixelID = 1:nrow(tblCur)) %>% dplyr::select(pixelID, x, y, prev) %>% as.matrix()
     head(p.xy)
     
     
