@@ -3,7 +3,7 @@
 # Load libraries ----------------------------------------------------------
 library(pacman)
 pacman::p_load(dplyr, fs, fst, gdata, glue, quantreg, rasterVis, reproducible,
-               stringr,tidyverse, terra )
+               stringr,tidyverse, terra, yaImpute)
 
 
 # Load data ---------------------------------------------------------------
@@ -62,6 +62,10 @@ get_velocity <- function(sp){
       print(spec[i])
       
     }
+    
+    f.xy <- as.data.frame(f.xy)
+    colnames(f.xy) <- c('ID', 'X', 'Y', 'Pres')
+    f.xy <- as_tibble(f.xy)
     
     
   })
