@@ -82,6 +82,12 @@ get_velocity <- function(sp){
     refstack <- c(msk, sppref)
     futprevstack <- c(msk, rstPrd)
     
+    # Run and erase
+    par(mfrow = c(1, 2))
+    plot(msk, main = 'mask')
+    plot(sppref, main = 'sppref')
+    par(mfrow = c(1, 1))
+    
   })
   
   fls <- fs::dir_ls(sp)
