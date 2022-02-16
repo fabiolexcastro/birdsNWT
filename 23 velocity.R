@@ -76,7 +76,7 @@ get_velocity <- function(sp){
     colnames(f.xy) <- c('ID', 'X', 'Y', 'Pres')
     f.xy <- as_tibble(f.xy)
     d1b <- left_join(f.xy, d1b, by = c('ID', 'X', 'Y'))
-    d1b <- mutate(d1b, fat = fattail(bvel, 8333.3335, 0.5))
+    d1b$fat <- fattail(d1b$bvel, 8333.3335, 0.5) 
     
     
   })
