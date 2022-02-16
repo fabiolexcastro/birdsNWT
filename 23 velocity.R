@@ -35,9 +35,11 @@ get_velocity <- function(sp){
   flsCur <- dir_ls(flsCur)
   flsCur <- grep('NA_range.tif', flsCur, value = TRUE)
   
-  map(.x = 1:length(flsPrd), .f = function(i){
+  rsltdo <- map(.x = 1:length(flsPrd), .f = function(i){
     
-    i <- 1 # Run and erase
+    # i <- 1 # Run and erase
+    cat('Start ', flsPrd[i], '\t')
+    
     flePrd <- flsPrd[i]
     rstCur <- terra::rast(fleCur)
     rstPrd <- terra::rast(flePrd)
@@ -81,26 +83,13 @@ get_velocity <- function(sp){
     sppref[is.na(sppref)] <- 0
     refstack <- c(msk, sppref)
     futprevstack <- c(msk, rstPrd)
-    
     terra::crs(sppref) <- terra::crs(msk)
     
-    # Run and erase
-    par(mfrow = c(1, 2))
-    plot(msk, main = 'mask')
-    plot(sppref, main = 'sppref')
-    par(mfrow = c(1, 1))
+    cat('Ending: ', flsPrd[i], '\n')
+    return(list(futprevstack, refstack))
     
   })
-  
-  fls <- fs::dir_ls(sp)
-  yrs <- parse_number(basename(fls))
-  yrs <- unique(yrs)
-  yrs <- na.omit(yrs)
-  gcm <- str_sub(basename(fls), start = 45, end = nchar(basename(fls)) - 17)
-  gcm <- unique(gcm)
-  
-  
-  present <- terra::rast(fl)
+ 
   
 }
 
