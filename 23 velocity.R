@@ -41,8 +41,9 @@ get_velocity <- function(sp){
     colnames(tblPrd)[3] <- 'prev'
   
     p.xy <- mutate(tblCur, pixelID = 1:nrow(tblCur)) %>% dplyr::select(pixelID, x, y, prev) %>% as.matrix()
+    f.xy <- mutate(tblCur, pixelID = 1:nrow(tblCur)) %>% dplyr::select(pixelID, x, y, prev) %>% as.matrix()
     head(p.xy)
-    
+    head(f.xy)
     
     
   })
