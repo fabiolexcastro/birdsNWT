@@ -61,7 +61,16 @@ ruta <- paste0(rastersPath, '/', )
 
 rastersForType
 
-tst <- rasterForType %>% 
+tst <- rastersForType %>% 
   separate(data = ., col = name, into = c('type', 'frst', 'spc', 'v1', 'v2', 'yr', 'y2', 'gcm', 'rng', 'msk'), sep = '_')
   
+map(.x = 1:nrow(tst), .f = function(i){
+  
+  i <- 1
+  df <- tst[i,]
+  df <- unnest(df, cols = drive_resource)
+  
+  
+})
+
 
