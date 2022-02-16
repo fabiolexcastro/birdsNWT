@@ -48,7 +48,20 @@ get_velocity <- function(sp){
     p.xy2 <- as.data.frame(p.xy) %>% filter(., prev > 0.1) %>% dplyr::select(1:3) %>% as.matrix()
     f.xy2 <- as.data.frame(f.xy) %>% filter(., prev > 0.1) %>% dplyr::select(1:3) %>% as.matrix()
   
-    head(p.xy2)
+    if(nrow(f.xy) > 0){
+      
+      d.ann <- as.data.frame(ann(
+        as.matrix(p.xy2[,-1, drop = FALSE]),
+        as.matrix(f.xy2[,-1, drop = FALSE]),
+        k = 1, verbose = F)$knnIndexDist)
+      d1b <- as.data.frame(cbind(f.xy2, round(sqrt(d.ann[,2]))))
+      names(d1b) <- c("ID","X","Y","bvel")
+      
+    } else {
+      
+      print(spec[i])
+      
+    }
     
     
   })
