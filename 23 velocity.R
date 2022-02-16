@@ -78,7 +78,9 @@ get_velocity <- function(sp){
     d1b <- left_join(f.xy, d1b, by = c('ID', 'X', 'Y'))
     d1b <- mutate(d1b, fat = fattail(bvel, 8333.3335, 0.5))
     sppref <- rast(d1b[,c(2,3,6)])
-    
+    sppref[is.na(sppref)] <- 0
+    refstack <- c(msk, sppref)
+    futprevstack <- c(msk, rstPrd)
     
   })
   
