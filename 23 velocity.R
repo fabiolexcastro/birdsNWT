@@ -45,8 +45,8 @@ get_velocity <- function(sp){
     head(p.xy)
     head(f.xy)
     
-    p.xy2 <- as.data.frame(p.xy) %>% filter(p.xy, prev > 0.1) %>% dplyr::select(1:3) %>% as.matrix()
-    f.xy2 <- as.data.frame(f.xy) %>% filter(f.xy, prev > 0.1) %>% dplyr::select(1:3) %>% as.matrix()
+    p.xy2 <- as.data.frame(p.xy) %>% filter(., prev > 0.1) %>% dplyr::select(1:3) %>% as.matrix()
+    f.xy2 <- as.data.frame(f.xy) %>% filter(., prev > 0.1) %>% dplyr::select(1:3) %>% as.matrix()
   
     
     
