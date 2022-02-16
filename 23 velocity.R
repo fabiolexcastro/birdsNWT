@@ -6,6 +6,15 @@ pacman::p_load(dplyr, fs, fst, gdata, glue, quantreg, rasterVis, reproducible,
                stringr,tidyverse, terra, yaImpute)
 
 
+# Fucntions ---------------------------------------------------------------
+fattail <- function(x, alpha, c) {
+  left <- (c/(2*alpha*gamma(1/c)))
+  right <- exp(-1*((abs(x/alpha))^c))
+  result <- left*right
+  return(right)
+}
+
+
 # Load data ---------------------------------------------------------------
 
 pathPred <- 'inputs/predictions'
