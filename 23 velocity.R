@@ -41,7 +41,7 @@ get_velocity <- function(sp){
     cat('Start ', flsPrd[i], '\t')
     
     flePrd <- flsPrd[i]
-    rstCur <- terra::rast(fleCur)
+    rstCur <- terra::rast(flsCur)
     rstPrd <- terra::rast(flePrd)
     
     msk <- rstCur * 0 + 1
@@ -52,7 +52,7 @@ get_velocity <- function(sp){
     colnames(tblPrd)[3] <- 'prev'
   
     p.xy <- mutate(tblCur, pixelID = 1:nrow(tblCur)) %>% dplyr::select(pixelID, x, y, prev) %>% as.matrix()
-    f.xy <- mutate(tblPrd, pixelID = 1:nrow(tblCur)) %>% dplyr::select(pixelID, x, y, prev) %>% as.matrix()
+    f.xy <- mutate(tblPrd, pixelID = 1:nrow(tblPrd)) %>% dplyr::select(pixelID, x, y, prev) %>% as.matrix()
     head(p.xy)
     head(f.xy)
     
@@ -82,6 +82,7 @@ get_velocity <- function(sp){
     sppref <- rast(d1b[,c(2,3,6)])
     sppref[is.na(sppref)] <- 0
     refstack <- c(msk, sppref)
+    rstPrd <- terra::resample(rstPrd, msk, method = 'near')
     futprevstack <- c(msk, rstPrd)
     terra::crs(sppref) <- terra::crs(msk)
     
