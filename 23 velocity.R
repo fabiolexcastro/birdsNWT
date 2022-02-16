@@ -40,6 +40,7 @@ get_velocity <- function(sp){
     tblPrd <- terra::as.data.frame(rstPrd, xy = TRUE)
     colnames(tblPrd)[3] <- 'prev'
   
+    p.xy <- cbind(seq(1, length(tblCur$x), 1), tblCur$x, tblCur$y, tblCur$prev)
     
     
     
