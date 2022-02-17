@@ -78,8 +78,9 @@ get_velocity <- function(sp){
     tblFut <- rownames_to_column(tblFut)
     tblMskFut <- full_join(tblMsk, tblFut, by = c('rowname', 'x', 'y'))
     tblMskFut <- dplyr::select(tblMskFut, 2:4)
+    futprevstack <- terra::rast(tblMskFut, type = 'xyz')
+    plot(futprevstack)
     
-    tblMskFut[!complete.cases(tblMskFut),]
     
     futprevstack <- c(msk, rstFut)
     
