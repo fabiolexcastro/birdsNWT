@@ -1,64 +1,54 @@
-
-
-# Load libraries ----------------------------------------------------------
+#"# Load libraries ----------------------------------------------------------
 library(pacman)
 pacman::p_load(dplyr, fs, fst, gdata, glue, quantreg, rasterVis, reproducible,
-               stringr,tidyverse, terra, yaImpute)
+               stringr,tidyverse, terra, yaImpute )
 
-
-# Fucntions ---------------------------------------------------------------
-fattail <- function(x, alpha, c) {
-  left <- (c/(2*alpha*gamma(1/c)))
-  right <- exp(-1*((abs(x/alpha))^c))
-  result <- left*right
-  return(right)
-}
-
-
+# Functions ---------------------------------------------------------------
+source('./R/fatTail.R')
 # Load data ---------------------------------------------------------------
 
-pathPred <- 'inputs/predictions'
-pathCurr <- 'inputs/current'
-dirsPred <- fs::dir_ls(pathPred, type = 'directory')
-dirsCurr <- fs::dir_ls(pathPred, type = 'directory')
-species <- basename(dirs)
+pathFut <- 'inputs/predictions'
+pathPres <- 'inputs/current'
+dirsFut <- fs::dir_ls(pathFut, type = 'directory')
+dirsPres <- fs::dir_ls(pathPres, type = 'directory')
+
+species <- basename(dirsFut)
 ecor <- terra::rast('./inputs/RTM_BCR6_NT1.tif')
 
 # Velocity metric ---------------------------------------------------------
 get_velocity <- function(sp){
-  
   sp <- species[1]
+  flsFut <- grep(sp, dirsFut, value = TRUE)
+  flsPres <- grep(sp, dirsPres, value = TRUE)
+  flsFut <- dir_ls(flsFut)
+  flsPres <- dir_ls(flsPres)
+  flsPres <- grep('NA_range.tif', flsPres, value = TRUE)
   
-  flsPrd <- grep(sp, dirsPred, value = TRUE)
-  flsCur <- grep(sp, dirsCurr, value = TRUE)
-  flsPrd <- dir_ls(flsPrd)
-  flsCur <- dir_ls(flsCur)
-  flsCur <- grep('NA_range.tif', flsCur, value = TRUE)
-  
-  rsltdo <- map(.x = 1:length(flsPrd), .f = function(i){
+  rsltdo <- map(.x = 1:length(flsFut), .f = function(i){
     
-    # i <- 1 # Run and erase
-    cat('Start ', flsPrd[i], '\t')
+    i <- 1 # Run and erase
+    cat('Start ', flsFut[i], '\t')
+    #cat('Start ', sp, '\t')
     
-    flePrd <- flsPrd[i]
-    rstCur <- terra::rast(flsCur)
-    rstPrd <- terra::rast(flePrd)
+    fleFut <- flsFut[i]
+    rstPres <- terra::rast(flsPres)
+    rstFut <- terra::rast(fleFut)
     
-    msk <- rstCur * 0 + 1
+    msk <- rstPres * 0 + 1
     
-    tblCur <- terra::as.data.frame(rstCur, xy = TRUE)
-    colnames(tblCur)[3] <- 'prev'
-    tblPrd <- terra::as.data.frame(rstPrd, xy = TRUE)
-    colnames(tblPrd)[3] <- 'prev'
-  
-    p.xy <- mutate(tblCur, pixelID = 1:nrow(tblCur)) %>% dplyr::select(pixelID, x, y, prev) %>% as.matrix()
-    f.xy <- mutate(tblPrd, pixelID = 1:nrow(tblPrd)) %>% dplyr::select(pixelID, x, y, prev) %>% as.matrix()
-    head(p.xy)
-    head(f.xy)
     
-    p.xy2 <- as.data.frame(p.xy) %>% filter(., prev > 0.1) %>% dplyr::select(1:3) %>% as.matrix()
-    f.xy2 <- as.data.frame(f.xy) %>% filter(., prev > 0.1) %>% dplyr::select(1:3) %>% as.matrix()
-  
+    tblPres <- terra::as.data.frame(rstPres, xy = TRUE)
+    colnames(tblPres)[3] <- 'prev'
+    tblFut <- terra::as.data.frame(rstFut, xy = TRUE)
+    colnames(tblFut)[3] <- 'prev'
+    
+    # p.xy <- mutate(tblPres, pixelID = 1:nrow(tblPres)) %>% dplyr::select(pixelID, x, y, prev) %>% as.matrix()
+    p.xy <- mutate(tblPres, pixelID = 1:nrow(tblPres)) %>% dplyr::select(pixelID, x, y, prev) 
+    f.xy <- mutate(tblFut, pixelID = 1:nrow(tblFut)) %>% dplyr::select(pixelID, x, y, prev) 
+    
+    p.xy2 <-filter(p.xy, prev > 0.1) %>% dplyr::select(1:3) %>% as.matrix()
+    f.xy2 <-filter(f.xy, prev > 0.1) %>% dplyr::select(1:3) %>% as.matrix()
+    
     if(nrow(f.xy) > 0){
       
       d.ann <- as.data.frame(ann(
@@ -71,7 +61,6 @@ get_velocity <- function(sp){
     } else {
       
       print(spec[i])
-      
     }
     
     f.xy <- as.data.frame(f.xy)
@@ -81,18 +70,17 @@ get_velocity <- function(sp){
     d1b <- mutate(d1b, fat = fattail(bvel, 8333.3335, 0.5))
     sppref <- rast(d1b[,c(2,3,6)])
     sppref[is.na(sppref)] <- 0
-    refstack <- c(msk, sppref)
-    rstPrd <- terra::resample(rstPrd, msk, method = 'near')
-    futprevstack <- c(msk, rstPrd)
+    #rstFut <- terra::resample(rstFut, msk, method = 'near')
     terra::crs(sppref) <- terra::crs(msk)
+    tblFut <- terra::as.data.frame(tblFut, xy = TRUE)
+    tblMsk <- terra::as.data.frame(msk,    xy = TRUE)
     
-    cat('Ending: ', flsPrd[i], '\n')
+    futprevstack <- c(msk, rstFut)
+    
+    
+    cat('Ending: ', flsFut[i], '\n')
     return(list(futprevstack, refstack))
     
   })
- 
   
 }
-
-head(mtcars[, c("mpg", "cyl"), drop = FALSE])
-head(mtcars[, c("mpg", "cyl")])
