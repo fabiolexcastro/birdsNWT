@@ -89,7 +89,14 @@ get_velocity <- function(sp){
   
   tst <- rsltdo[[1]]
   futprevmean <- terra::lapp(rsltdo[[1]], fun = 'mean')
-  
+  nmsFut <- basename(flsFut)
+  nmsFut <- as.character(nmsFut)
+  ts2 <- lapply(1:length(rsltdo), function(h) rsltdo[[h]][[1]])
+  ts2 <- lapply(1:length(ts2), function(h){
+    
+    names(ts2[[h]])[[1]] <- nmsFut[h]
+    
+  })
   
 }
 
