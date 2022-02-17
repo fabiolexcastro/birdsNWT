@@ -74,9 +74,12 @@ get_velocity <- function(sp){
     terra::crs(sppref) <- terra::crs(msk)
     tblFut <- terra::as.data.frame(tblFut, xy = TRUE)
     tblMsk <- terra::as.data.frame(msk,    xy = TRUE)
-    tblMsk <- rownames_to_column(tblFut)
+    tblMsk <- rownames_to_column(tblMsk)
     tblFut <- rownames_to_column(tblFut)
     tblMskFut <- full_join(tblMsk, tblFut, by = c('rowname', 'x', 'y'))
+    tblMskFut <- dplyr::select(tblMskFut, 2:4)
+    
+    tblMskFut[!complete.cases(tblMskFut),]
     
     futprevstack <- c(msk, rstFut)
     
