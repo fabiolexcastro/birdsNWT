@@ -26,7 +26,7 @@ get_velocity <- function(sp){
   
   rsltdo <- map(.x = 1:length(flsFut), .f = function(i){
     
-    i <- 1 # Run and erase
+    # i <- 1 # Run and erase
     cat('Start ', flsFut[i], '\t')
     #cat('Start ', sp, '\t')
     
@@ -79,16 +79,20 @@ get_velocity <- function(sp){
     tblMskFut <- full_join(tblMsk, tblFut, by = c('rowname', 'x', 'y'))
     tblMskFut <- dplyr::select(tblMskFut, 2:5)
     futprevstack <- terra::rast(tblMskFut, type = 'xyz')
-    plot(futprevstack)
-    
-    
-    futprevstack <- c(msk, rstFut)
-    
-    
-    
+    # plot(futprevstack)
     cat('Ending: ', flsFut[i], '\n')
-    return(list(futprevstack, refstack))
+    return(list(futprevstack, msk))
     
   })
   
+  save(rsltdo, file = './test_v1.RData')
+  
+  tst <- rsltdo[[1]]
+  futprevmean <- terra::lapp(rsltdo[[1]], fun = 'mean')
+  
+  
 }
+
+tst2 <- tst2 %>% 
+  mutate(name = glue('{type}_{frst}_{spc}_{v1}_{v2}_{yr}_{y2}_{gcm}_{rng}_{msk}'), 
+         name = as.character(name))
