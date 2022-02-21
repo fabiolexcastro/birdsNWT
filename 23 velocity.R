@@ -23,9 +23,9 @@ get_velocity <- function(sp, gcm){
   
   cat('Start ', sp, ' ', gcm, '\n')
   flsFut <- grep(sp, dirsFut, value = TRUE)
+  flsFut <- dir_ls(flsFut)
   flsFut <- grep(gcm, flsFut, value = TRUE)
   flsPres <- grep(sp, dirsPres, value = TRUE)
-  flsFut <- dir_ls(flsFut)
   flsPres <- dir_ls(flsPres)
   flsPres <- grep('NA_range_masked.tif', flsPres, value = TRUE)
   
