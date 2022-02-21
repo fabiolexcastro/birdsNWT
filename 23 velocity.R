@@ -70,28 +70,26 @@ get_velocity <- function(sp, gcm){
     d1b <- mutate(d1b, fat = fattail(bvel, 8333.3335, 0.5))
     sppref <- rast(d1b[,c(2,3,6)])
     sppref[is.na(sppref)] <- 0
-    e<- ext(emptyRas)
+    e <- ext(emptyRas)
     spprefExt <- extend(sppref,e)
     refstack <- c(spprefExt, emptyRas)
     futprevstack <- c(emptyRas, rstFut)
-    # reterra::crs(sppref) <- terra::crs(msk)
-    # tblFut <- terra::as.data.frame(tblFut, xy = TRUE)
-    # tblMsk <- terra::as.data.frame(msk,    xy = TRUE)
-    # tblMsk <- rownames_to_column(tblMsk)
-    # tblFut <- rownames_to_column(tblFut)
-    # tblMskFut <- full_join(tblMsk, tblFut, by = c('rowname', 'x', 'y'))
-    # tblMskFut <- dplyr::select(tblMskFut, 2:5)
-    # futprevstack <- terra::rast(tblMskFut, type = 'xyz')
     cat('Done ', flsFut[i], '\n')
-    return(list(futprevstack, emptyRas)) 
+    return(list(futprevstack, refstack)) 
     
   }) 
     
   # Getting the Future rasters
   ftr.trr <- map(1:length(rsltdo), function(h) rsltdo[[h]][[1]])
-  ftr.trr <- map(1:length(ftr.trr), function(h) ftr.trr[[h]][[2]])
-  ftr.stk <- do.call(what = c, args = ftr.trr)
+  ftr.stk <- map(1:length(ftr.trr), function(h) ftr.trr[[h]][[2]])
+  ftr.stk <- do.call(what = c, args = ftr.stk)
   ftr.avg <- terra::app(ftr.stk, fun = 'mean')
   
+  # Average - Ref Stack
+  ref.stk <- map(1:length(rsltdo), function(h) rsltdo[[h]][[2]])
+  ref.stk <- map(1:length(ref.stk), function(h) ref.stk[[h]][[1]])
   
+ }
+
 }
+
