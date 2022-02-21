@@ -88,6 +88,13 @@ get_velocity <- function(sp, gcm){
   # Average - Ref Stack
   ref.stk <- map(1:length(rsltdo), function(h) rsltdo[[h]][[2]])
   ref.stk <- map(1:length(ref.stk), function(h) ref.stk[[h]][[1]])
+  ref.stk <- do.call(what = c, args = ref.stk)
+  ref.avg <- terra::app(ref.stk, fun = 'mean')
+  
+  par(mfrow = c(1, 2))
+  plot(ftr.avg, main = 'Future')
+  plot(ref.avg, main = 'RefStk')
+  par(mfrow = c(1, 1))
   
  }
 
