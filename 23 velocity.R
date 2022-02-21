@@ -91,10 +91,13 @@ get_velocity <- function(sp, gcm){
   ref.stk <- do.call(what = c, args = ref.stk)
   ref.avg <- terra::app(ref.stk, fun = 'mean')
   
-  par(mfrow = c(1, 2))
-  plot(ftr.avg, main = 'Future')
-  plot(ref.avg, main = 'RefStk')
-  par(mfrow = c(1, 1))
+  # To write these rasters
+  dir.out <- glue('./outputs/velocity/{sp}')
+  ifelse(!file.exists(dir.out), dir_create(dir.out), print('Exists'))
+  terra::writeRaster(x = ftr.avg, filename = glue('{dir.out}/velocity_{sp}_{gcm}.tif'))
+  terra::writeRaster(x = ref.avg, filename = glue('{dir.out}/refstack_{sp}_{gcm}.tif'))
+  cat('Done!\n')
+  
   
  }
 
