@@ -19,7 +19,7 @@ species <- basename(dirsFut)
 get_velocity <- function(sp, gcm){
   
   sp <- species[1]
-  ssp <- ssps[1]
+  gcm <- gcms[1]
   
   cat('Start ', sp, ' ', gcm, '\n')
   flsFut <- grep(sp, dirsFut, value = TRUE)
