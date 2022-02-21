@@ -21,7 +21,7 @@ get_velocity <- function(sp, gcm){
   sp <- species[1]
   gcm <- gcms[1]
   
-  cat('Start ', sp, ' ', gcm, '\n')
+  cat('Start ', basename(sp), ' ', gcm, '\n')
   flsFut <- grep(sp, dirsFut, value = TRUE)
   flsFut <- dir_ls(flsFut)
   flsFut <- grep(gcm, flsFut, value = TRUE)
@@ -33,7 +33,7 @@ get_velocity <- function(sp, gcm){
   rsltdo <- map(.x = 1:length(flsFut), .f = function(i){
     
     #i <- 1 # Run and erase
-    cat('Start ', flsFut[i], '\t')
+    cat('Start ', basename(flsFut[i]=, '\t')
     cat('Start ', sp, '\t')
     
     fleFut <- flsFut[i]
@@ -83,13 +83,16 @@ get_velocity <- function(sp, gcm){
     # tblMskFut <- dplyr::select(tblMskFut, 2:5)
     # futprevstack <- terra::rast(tblMskFut, type = 'xyz')
     cat('Done ', flsFut[i], '\n')
-    return(list(futprevstack, msk))
+    return(list(futprevstack, emptyRas))
     
   })
+  
   save(rsltdo, file = './outputs/test_v1.RData')
   
-  futprevmean <-  terra::app(futprevstack, fun = 'mean')
-  refmean <- terra::app(refstack, fun = 'mean')
+  # Getting the Future rasters
+  ftr.trr <- map(1:length(rsltdo), function(h) rsltdo[[h]][[1]])
+  
+  
   tst <- rsltdo[[1]]
   futprevmean <- terra::app(futprevstack, fun = 'mean')
   nmsFut <- basename(flsFut)
