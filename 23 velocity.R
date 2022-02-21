@@ -97,7 +97,7 @@ get_velocity <- function(sp, gcm){
   terra::writeRaster(x = ftr.avg, filename = glue('{dir.out}/velocity_{sp}_{gcm}.tif'))
   terra::writeRaster(x = ref.avg, filename = glue('{dir.out}/refstack_{sp}_{gcm}.tif'))
   cat('Done!\n')
-  
+  # Fabio Castro
   
  }
 
