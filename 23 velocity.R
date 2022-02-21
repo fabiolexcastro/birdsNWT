@@ -83,13 +83,14 @@ get_velocity <- function(sp, gcm){
     # tblMskFut <- dplyr::select(tblMskFut, 2:5)
     # futprevstack <- terra::rast(tblMskFut, type = 'xyz')
     cat('Done ', flsFut[i], '\n')
-    return(list(futprevstack, emptyRas))
+    return(list(futprevstack, emptyRas)) 
     
-  })
+  }) 
     
   # Getting the Future rasters
   ftr.trr <- map(1:length(rsltdo), function(h) rsltdo[[h]][[1]])
   ftr.trr <- map(1:length(ftr.trr), function(h) ftr.trr[[h]][[1]])
+  ftr.stk <- do.call(what = c, args = ftr.trr)
   
   tst <- rsltdo[[1]]
   futprevmean <- terra::app(futprevstack, fun = 'mean')
