@@ -89,21 +89,9 @@ get_velocity <- function(sp, gcm){
     
   # Getting the Future rasters
   ftr.trr <- map(1:length(rsltdo), function(h) rsltdo[[h]][[1]])
-  ftr.trr <- map(1:length(ftr.trr), function(h) ftr.trr[[h]][[1]])
+  ftr.trr <- map(1:length(ftr.trr), function(h) ftr.trr[[h]][[2]])
   ftr.stk <- do.call(what = c, args = ftr.trr)
-  
-  tst <- rsltdo[[1]]
-  futprevmean <- terra::app(futprevstack, fun = 'mean')
-  nmsFut <- basename(flsFut)
-  nmsFut <- as.character(nmsFut)
-  ts2 <- lapply(1:length(rsltdo), function(h) rsltdo[[h]][[1]])
-  ts2 <- lapply(1:length(ts2), function(h){
-    
-    names(ts2[[h]])[[1]] <- nmsFut[h]
-  })
-  futRas <- lapply(rsltdo, FUN = function(j){
-    futprevmean <- terra::tapp(a,1, fun =  'mean')
-  })
+  ftr.avg <- terra::app(ftr.stk, fun = 'mean')
   
   
 }
