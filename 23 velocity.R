@@ -86,12 +86,10 @@ get_velocity <- function(sp, gcm){
     return(list(futprevstack, emptyRas))
     
   })
-  
-  save(rsltdo, file = './outputs/test_v1.RData')
-  
+    
   # Getting the Future rasters
   ftr.trr <- map(1:length(rsltdo), function(h) rsltdo[[h]][[1]])
-  
+  ftr.trr <- map(1:length(ftr.trr), function(h) ftr.trr[[h]][[1]])
   
   tst <- rsltdo[[1]]
   futprevmean <- terra::app(futprevstack, fun = 'mean')
