@@ -22,7 +22,7 @@ spcs <- unique(spcs)
 # Make graph function -----------------------------------------------------
 make_graph <- function(spc){
   
-  spc <- spcs[1]
+  # spc <- spcs[1]
   
   cat(spc, '\t')
   fle <- grep(spc, fles, value = TRUE)
@@ -48,14 +48,12 @@ make_graph <- function(spc){
   out <- glue('./graphs/figs/zonal_ecoregions/zonalNewEco_{spc}.jpg')
   ggsave(plot = gpn, filename = out, units = 'in', width = 9, height = 7, dpi = 300)
   
+  cat('Done!\n')
   
-  
-  
-  
-  
-  
+
 }
 
-
+# Apply the function ------------------------------------------------------
+map(spcs, make_graph)
 
 
