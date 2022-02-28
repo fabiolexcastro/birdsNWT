@@ -15,3 +15,17 @@ head(fles); length(fles); tail(fles)
 
 grps <- read_csv('./inputs/birdSpecies_traits.csv')
 head(grps); dim(grps)
+
+spcs <- str_sub(basename(fles), 1, 4)
+spcs <- unique(spcs)
+
+# Make graph function -----------------------------------------------------
+make_graph <- function(spc){
+  
+  
+  
+}
+
+
+
+
