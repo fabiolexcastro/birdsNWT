@@ -39,7 +39,9 @@ make_graph <- function(spc){
     theme(legend.position = 'bottom', 
           plot.title = element_text(size = 16, face = 'bold', hjust = 0.5), 
           axis.text.x = element_text(size = 12), 
-          axis.text.y = element_text(size = 12)) +
+          axis.text.y = element_text(size = 12), 
+          legend.text = element_text(size = 12), 
+          legend.title = element_text(size = 13, face = 'bold')) +
     labs(x = 'Region', y = 'logRatio', color = 'GCM') +
     guides(color = guide_legend(override.aes = list(size = 12)))
   
