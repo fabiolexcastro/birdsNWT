@@ -28,7 +28,16 @@ make_graph <- function(spc){
   fle <- grep(spc, fles, value = TRUE)
   tbl <- qs::qread(fle)
   tbl <- as_tibble(tbl)
-  tbl
+  tbl <- dplyr::select(tbl, region, average.mean.logRatio)
+  
+  gpn <- ggplot(data = tbl, aes(x = region, y = average.mean.logRatio, group = model, col = model)) +
+    geom_point() + 
+    coord_flip() + 
+    theme_bw()
+  
+  gpn
+  
+  
   
   
 }
