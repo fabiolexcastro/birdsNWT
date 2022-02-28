@@ -40,7 +40,8 @@ make_graph <- function(spc){
           plot.title = element_text(size = 16, face = 'bold', hjust = 0.5), 
           axis.text.x = element_text(size = 12), 
           axis.text.y = element_text(size = 12)) +
-    labs(x = 'Region', y = 'logRatio', color = 'GCM')
+    labs(x = 'Region', y = 'logRatio', color = 'GCM') +
+    guides(color = guide_legend(override.aes = list(size = 12)))
   
   out <- glue('./graphs/figs/zonal_ecoregions/zonalNewEco_{spc}.jpg')
   ggsave(plot = gpn, filename = out, units = 'in', width = 9, height = 7, dpi = 300)
