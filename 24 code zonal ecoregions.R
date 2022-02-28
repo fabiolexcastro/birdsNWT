@@ -12,3 +12,6 @@ rm(list = ls())
 root <- './qs/zonal'
 fles <- dir_ls(root, regexp = '2.qs$')
 head(fles); length(fles); tail(fles)
+
+grps <- read_csv('./inputs/birdSpecies_traits.csv')
+head(grps); dim(grps)
