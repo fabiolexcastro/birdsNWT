@@ -55,5 +55,3 @@ make_graph <- function(spc){
 
 # Apply the function ------------------------------------------------------
 map(spcs, make_graph)
-
-
