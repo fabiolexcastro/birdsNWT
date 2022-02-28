@@ -30,14 +30,15 @@ make_graph <- function(spc){
   tbl <- as_tibble(tbl)
   
   gpn <- ggplot(data = tbl, aes(x = region, y = average, group = model, col = model)) +
-    geom_point() + 
+    geom_point(size = 5) + 
     scale_color_manual(values = c('CanESM2' = "#FF6A00",'CCSM4' = "#C15CCB", 
                                   'INM-CM4' = "#00868B")) +
     coord_flip() + 
     ggtitle(label = glue('Zonal mean log2 density {spc}')) +
     theme_bw() +
     theme(legend.position = 'bottom', 
-          plot.title = element_text(size = 16, face = 'bold', hjust = 0.5))
+          plot.title = element_text(size = 16, face = 'bold', hjust = 0.5)) +
+    labs(x = 'Region', y = 'logRatio', color = 'GCM')
   
   out <- glue('./graphs/figs/zonal_ecoregions/zonalNewEco_{spc}.jpg')
   ggsave(plot = gpn, filename = out, units = 'in', width = 9, height = 7, dpi = 300)
