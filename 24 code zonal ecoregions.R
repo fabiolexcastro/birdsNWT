@@ -28,14 +28,22 @@ make_graph <- function(spc){
   fle <- grep(spc, fles, value = TRUE)
   tbl <- qs::qread(fle)
   tbl <- as_tibble(tbl)
-  tbl <- dplyr::select(tbl, region, average.mean.logRatio)
   
-  gpn <- ggplot(data = tbl, aes(x = region, y = average.mean.logRatio, group = model, col = model)) +
+  gpn <- ggplot(data = tbl, aes(x = region, y = average, group = model, col = model)) +
     geom_point() + 
+    scale_color_manual(values = c('CanESM2' = "#FF6A00",'CCSM4' = "#C15CCB", 
+                                  'INM-CM4' = "#00868B")) +
     coord_flip() + 
-    theme_bw()
+    ggtitle(label = glue('Zonal mean log2 density {spc}')) +
+    theme_bw() +
+    theme(legend.position = 'bottom', 
+          plot.title = element_text(size = 16, face = 'bold', hjust = 0.5))
   
-  gpn
+  out <- glue('./graphs/figs/zonal_ecoregions/zonalNewEco_{spc}.jpg')
+  ggsave(plot = gpn, filename = out, units = 'in', width = 9, height = 7, dpi = 300)
+  
+  
+  
   
   
   
