@@ -37,7 +37,9 @@ make_graph <- function(spc){
     ggtitle(label = glue('Zonal mean log2 density {spc}')) +
     theme_bw() +
     theme(legend.position = 'bottom', 
-          plot.title = element_text(size = 16, face = 'bold', hjust = 0.5)) +
+          plot.title = element_text(size = 16, face = 'bold', hjust = 0.5), 
+          axis.text.x = element_text(size = 12), 
+          axis.text.y = element_text(size = 12)) +
     labs(x = 'Region', y = 'logRatio', color = 'GCM')
   
   out <- glue('./graphs/figs/zonal_ecoregions/zonalNewEco_{spc}.jpg')
