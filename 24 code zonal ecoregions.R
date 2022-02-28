@@ -22,6 +22,13 @@ spcs <- unique(spcs)
 # Make graph function -----------------------------------------------------
 make_graph <- function(spc){
   
+  spc <- spcs[1]
+  
+  cat(spc, '\t')
+  fle <- grep(spc, fles, value = TRUE)
+  tbl <- qs::qread(fle)
+  tbl <- as_tibble(tbl)
+  tbl
   
   
 }
