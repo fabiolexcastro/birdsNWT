@@ -90,7 +90,7 @@ get_velocity <- function(sp){
     
     # Refstack
     ref.stk <- map(1:length(rs), function(h) rs[[h]][[2]])
-    
+    ref.stk <- c(ref.stk[[1]], ref.stk[[2]], ref.stk[[3]])
     
   })
   
