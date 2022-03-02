@@ -93,6 +93,13 @@ get_velocity <- function(sp){
     ref.stk <- c(ref.stk[[1]], ref.stk[[2]], ref.stk[[3]])
     ref.stk <- terra::app(ref.stk, fun = 'mean')
     
+    # Write these rasters
+    out <- glue('./outputs/velocity/{sp}')
+    ifelse(!file.exists(out), dir_create(out), print('Already exists'))
+    terra::writeRaster(ftr.stk, glue('{out}/ftr_mean_{rcp[k]}.tif'))
+    terra::writeRaster(ref.stk, glue('{out}/ref_mean_{rcp[k]}.tif'))
+    cat('Finish!\n')
+    
   })
   
   
