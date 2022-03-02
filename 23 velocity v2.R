@@ -18,7 +18,7 @@ rcp <- c('45', '85')
 
 # Velocity metric ---------------------------------------------------------
 get_velocity <- function(sp){
-  sp <- species[1]
+  # sp <- species[1]
   message(crayon::blue('Starting with ', sp, '\n'))
   flsFut <- grep(sp, dirsFut, value = TRUE)
   dirPres <- grep(sp, dirsPres, value = TRUE)
@@ -99,14 +99,12 @@ get_velocity <- function(sp){
     out <- glue('./outputs/velocity/{sp}')
     ifelse(!file.exists(out), dir_create(out), print('Already exists'))
     terra::writeRaster(ftr.stk, glue('{out}/ftr_mean_{rcp[k]}.tif'))
-    terra::writeRaster(ref.stk, glue('{out}/ref_mean_{rcp[k]}.tif'))
+    terra::writeRaster(ref.stk, glue('{out}/ref_mean_{rcp[k]}.tif')) # Velocity
     cat('Finish!\n')
     
   })
   
-  
-  
-  
-  
-  
 }
+
+# Apply the function velocity ---------------------------------------------
+map(species, get_velocity)
