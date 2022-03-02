@@ -87,6 +87,8 @@ get_velocity <- function(sp){
     # Getting the Future rasters
     ftr.stk <- map(1:length(rs), function(h) rs[[h]][[1]])
     ftr.stk <- map(1:length(ftr.stk), function(h) mean(ftr.stk[[h]]))
+    ftr.stk <- do.call(what = c, ftr.stk)
+    names(ftr.stk)
     
     # Refstack
     ref.stk <- map(1:length(rs), function(h) rs[[h]][[2]])
