@@ -87,9 +87,10 @@ get_velocity <- function(sp){
     # Getting the Future rasters
     ftr.stk <- map(1:length(rs), function(h) rs[[h]][[1]])
     ftr.stk <- map(1:length(ftr.stk), function(h) mean(ftr.stk[[h]]))
-    ftr.stk <- do.call(what = c, args = ftr.stk)
-    ## obtain mean for the future stack
-    futMean <- terra::app(ftr.stk, fun = 'mean')
+    
+    # Refstack
+    ref.stk <- map(1:length(rs), function(h) rs[[h]][[2]])
+    
     
   })
   
