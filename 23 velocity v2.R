@@ -88,7 +88,7 @@ get_velocity <- function(sp){
     ftr.stk <- map(1:length(rs), function(h) rs[[h]][[1]])
     ftr.stk <- map(1:length(ftr.stk), function(h) mean(ftr.stk[[h]]))
     ftr.stk <- do.call(what = c, ftr.stk)
-    names(ftr.stk)
+    names(ftr.stk) <- glue('y{yrs}')
     
     # Refstack
     ref.stk <- map(1:length(rs), function(h) rs[[h]][[2]])
